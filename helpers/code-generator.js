@@ -20,10 +20,7 @@ class RegisterTable {
         this.#dataObjects = [];
     }
 
-    addContinuousRegister(reg) {
-        this.#continuousRegisters.push(reg);
-        let dataObjects = reg.dataObjects;
-    }
+    addContinuousRegister(reg) { this.#continuousRegisters.push(reg); }
 
     addDataObject(dataObj) { this.#dataObjects.push(dataObj); }
 
@@ -38,6 +35,27 @@ class RegisterTable {
         let code = new CodeBlock();
         for (let i = 0; i < this.#continuousRegisters.length; i++) code.addCodeLines(this.#continuousRegisters[i].toItemsCodeLines());
         return code.toCode();
+    }
+
+    toSitemapCode() {
+        // build list of groups and data objects
+        let sitemap = [];
+        for (let i = 0; i < this.#dataObjects.length; i++) {
+            let d = this.#dataObjects[i];
+            if (!(d.sitemap in sitemap)) sitemap[d.sitemap] = [];
+            sitemap[d.sitemap].push(d);
+        }
+        // create the code;
+        let code = 'sitemap solinteg label="Solinteg" {' + CR + CR;
+        for (let group in sitemap) {
+            code += TAB + `Frame label="${group}" {` + CR;
+            for (let i = 0; i < sitemap[group].length; i++) {
+                code += TAB + TAB + 'Text item=' + sitemap[group][i].getItemName() + CR;
+            }
+            code += TAB + '}' + CR + CR;
+        }
+        code += '}';
+        return code;
     }
 
     static get REG_TYPE_RO() { return 'ro'; }
@@ -177,9 +195,10 @@ class DataObject {
     #exclude;
     #icon;
     #group;
+    #sitemap;
 
     constructor(type, startAddress, description, dataType, uom = undefined, accuracy = undefined, note = undefined,
-            itemType = undefined, transformation = undefined, exclude = false, icon = undefined, group = undefined) {
+            itemType = undefined, transformation = undefined, exclude = false, icon = undefined, group = undefined, sitemap = undefined) {
         this.#type = type;
         this.#startAddress = startAddress;
         this.#description = description;
@@ -192,6 +211,7 @@ class DataObject {
         this.#exclude = exclude;
         this.#icon = icon;
         this.#group = group;
+        this.#sitemap = sitemap;
         // ensure numeric values
         function setNumeric(field) { try { field = parseInt(field) } catch (e) { error.log('Data was not numeric.'); } }
         setNumeric(this.#startAddress);
@@ -205,6 +225,7 @@ class DataObject {
     get uom() { return this.#uom; }
     get accuracy() { return this.#accuracy; }
     get note() { return this.#note; }
+    get sitemap() { return this.#sitemap; }
 
     _getThingID() { return 'do' + this.#startAddress; }
 
@@ -287,7 +308,7 @@ class DataObject {
         return this.#itemType.toString();
     }
 
-    _getItemName() {
+    getItemName() {
         // return this.#description.replace(/ /gi, '_');
         return `PV_DO${this.#startAddress}`;
     }
@@ -325,7 +346,7 @@ class DataObject {
         // type
         cl.addCodePart(this._getItemType());
         // name
-        cl.addCodePart(this._getItemName());
+        cl.addCodePart(this.getItemName());
         // description
         cl.addCodePart(this._getItemDescription());
         // icon

@@ -1,0 +1,219 @@
+sitemap solinteg label="Solinteg" {
+
+    Frame label="Infos" {
+        Text item=PV_DO10104
+    }
+
+    Frame label="Control" {
+        Text item=PV_DO10105
+    }
+
+    Frame label="Phase A" {
+        Text item=PV_DO10994
+        Text item=PV_DO11009
+        Text item=PV_DO11010
+        Text item=PV_DO30200
+        Text item=PV_DO30201
+        Text item=PV_DO30202
+        Text item=PV_DO30204
+        Text item=PV_DO30236
+    }
+
+    Frame label="Phase B" {
+        Text item=PV_DO10996
+        Text item=PV_DO11011
+        Text item=PV_DO11012
+        Text item=PV_DO30210
+        Text item=PV_DO30211
+        Text item=PV_DO30212
+        Text item=PV_DO30214
+        Text item=PV_DO30242
+    }
+
+    Frame label="Phase C" {
+        Text item=PV_DO10998
+        Text item=PV_DO11013
+        Text item=PV_DO11014
+        Text item=PV_DO30220
+        Text item=PV_DO30221
+        Text item=PV_DO30222
+        Text item=PV_DO30224
+        Text item=PV_DO30248
+    }
+
+    Frame label="All Phases" {
+        Text item=PV_DO11000
+        Text item=PV_DO11002
+        Text item=PV_DO11004
+        Text item=PV_DO11006
+        Text item=PV_DO11007
+        Text item=PV_DO11008
+        Text item=PV_DO11015
+        Text item=PV_DO11016
+        Text item=PV_DO11018
+        Text item=PV_DO11020
+        Text item=PV_DO30230
+    }
+
+    Frame label="PV" {
+        Text item=PV_DO11022
+        Text item=PV_DO11028
+        Text item=PV_DO11032
+        Text item=PV_DO11033
+        Text item=PV_DO11034
+        Text item=PV_DO11035
+        Text item=PV_DO11038
+        Text item=PV_DO11039
+        Text item=PV_DO11040
+        Text item=PV_DO11041
+        Text item=PV_DO11062
+        Text item=PV_DO11064
+    }
+
+    Frame label="Battery" {
+        Text item=PV_DO30254
+        Text item=PV_DO30255
+        Text item=PV_DO30256
+        Text item=PV_DO30258
+        Text item=PV_DO32000
+        Text item=PV_DO32001
+        Text item=PV_DO32002
+        Text item=PV_DO32003
+        Text item=PV_DO32004
+        Text item=PV_DO32005
+        Text item=PV_DO32006
+        Text item=PV_DO33000
+        Text item=PV_DO33001
+        Text item=PV_DO33002
+        Text item=PV_DO33003
+        Text item=PV_DO33008
+        Text item=PV_DO33009
+        Text item=PV_DO33010
+        Text item=PV_DO33011
+        Text item=PV_DO33012
+        Text item=PV_DO33013
+        Text item=PV_DO33014
+        Text item=PV_DO33015
+        Text item=PV_DO33016
+        Text item=PV_DO33018
+        Text item=PV_DO33020
+        Text item=PV_DO33021
+        Text item=PV_DO33022
+        Text item=PV_DO33023
+    }
+
+    Frame label="Statistics" {
+        Text item=PV_DO31000
+        Text item=PV_DO31001
+        Text item=PV_DO31002
+        Text item=PV_DO31003
+        Text item=PV_DO31004
+        Text item=PV_DO31005
+        Text item=PV_DO31006
+        Text item=PV_DO31008
+        Text item=PV_DO31102
+        Text item=PV_DO31104
+        Text item=PV_DO31106
+        Text item=PV_DO31108
+        Text item=PV_DO31110
+        Text item=PV_DO31112
+        Text item=PV_DO31114
+        Text item=PV_DO31118
+    }
+
+    Frame label="Config" {
+        Text item=PV_DO25000
+        Text item=PV_DO25015
+        Text item=PV_DO25100
+        Text item=PV_DO25103
+        Text item=PV_DO25104
+        Text item=PV_DO25105
+        Text item=PV_DO25107
+        Text item=PV_DO25109
+        Text item=PV_DO25118
+        Text item=PV_DO25120
+        Text item=PV_DO25121
+        Text item=PV_DO28000
+        Text item=PV_DO28001
+        Text item=PV_DO28002
+        Text item=PV_DO28003
+        Text item=PV_DO28004
+        Text item=PV_DO28005
+        Text item=PV_DO28006
+        Text item=PV_DO28007
+        Text item=PV_DO28012
+        Text item=PV_DO28013
+        Text item=PV_DO28014
+        Text item=PV_DO28015
+        Text item=PV_DO28101
+        Text item=PV_DO28102
+        Text item=PV_DO50000
+        Text item=PV_DO50001
+        Text item=PV_DO50004
+        Text item=PV_DO50005
+        Text item=PV_DO50006
+        Text item=PV_DO50007
+        Text item=PV_DO50009
+        Text item=PV_DO50010
+        Text item=PV_DO50202
+        Text item=PV_DO50203
+        Text item=PV_DO50204
+        Text item=PV_DO50205
+        Text item=PV_DO50206
+        Text item=PV_DO50207
+        Text item=PV_DO50208
+        Text item=PV_DO50209
+        Text item=PV_DO50210
+        Text item=PV_DO50211
+        Text item=PV_DO52500
+        Text item=PV_DO52501
+        Text item=PV_DO52502
+        Text item=PV_DO52503
+        Text item=PV_DO52504
+        Text item=PV_DO52505
+        Text item=PV_DO53007
+        Text item=PV_DO53008
+        Text item=PV_DO53009
+        Text item=PV_DO53010
+        Text item=PV_DO53011
+        Text item=PV_DO53014
+        Text item=PV_DO53015
+        Text item=PV_DO53016
+        Text item=PV_DO53017
+        Text item=PV_DO53018
+        Text item=PV_DO53021
+        Text item=PV_DO53022
+        Text item=PV_DO53023
+        Text item=PV_DO53024
+        Text item=PV_DO53025
+        Text item=PV_DO53028
+        Text item=PV_DO53029
+        Text item=PV_DO53030
+        Text item=PV_DO53031
+        Text item=PV_DO53032
+        Text item=PV_DO53035
+        Text item=PV_DO53036
+        Text item=PV_DO53037
+        Text item=PV_DO53038
+        Text item=PV_DO53039
+        Text item=PV_DO53042
+        Text item=PV_DO53043
+        Text item=PV_DO53044
+        Text item=PV_DO53045
+        Text item=PV_DO53046
+        Text item=PV_DO53500
+        Text item=PV_DO53508
+        Text item=PV_DO53509
+        Text item=PV_DO53511
+        Text item=PV_DO53513
+        Text item=PV_DO53515
+        Text item=PV_DO53516
+        Text item=PV_DO53517
+        Text item=PV_DO53518
+        Text item=PV_DO53519
+        Text item=PV_DO53520
+        Text item=PV_DO53521
+        Text item=PV_DO53522
+    }
+
+}

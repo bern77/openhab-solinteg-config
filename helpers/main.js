@@ -8,6 +8,7 @@ const {RegisterTable, ContinuousRegisters, DataObject} = require('./code-generat
 const EXCEL_FILENAME = './Solinteg Modbus Registers.xlsx';
 const FILENAME_THINGS = 'solinteg.things';
 const FILENAME_ITEMS = 'solinteg.items';
+const FILENAME_SITEMAP = 'solinteg.sitemap';
 const PATH_MANUAL = './manual/';
 const PATH_GENERATED = './openhab/';
 
@@ -19,7 +20,7 @@ const ROWS = {
 const COLS = {
     // C - O
     start: 2,
-    end: 16,
+    end: 17,
 
     // reference the individual columns:
     no: 2, // B
@@ -34,7 +35,8 @@ const COLS = {
     manualItemType: 13, // M
     tranform: 14, // N
     exclude: 15, // O
-    icon: 16 // P
+    icon: 16, // P
+    sitemap: 17 // Q
 }
 
 const TRIM = false;
@@ -86,7 +88,8 @@ workbook.xlsx.readFile(EXCEL_FILENAME).then(() => {
                     row.getCell(COLS.tranform).value,
                     exclude,
                     row.getCell(COLS.icon).value,
-                    GROUP
+                    GROUP,
+                    row.getCell(COLS.sitemap).value,
                 );
                 registerTable.addDataObject(dataObj);
                 if (poller === null) { // first line
@@ -105,6 +108,9 @@ workbook.xlsx.readFile(EXCEL_FILENAME).then(() => {
     // output the code
     let manualPart = fs.readFileSync(PATH_MANUAL + FILENAME_THINGS, 'utf8');
     fs.writeFileSync(PATH_GENERATED + 'things/' + FILENAME_THINGS, registerTable.toThingsCode() + manualPart.split('///////')[1]);
+    
     manualPart = fs.readFileSync(PATH_MANUAL + FILENAME_ITEMS, 'utf8');
     fs.writeFileSync(PATH_GENERATED + 'items/' + FILENAME_ITEMS, manualPart + registerTable.toItemsCode());
+    
+    fs.writeFileSync(PATH_GENERATED + 'sitemaps/' + FILENAME_SITEMAP, registerTable.toSitemapCode());
 });
