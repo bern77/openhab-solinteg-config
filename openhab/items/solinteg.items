@@ -1,279 +1,312 @@
 Group gPV "Photovoltaik inkl. Speicher" <solarplant>
 Group gPV_Error "PV Fehler" <error> (gPV)
 
-// --------------
-// RO Data Object
-// --------------
-
-// #1 | Device Serial Number
+// Device Serial Number
 Group gPV_Device_SN
-String PV_Device_SN_01 "Device SN - Character 1"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_01:string"}
-String PV_Device_SN_02 "Device SN - Character 2"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_02:string"}
-String PV_Device_SN_03 "Device SN - Character 3"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_03:string"}
-String PV_Device_SN_04 "Device SN - Character 4"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_04:string"}
-String PV_Device_SN_05 "Device SN - Character 5"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_05:string"}
-String PV_Device_SN_06 "Device SN - Character 6"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_06:string"}
-String PV_Device_SN_07 "Device SN - Character 7"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_07:string"}
-String PV_Device_SN_08 "Device SN - Character 8"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_08:string"}
-String PV_Device_SN_09 "Device SN - Character 9"  (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_09:string"}
-String PV_Device_SN_10 "Device SN - Character 10" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_10:string"}
-String PV_Device_SN_11 "Device SN - Character 11" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_11:string"}
-String PV_Device_SN_12 "Device SN - Character 12" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_12:string"}
-String PV_Device_SN_13 "Device SN - Character 13" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_13:string"}
-String PV_Device_SN_14 "Device SN - Character 14" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_14:string"}
-String PV_Device_SN_15 "Device SN - Character 15" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_15:string"}
-String PV_Device_SN_16 "Device SN - Character 16" (gPV_Device_SN) {channel="modbus:data:TODO:ro_001_002:do001_chr_16:string"}
+String PV_Device_SN_01 "Device SN - Character 1"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10000_l:string"}
+String PV_Device_SN_02 "Device SN - Character 2"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10000_h:string"}
+String PV_Device_SN_03 "Device SN - Character 3"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10001_l:string"}
+String PV_Device_SN_04 "Device SN - Character 4"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10001_h:string"}
+String PV_Device_SN_05 "Device SN - Character 5"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10002_l:string"}
+String PV_Device_SN_06 "Device SN - Character 6"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10002_h:string"}
+String PV_Device_SN_07 "Device SN - Character 7"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10003_l:string"}
+String PV_Device_SN_08 "Device SN - Character 8"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10003_h:string"}
+String PV_Device_SN_09 "Device SN - Character 9"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10004_l:string"}
+String PV_Device_SN_10 "Device SN - Character 10" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10004_h:string"}
+String PV_Device_SN_11 "Device SN - Character 11" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10005_l:string"}
+String PV_Device_SN_12 "Device SN - Character 12" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10005_h:string"}
+String PV_Device_SN_13 "Device SN - Character 13" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10006_l:string"}
+String PV_Device_SN_14 "Device SN - Character 14" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10006_h:string"}
+String PV_Device_SN_15 "Device SN - Character 15" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10007_l:string"}
+String PV_Device_SN_16 "Device SN - Character 16" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10007_h:string"}
 String PV_Device_SN "Device Serial Number" <keyring> (gPV) ["Status"]
 
-// #2 | Device Model Info
+// Device Model Info
 Group gPV_Device_Model_Info
-Number PV_Inverter_Type "Inverter Type" (gPV_Device_Model_Info) {channel="modbus:data:TODO:ro_001_002:do002_l:number"}
-Number PV_Model_Info    "Model Info"    (gPV_Device_Model_Info) {channel="modbus:data:TODO:ro_001_002:do002_h:number"}
+Number PV_Inverter_Type "Inverter Type" (gPV_Device_Model_Info) {channel="modbus:data:inverter:ro10000:do10008_l:number"}
+Number PV_Model_Info    "Model Info"    (gPV_Device_Model_Info) {channel="modbus:data:inverter:ro10000:do10008_h:number"}
 String PV_Device_Model_Info "Device Model Info" <keyring> (gPV) ["Status"]
 
-// #3 | Firmware Version
+// Firmware Version
 Group gPV_Firmware_Version
-Number PV_FW_Ver_1 "Firmware Version 1" (gPV_Firmware_Version) {channel="modbus:data:TODO:ro_003:do003_b1:number"}
-Number PV_FW_Ver_2 "Firmware Version 2" (gPV_Firmware_Version) {channel="modbus:data:TODO:ro_003:do003_b2:number"}
-Number PV_FW_Ver_3 "Firmware Version 3" (gPV_Firmware_Version) {channel="modbus:data:TODO:ro_003:do003_b3:number"}
-Number PV_FW_Ver_4 "Firmware Version 4" (gPV_Firmware_Version) {channel="modbus:data:TODO:ro_003:do003_b4:number"}
+Number PV_FW_Ver_1 "Firmware Version 1" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10011_l:number"}
+Number PV_FW_Ver_2 "Firmware Version 2" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10011_h:number"}
+Number PV_FW_Ver_3 "Firmware Version 3" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10012_l:number"}
+Number PV_FW_Ver_4 "Firmware Version 4" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10012_h:number"}
 String PV_Firmware_Version "Firmware Version" <settings> (gPV) ["Status"]
 
-// #4 - #6 | Date and Time
+// Date and Time
 Group gPV_DateTime
-Number PV_DateTime_Y "Date+Time - Year"   (gPV_DateTime) {channel="modbus:data:TODO:ro_004_006:do004_h:number"}
-Number PV_DateTime_M "Date+Time - Month"  (gPV_DateTime) {channel="modbus:data:TODO:ro_004_006:do004_l:number"}
-Number PV_DateTime_D "Date+Time - Day"    (gPV_DateTime) {channel="modbus:data:TODO:ro_004_006:do005_h:number"}
-Number PV_DateTime_h "Date+Time - Hour"   (gPV_DateTime) {channel="modbus:data:TODO:ro_004_006:do005_l:number"}
-Number PV_DateTime_m "Date+Time - Minute" (gPV_DateTime) {channel="modbus:data:TODO:ro_004_006:do006_h:number"}
-Number PV_DateTime_s "Date+Time - Second" (gPV_DateTime) {channel="modbus:data:TODO:ro_004_006:do006_l:number"}
+Number PV_DateTime_Y "Date+Time - Year"   (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10100_h:number"}
+Number PV_DateTime_M "Date+Time - Month"  (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10100_l:number"}
+Number PV_DateTime_D "Date+Time - Day"    (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10101_h:number"}
+Number PV_DateTime_h "Date+Time - Hour"   (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10101_l:number"}
+Number PV_DateTime_m "Date+Time - Minute" (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10102_h:number"}
+Number PV_DateTime_s "Date+Time - Second" (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10102_l:number"}
 DateTime PV_DateTime "Date+Time" <calendar> (gPV) ["Status"]
 
-// #7 - #8
-Number PV_Safety_Code        "Safety Code [JS(solinteg-saftey-code.js):%s]"                          <f7:tag>   (gPV) {channel="modbus:data:TODO:ro_007_008:do007:number"}
-Number PV_Inv_Working_Status "Inverter Working Status [MAP(solinteg-inverter-working-status.map):%s]" <settings> (gPV) {channel="modbus:data:TODO:ro_007_008:do008:number"}
+// Fault Flag 1
+Switch PV_Fault_1_0 "Mains Lost"                 <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_0:switch"}
+Switch PV_Fault_1_1 "Grid Voltage Fault"         <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_1:switch"}
+Switch PV_Fault_1_2 "Grid Frequency Fault"       <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_2:switch"}
+Switch PV_Fault_1_3 "DCI Fault"                  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_3:switch"}
+Switch PV_Fault_1_4 "ISO Over Limitation"        <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_4:switch"}
+Switch PV_Fault_1_5 "GFCI Fault"                 <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_5:switch"}
+Switch PV_Fault_1_6 "PV Over Voltage"            <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_6:switch"}
+Switch PV_Fault_1_7 "Bus Voltage Fault"          <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_7:switch"}
+Switch PV_Fault_1_8 "Inverter Over Temperature"  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_8:switch"}
 
-// #9
-Switch PV_Fault_1_0 "Mains Lost"                 <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_0:switch"}
-Switch PV_Fault_1_1 "Grid Voltage Fault"         <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_1:switch"}
-Switch PV_Fault_1_2 "Grid Frequency Fault"       <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_2:switch"}
-Switch PV_Fault_1_3 "DCI Fault"                  <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_3:switch"}
-Switch PV_Fault_1_4 "ISO Over Limitation"        <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_4:switch"}
-Switch PV_Fault_1_5 "GFCI Fault"                 <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_5:switch"}
-Switch PV_Fault_1_6 "PV Over Voltage"            <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_6:switch"}
-Switch PV_Fault_1_7 "Bus Voltage Fault"          <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_7:switch"}
-Switch PV_Fault_1_8 "Inverter Over Temperature"  <error> (gPV_Error) {channel="modbus:data:TODO:ro_009:do009_8:switch"}
+// Fault Flag 2
+Switch PV_Fault_2_1 "SPI Fault"           <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_1:switch"}
+Switch PV_Fault_2_2 "E2 Fault"            <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_2:switch"}
+Switch PV_Fault_2_3 "GFCI Device Fault"   <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_3:switch"}
+Switch PV_Fault_2_4 "AC Transducer Fault" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_4:switch"}
+Switch PV_Fault_2_5 "Relay Check Fail"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_5:switch"}
+Switch PV_Fault_2_6 "Internal Fan Fault"  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_6:switch"}
+Switch PV_Fault_2_7 "External Fan Fault"  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_7:switch"}
 
-// #10
-Switch PV_Fault_2_1 "SPI Fault"           <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_1:switch"}
-Switch PV_Fault_2_2 "E2 Fault"            <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_2:switch"}
-Switch PV_Fault_2_3 "GFCI Device Fault"   <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_3:switch"}
-Switch PV_Fault_2_4 "AC Transducer Fault" <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_4:switch"}
-Switch PV_Fault_2_5 "Relay Check Fail"    <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_5:switch"}
-Switch PV_Fault_2_6 "Internal Fan Fault"  <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_6:switch"}
-Switch PV_Fault_2_7 "External Fan Fault"  <error> (gPV_Error) {channel="modbus:data:TODO:ro_010:do010_7:switch"}
+// Fault Flag 3
+Switch PV_Fault_3_0  "Bus Hardware Fault"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_0:switch"}
+Switch PV_Fault_3_1  "PV Power Low"          <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_1:switch"}
+Switch PV_Fault_3_2  "Batt. Voltage Fault"   <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_2:switch"}
+Switch PV_Fault_3_3  "BAK Voltage Fault"     <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_3:switch"}
+Switch PV_Fault_3_4  "Bus Voltage Lower"     <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_4:switch"}
+Switch PV_Fault_3_5  "Sys Hardware Fault"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_5:switch"}
+Switch PV_Fault_3_6  "BAK Over Power"        <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_6:switch"}
+Switch PV_Fault_3_7  "Inverter Over Voltage" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_7:switch"}
+Switch PV_Fault_3_8  "Inverter Over Freq"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_8:switch"}
+Switch PV_Fault_3_9  "Inverter Over Current" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_9:switch"}
+Switch PV_Fault_3_10 "Phase Order Err"       <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_10:switch"}
 
-// #11
-Switch PV_Fault_3_0  "Bus Hardware Fault"    <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_0:switch"}
-Switch PV_Fault_3_1  "PV Power Low"          <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_1:switch"}
-Switch PV_Fault_3_2  "Batt. Voltage Fault"   <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_2:switch"}
-Switch PV_Fault_3_3  "BAK Voltage Fault"     <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_3:switch"}
-Switch PV_Fault_3_4  "Bus Voltage Lower"     <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_4:switch"}
-Switch PV_Fault_3_5  "Sys Hardware Fault"    <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_5:switch"}
-Switch PV_Fault_3_6  "BAK Over Power"        <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_6:switch"}
-Switch PV_Fault_3_7  "Inverter Over Voltage" <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_7:switch"}
-Switch PV_Fault_3_8  "Inverter Over Freq"    <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_8:switch"}
-Switch PV_Fault_3_9  "Inverter Over Current" <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_9:switch"}
-Switch PV_Fault_3_10 "Phase Order Err"       <error> (gPV_Error) {channel="modbus:data:TODO:ro_011:do011_10:switch"}
+// ARM Fault Flag 1
+Switch PV_Fault_ARM_0 "SCI Fault"        <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro18000:do18000_0:switch"}
+Switch PV_Fault_ARM_1 "FLASH Fault"      <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro18000:do18000_1:switch"}
+Switch PV_Fault_ARM_2 "Meter Comm Fault" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro18000:do18000_2:switch"}
 
-// #12 - #15
-Number:Power PV_PMeter_A   "Power Meter Phase A [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"] {unit="kW", channel="modbus:data:TODO:ro_012_031:do012:number"}
-Number:Power PV_PMeter_B   "Power Meter Phase A [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"] {unit="kW", channel="modbus:data:TODO:ro_012_031:do013:number"}
-Number:Power PV_PMeter_C   "Power Meter Phase A [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"] {unit="kW", channel="modbus:data:TODO:ro_012_031:do014:number"}
-Number:Power PV_PMeter_ABC "Power Meter Phase A [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"] {unit="kW", channel="modbus:data:TODO:ro_012_031:do015:number"}
+// Date + Time: ignored, not likely that these values should be actively written to the inverter + they seem to be readable from other registers
 
-// #16 - #17
-Number:Energy PV_Total_Grid_Injection "Total Grid-Injection Energy on Meter [%.2f %unit%]"       <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_012_031:do011_10:number"}
-Number:Energy PV_Total_Grid_Purchase  "Total Purchasing Energy from Grid on Meter [%.2f %unit%]" <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_012_031:do011_10:number"}
+// Period Enable Flag
+Switch PV_Period_1_Enabled "Period Enable Flag - Period 1" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_0:switch"}
+Switch PV_Period_2_Enabled "Period Enable Flag - Period 2" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_1:switch"}
+Switch PV_Period_3_Enabled "Period Enable Flag - Period 3" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_2:switch"}
+Switch PV_Period_4_Enabled "Period Enable Flag - Period 4" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_3:switch"}
+Switch PV_Period_5_Enabled "Period Enable Flag - Period 5" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_4:switch"}
+Switch PV_Period_6_Enabled "Period Enable Flag - Period 6" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_5:switch"}
 
-// #18 - #28
-Number:ElectricPotential PV_Line_V_AB "AB line voltage [%.1f %unit%]" <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_012_031:do018:number"}
-Number:ElectricPotential PV_Line_V_BC "BC line voltage [%.1f %unit%]" <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_012_031:do019:number"}
-Number:ElectricPotential PV_Line_V_CA "CA line voltage [%.1f %unit%]" <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_012_031:do020:number"}
-Number:ElectricPotential PV_U_A       "Phase A Voltage [%.1f %unit%]" <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_012_031:do021:number"}
-Number:ElectricCurrent   PV_I_A       "Phase A Current [%.1f %unit%]" <energy> (gPV) ["Measurement", "Current"]   {unit="A",  channel="modbus:data:TODO:ro_012_031:do022:number"}
-Number:ElectricPotential PV_U_B       "Phase B Voltage [%.1f %unit%]" <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_012_031:do023:number"}
-Number:ElectricCurrent   PV_I_B       "Phase B Current [%.1f %unit%]" <energy> (gPV) ["Measurement", "Current"]   {unit="A",  channel="modbus:data:TODO:ro_012_031:do024:number"}
-Number:ElectricPotential PV_U_C       "Phase C Voltage [%.1f %unit%]" <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_012_031:do025:number"}
-Number:ElectricCurrent   PV_I_C       "Phase C Current [%.1f %unit%]" <energy> (gPV) ["Measurement", "Current"]   {unit="A",  channel="modbus:data:TODO:ro_012_031:do026:number"}
-Number:Frequency         PV_Grid_Freq "Grid Frequency [%.2f %unit%]"  <energy> (gPV) ["Measurement", "Frequency"] {unit="Hz", channel="modbus:data:TODO:ro_012_031:do027:number"}
-Number:Power             PV_P_AC      "P AC [%.3f %unit%]"            <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_012_031:do028:number"}
+// Start/Stop Times - Periods 1-6
+Number PV_Period_1_Start_H "Period 1 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53012_h:number"}
+Number PV_Period_2_Start_H "Period 2 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53019_h:number"}
+Number PV_Period_3_Start_H "Period 3 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53026_h:number"}
+Number PV_Period_4_Start_H "Period 4 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53033_h:number"}
+Number PV_Period_5_Start_H "Period 5 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53040_h:number"}
+Number PV_Period_6_Start_H "Period 6 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53047_h:number"}
+Number PV_Period_1_Start_M "Period 1 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53012_l:number"}
+Number PV_Period_2_Start_M "Period 2 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53019_l:number"}
+Number PV_Period_3_Start_M "Period 3 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53026_l:number"}
+Number PV_Period_4_Start_M "Period 4 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53033_l:number"}
+Number PV_Period_5_Start_M "Period 5 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53040_l:number"}
+Number PV_Period_6_Start_M "Period 6 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53047_l:number"}
+Number PV_Period_1_Stop_H "Period 1 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53013_h:number"}
+Number PV_Period_2_Stop_H "Period 2 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53020_h:number"}
+Number PV_Period_3_Stop_H "Period 3 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53027_h:number"}
+Number PV_Period_4_Stop_H "Period 4 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53034_h:number"}
+Number PV_Period_5_Stop_H "Period 5 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53041_h:number"}
+Number PV_Period_6_Stop_H "Period 6 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53048_h:number"}
+Number PV_Period_1_Stop_M "Period 1 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53013_l:number"}
+Number PV_Period_2_Stop_M "Period 2 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53020_l:number"}
+Number PV_Period_3_Stop_M "Period 3 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53027_l:number"}
+Number PV_Period_4_Stop_M "Period 4 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53034_l:number"}
+Number PV_Period_5_Stop_M "Period 5 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53041_l:number"}
+Number PV_Period_6_Stop_M "Period 6 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53048_l:number"}
+DateTime PV_Period_1_Start "Period 1 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_1_Stop  "Period 1 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_2_Start "Period 2 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_2_Stop  "Period 2 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_3_Start "Period 3 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_3_Stop  "Period 3 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_4_Start "Period 4 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_4_Stop  "Period 4 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_5_Start "Period 5 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_5_Stop  "Period 5 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_6_Start "Period 6 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_6_Stop  "Period 6 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
 
-// #29 - #32
-Number:Energy PV_Energy_Today   "Energy today [%.1f %unit%]"         <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_012_031:do029:number"}
-Number:Energy PV_Energy_Total   "Energy total [%.1f %unit%]"         <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_012_031:do030:number"}
-Number:Time   PV_Total_Gen_H    "Total Generation Hours [%d %unit%]" <time>   (gPV) ["Measurement", "Time"]   {unit="h",   channel="modbus:data:TODO:ro_012_031:do031:number"}
-Number:Power  PV_Total_PV_Input "Total PV Input Power [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"]  {unit="kW",  channel="modbus:data:TODO:ro_032:do032:number"}
-
-// #33 - #36
-Number:Temperature PV_Temp1 "Temp. 1 [%.1f %unit%]" <temperature> (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_033_036:do033:number"}
-Number:Temperature PV_Temp2 "Temp. 2 [%.1f %unit%]" <temperature> (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_033_036:do034:number"}
-Number:Temperature PV_Temp3 "Temp. 3 [%.1f %unit%]" <temperature> (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_033_036:do035:number"}
-Number:Temperature PV_Temp4 "Temp. 4 [%.1f %unit%]" <temperature> (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_033_036:do036:number"}
-
-// #37 - #42
-Number:ElectricPotential PV_U_PV1 "PV1 Voltage [%.1f %unit%]"     <energy> (gPV) ["Measurement", "Voltage"] {unit="V",  channel="modbus:data:TODO:ro_037_040:do037:number"}
-Number:ElectricCurrent   PV_I_PV1 "PV1 Current [%.1f %unit%]"     <energy> (gPV) ["Measurement", "Current"] {unit="A",  channel="modbus:data:TODO:ro_037_040:do038:number"}
-Number:ElectricPotential PV_U_PV2 "PV2 Voltage [%.1f %unit%]"     <energy> (gPV) ["Measurement", "Voltage"] {unit="V",  channel="modbus:data:TODO:ro_037_040:do039:number"}
-Number:ElectricCurrent   PV_I_PV2 "PV2 Current [%.1f %unit%]"     <energy> (gPV) ["Measurement", "Current"] {unit="A",  channel="modbus:data:TODO:ro_037_040:do040:number"}
-Number:Power             PV_P_PV1 "PV1 Input Power [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"]   {unit="kW", channel="modbus:data:TODO:ro_041_042:do041:number"}
-Number:Power             PV_P_PV2 "PV2 Input Power [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"]   {unit="kW", channel="modbus:data:TODO:ro_041_042:do042:number"}
-
-// #43
-Switch PV_Fault_ARM_0 "SCI Fault"        <error> (gPV_Error) {channel="modbus:data:TODO:ro_043:do043_0:switch"}
-Switch PV_Fault_ARM_1 "FLASH Fault"      <error> (gPV_Error) {channel="modbus:data:TODO:ro_043:do043_1:switch"}
-Switch PV_Fault_ARM_2 "Meter Comm Fault" <error> (gPV_Error) {channel="modbus:data:TODO:ro_043:do043_2:switch"}
-
-// #44 - #59
-Number:ElectricPotential PV_BAK_U_A "Backup A Voltage [%.1f %unit%]"      <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_044_046:do044:number"}
-Number:ElectricCurrent   PV_BAK_I_A "Backup A Current [%.1f %unit%]"      <energy> (gPV) ["Measurement", "Current"]   {unit="A",  channel="modbus:data:TODO:ro_044_046:do045:number"}
-Number:Frequency         PV_BAK_F_A "Backup A Frequency [%.2f %unit%]"    <energy> (gPV) ["Measurement", "Frequency"] {unit="Hz", channel="modbus:data:TODO:ro_044_046:do046:number"}
-Number:Power             PV_BAK_P_A "Backup A Active Power [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_047:do047:number"}
-Number:ElectricPotential PV_BAK_U_B "Backup B Voltage [%.1f %unit%]"      <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_048_050:do048:number"}
-Number:ElectricCurrent   PV_BAK_I_B "Backup B Current [%.1f %unit%]"      <energy> (gPV) ["Measurement", "Current"]   {unit="A",  channel="modbus:data:TODO:ro_048_050:do049:number"}
-Number:Frequency         PV_BAK_F_B "Backup B Frequency [%.2f %unit%]"    <energy> (gPV) ["Measurement", "Frequency"] {unit="Hz", channel="modbus:data:TODO:ro_048_050:do050:number"}
-Number:Power             PV_BAK_P_B "Backup B Active Power [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_051:do051:number"}
-Number:ElectricPotential PV_BAK_U_C "Backup C Voltage [%.1f %unit%]"      <energy> (gPV) ["Measurement", "Voltage"]   {unit="V",  channel="modbus:data:TODO:ro_052_054:do052:number"}
-Number:ElectricCurrent   PV_BAK_I_C "Backup C Current [%.1f %unit%]"      <energy> (gPV) ["Measurement", "Current"]   {unit="A",  channel="modbus:data:TODO:ro_052_054:do053:number"}
-Number:Frequency         PV_BAK_F_C "Backup C Frequency [%.2f %unit%]"    <energy> (gPV) ["Measurement", "Frequency"] {unit="Hz", channel="modbus:data:TODO:ro_052_054:do054:number"}
-Number:Power             PV_BAK_P_C "Backup C Active Power [%.3f %unit%]" <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_055:do055:number"}
-Number:Power             PV_P_Total "Total Active Power [%.3f %unit%]"    <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_056:do056:number"}
-Number:Power             PV_P_A     "Phase A Active Power [%.3f %unit%]"  <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_057:do057:number"}
-Number:Power             PV_P_B     "Phase B Active Power [%.3f %unit%]"  <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_058:do058:number"}
-Number:Power             PV_P_C     "Phase C Active Power [%.3f %unit%]"  <energy> (gPV) ["Measurement", "Power"]     {unit="kW", channel="modbus:data:TODO:ro_059:do059:number"}
-
-// #60 - #63
-Number:ElectricPotential PV_U_Batt    "Battery Voltage [%.1f %unit%]" <batterylevel> (gPV) ["Measurement", "Voltage"]  {unit="V",  channel="modbus:data:TODO:ro_060_062:do060:number"}
-Number:ElectricCurrent   PV_I_Batt    "Battery Current [%.1f %unit%]" <batterylevel> (gPV) ["Measurement", "Current"]  {unit="A",  channel="modbus:data:TODO:ro_060_062:do061:number"}
-Switch                   PV_Batt_Mode "Battery Mode [MAP(solinteg-battery-mode.map):%s]" <batterylevel> (gPV) ["Status"]          {channel="modbus:data:TODO:ro_060_062:do062:switch"}
-Number:Power             PV_P_Batt    "Battery Power [%.3f %unit%]"   <batterylevel> (gPV) ["Measurement", "Power"]    {unit="kW", channel="modbus:data:TODO:ro_063:do063:number"}
-
-// #64 - #79
-Number:Energy PV_E_Injected_d       "Daily Energy Injected to Grid [%.1f %unit%]"                <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do064:number"}
-Number:Energy PV_E_Purchased_d      "Daily Purchased Energy [%.1f %unit%]"                       <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do065:number"}
-Number:Energy PV_E_Backup_Output_d  "Daily Energy Output on Backup [%.1f %unit%]"                <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do066:number"}
-Number:Energy PV_E_Charging_d       "Daily Battery Charging Energy [%.1f %unit%]"                <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do067:number"}
-Number:Energy PV_E_Discharging_d    "Daily Battery Discharging [%.1f %unit%]"                    <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do068:number"}
-Number:Energy PV_E_PV_Gen_d         "Daily PV Generation [%.1f %unit%]"                          <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do069:number"}
-Number:Energy PV_E_Load_Cons_d      "Daily Load Consumption [%.1f %unit%]"                       <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_064_070:do070:number"}
-Number:Energy PV_E_Purchased_Grid_d "Daily Energy Purchased from Grid at Inverter [%.1f %unit%]" <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_071:do071:number"}
-Number:Energy PV_E_Injected_T       "Total Energy Injected to Grid [%.1f %unit%]"                <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do072:number"}
-Number:Energy PV_E_Purchased_T      "Total Purchased Energy [%.1f %unit%]"                       <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do073:number"}
-Number:Energy PV_E_Backup_Output_T  "Total Energy Output on Backup [%.1f %unit%]"                <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do074:number"}
-Number:Energy PV_E_Charging_T       "Total Battery Charging Energy [%.1f %unit%]"                <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do075:number"}
-Number:Energy PV_E_Discharging_T    "Total Battery Discharging [%.1f %unit%]"                    <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do076:number"}
-Number:Energy PV_E_PV_Gen_T         "Total PV Generation [%.1f %unit%]"                          <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do077:number"}
-Number:Energy PV_E_Load_Cons_T      "Total Load Consumption [%.1f %unit%]"                       <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_072_078:do078:number"}
-Number:Energy PV_E_Purchased_Grid_T "Total Energy Purchased from Grid at Inverter [%.1f %unit%]" <energy> (gPV) ["Measurement", "Energy"] {unit="kWh", channel="modbus:data:TODO:ro_079:do079:number"}
-
-// #80 - #104
-Number                   PV_Batt_Type            "Battery Type Codes [%d]"                <batterylevel> (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do080:number"}
-Number                   PV_Batt_Strings         "Battery strings [%d]"                   <batterylevel> (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do081:number"}
-Number                   PV_Batt_Proto           "Battery protocol [%d]"                  <batterylevel> (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do082:number"}
-Number                   PV_Batt_SW_Ver          "Software Version [%d]"                  <batterylevel> (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do083:number"}
-Number                   PV_Batt_HW_Ver          "Hardware Version [%d]"                  <batterylevel> (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do084:number"}
-Number:ElectricCurrent   PV_Batt_Chg_Imax        "BMS Charge Imax [%.1f %unit%]"          <batterylevel> (gPV) ["Measurement", "Current"]     {unit="A",  channel="modbus:data:TODO:ro_091_104:do085:number"}
-Number:ElectricCurrent   PV_Batt_Dis_Imax        "BMS Discharge Imax [%.1f %unit%]"       <batterylevel> (gPV) ["Measurement", "Current"]     {unit="A",  channel="modbus:data:TODO:ro_091_104:do086:number"}
-Number:Dimensionless     PV_Batt_SOC             "SOC [%d %unit%]"                        <batterylevel> (gPV) ["Status"]                     {unit="%",  channel="modbus:data:TODO:ro_091_104:do087:number"}
-Number:Dimensionless     PV_Batt_SOH             "SOH [%d %unit%]"                        <batterylevel> (gPV) ["Status"]                     {unit="%",  channel="modbus:data:TODO:ro_091_104:do088:number"}
-Number                   PV_Batt_BMS_Status      "BMS Status [%d]"                        <batterylevel> (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do089:number"}
-Number:Temperature       PV_Batt_BMS_Temp        "BMS Pack Temperature [%.1f %unit%]"     <temperature>  (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_091_104:do090:number"}
-Number                   PV_Batt_Max_Temp_ID     "Max Cell Temperature ID [%d]"           <temperature>  (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do091:number"}
-Number:Temperature       PV_Batt_Max_Temp        "Max Cell Temperature [%.1f %unit%]"     <temperature>  (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_091_104:do092:number"}
-Number                   PV_Batt_Min_Temp_ID     "Min Cell Temperature ID [%d]"           <temperature>  (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do093:number"}
-Number:Temperature       PV_Batt_Min_Temp        "Min Cell Temperature [%.1f %unit%]"     <temperature>  (gPV) ["Measurement", "Temperature"] {unit="°C", channel="modbus:data:TODO:ro_091_104:do094:number"}
-Number                   PV_Batt_Max_U_ID        "Max Cell Voltage ID [%d]"               <energy>       (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do095:number"}
-Number:ElectricPotential PV_Batt_Max_U           "Max Cell Voltage [%.3f %unit%]"         <energy>       (gPV) ["Measurement", "Voltage"]     {unit="V",  channel="modbus:data:TODO:ro_091_104:do096:number"}
-Number                   PV_Batt_Min_U_ID        "Min Cell Voltage ID [%d]"               <energy>       (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do097:number"}
-Number:ElectricPotential PV_Batt_Min_U           "Min Cell Voltage [%.3f %unit%]"         <energy>       (gPV) ["Measurement", "Voltage"]     {unit="V",  channel="modbus:data:TODO:ro_091_104:do098:number"}
-Number                   PV_Batt_BMS_Err_Code    "BMS ERROR CODE [%d]"                    <error>        (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do099:number"}
-Number                   PV_Batt_BMS_Warn_Code   "BMS WARN CODE [%d]"                     <error>        (gPV) ["Status"]                     {           channel="modbus:data:TODO:ro_091_104:do100:number"}
-Number:ElectricPotential PV_Batt_Chg_Cutoff_U    "Charge Cutoff Voltage [%.1f %unit%]"    <batterylevel> (gPV) ["Measurement", "Voltage"]     {unit="V",  channel="modbus:data:TODO:ro_091_104:do101:number"}
-Number:ElectricCurrent   PV_Batt_Chg_Curr_Limit  "Charge Current Limit [%.1f %unit%]"     <batterylevel> (gPV) ["Measurement", "Current"]     {unit="A",  channel="modbus:data:TODO:ro_091_104:do102:number"}
-Number:ElectricPotential PV_Batt_Dchg_Cutoff_U   "Discharge Cutoff Voltage [%.1f %unit%]" <batterylevel> (gPV) ["Measurement", "Voltage"]     {unit="V",  channel="modbus:data:TODO:ro_091_104:do103:number"}
-Number:ElectricCurrent   PV_Batt_Dchg_Curr_Limit "Discharge Current Limit [%.1f %unit%]"  <batterylevel> (gPV) ["Measurement", "Current"]     {unit="A",  channel="modbus:data:TODO:ro_091_104:do104:number"}
-
-
-// --------------
-// RW Data Object
-// --------------
-
-// #1 - #4: ignored, not likely that these values should be actively written to the inverter + they seem to be readable from other registers
-
-// #5 - #7
-// #8 - #11: ignored, as they are WO objects that don't seem to we necessary for my setup)
-// #12 - #14
-Number               PV_Overload_Method       "Overload Method Setting [MAP(solinteg-overload-method.map):%s]" <energy> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_005:do005:number"}
-Switch               PV_Grid_Inj_Limit_Active "Grid Injection Power Limit Switch"                              <switch> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_006:do006:switch"}
-Number:Dimensionless PV_Grid_Inj_Limit        "Grid Injection Power Limit % Setting [%.1f %unit%]"             <energy> (gPV) ["Setpoint"] {unit="%", channel="modbus:data:TODO:rw_007_011:do007:number"}
-Number:Dimensionless PV_P_Limit_Pct           "Reactive power limit percentage [%d %unit%]"                    <energy> (gPV) ["Setpoint"] {unit="%", channel="modbus:data:TODO:rw_012:do012:number"}
-Number               PV_PF_Setting            "PF Setting [%d]"                                                <energy> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_013_014:do013:number"}
-Number               PV_P_Ctl_Mode            "Reactive power Control Mode [MAP(solinteg-pwr-ctl.map):%s]"     <energy> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_013_014:do014:number"}
-
-// #15 - #26
-Number:ElectricPotential PV_FR_U_LL   "Fault recovery voltage lower limit [%.1f %unit%]"          <error> (gPV) ["Setpoint", "Voltage"]   {unit="V",  channel="modbus:data:TODO:rw_015_022:do015:number"}
-Number:ElectricPotential PV_FR_U_UL   "Fault recovery voltage upper limit [%.1f %unit%]"          <error> (gPV) ["Setpoint", "Voltage"]   {unit="V",  channel="modbus:data:TODO:rw_015_022:do016:number"}
-Number:Frequency         PV_FR_F_LL   "Fault recovery frequency lower limit [%.3f %unit%]"        <error> (gPV) ["Setpoint", "Frequency"] {unit="Hz", channel="modbus:data:TODO:rw_015_022:do017:number"}
-Number:Frequency         PV_FR_F_UL   "Fault recovery frequency upper limit [%.3f %unit%]"        <error> (gPV) ["Setpoint", "Frequency"] {unit="Hz", channel="modbus:data:TODO:rw_015_022:do018:number"}
-Number:ElectricPotential PV_L1_UV_Thr "Level-1 undervoltage protection threshold [%.1f %unit%]"   <error> (gPV) ["Setpoint", "Voltage"]   {unit="V",  channel="modbus:data:TODO:rw_015_022:do019:number"}
-Number:Dimensionless     PV_L1_UV_Dur "Level-1 undervoltage protection duration [%d]"             <error> (gPV) ["Setpoint"]              {           channel="modbus:data:TODO:rw_015_022:do020:number"}
-Number:ElectricPotential PV_L1_OV_Thr "Level-1 overvoltage protection threshold [%.1f %unit%]"    <error> (gPV) ["Setpoint", "Voltage"]   {unit="V",  channel="modbus:data:TODO:rw_015_022:do021:number"}
-Number:Dimensionless     PV_L1_OV_Dur "Level-1 overvoltage protection duration [%d]"              <error> (gPV) ["Setpoint"]              {           channel="modbus:data:TODO:rw_015_022:do022:number"}
-Number:Frequency         PV_L1_UF_Thr "Level-1 underfrequency protection threshold [%.3f %unit%]" <error> (gPV) ["Setpoint", "Frequency"] {unit="Hz", channel="modbus:data:TODO:rw_023_026:do023:number"}
-Number:Dimensionless     PV_L1_UF_Dur "Level-1 underfrequency protection duration [%d]"           <error> (gPV) ["Setpoint"]              {           channel="modbus:data:TODO:rw_023_026:do024:number"}
-Number:Frequency         PV_L1_OF_Thr "Level-1 overfrequency protection threshold [%.3f %unit%]"  <error> (gPV) ["Setpoint", "Frequency"] {unit="Hz", channel="modbus:data:TODO:rw_023_026:do025:number"}
-Number:Dimensionless     PV_L1_OF_Dur "Level-1 overfrequency protection duration [%d]"            <error> (gPV) ["Setpoint"]              {           channel="modbus:data:TODO:rw_023_026:do026:number"}
-
-// #27 - #28
-Number PV_Working_Mode "Hybrid Inverter Working Mode [MAP(solinteg-working-mode.map):%s]" <settings>     (gPV) ["Setpoint"] {channel="modbus:data:TODO:rw_027_028:do027:number"}
-Switch PV_Enable_UPS   "Enable UPS Function Switch"                                       <batterylevel> (gPV) ["Setpoint"] {channel="modbus:data:TODO:rw_027_028:do028:switch"}
-
-// #29 - #33
-Number:ElectricPotential PV_Off_Grid_U       "Off-grid Voltage Setting [%.1f %unit%]"      <energy>   (gPV) ["Setpoint", "Voltage"]   {unit="V",   channel="modbus:data:TODO:rw_029_032:do029:number"}
-Number:Frequency         PV_Off_Grid_F       "Off-grid Frequency Setting [%.3f %unit%]"    <energy>   (gPV) ["Setpoint", "Frequency"] {unit="Hz",  channel="modbus:data:TODO:rw_029_032:do030:number"}
-Switch                   PV_On_Grid_Unb_Out  "On-Grid Unbalanced Output Switch"            <energy>   (gPV) ["Setpoint"]              {            channel="modbus:data:TODO:rw_029_032:do031:switch"}
-Switch                   PV_Peak_Load_Shift  "Peak Load Shifting Switch"                   <energy>   (gPV) ["Setpoint"]              {            channel="modbus:data:TODO:rw_029_032:do032:switch"}
-Number:Power             PV_Max_Grid_Pwr_Val "Max. Grid Power Value Setting [%.1f %unit%]" <energy>   (gPV) ["Setpoint", "Power"]     {unit="kVA", channel="modbus:data:TODO:rw_033_034:do033:number"}
-
-// #34 - #35, #43
-Number PV_Parallel_MS    "Parallel Master-Slave Sign [MAP(solinteg-ms.map):%s]"                   <settings> (gPV) ["Setpoint"] {channel="modbus:data:TODO:rw_033_034:do034:number"}
-Number PV_Pwr_Sched_Mode "AC Power Scheduling Mode Setting [MAP(solinteg-pwr-schdl.map):%s]"      <settings> (gPV) ["Setpoint"] {channel="modbus:data:TODO:rw_035_044:do035:number"}
-Switch PV_Prio_Power_Out "Priority of Power Output Setting [MAP(solinteg-pwr-schdl-prio.map):%s]" <energy>   (gPV) ["Setpoint"] {channel="modbus:data:TODO:rw_035_044:do043:switch"}
-
-// #36 - #42, #44
-Number:Power PV_AC_Pwr_Sched     "Total AC Power Scheduling Setting [%.2f %unit%]" <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do036:number"}
-Number:Power PV_A_Pwr_Sched      "Phase A Power Scheduling Setting [%.2f %unit%]"  <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do037:number"}
-Number:Power PV_B_Pwr_Sched      "Phase B Power Scheduling Setting [%.2f %unit%]"  <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do038:number"}
-Number:Power PV_C_Pwr_Sched      "Phase C Power Scheduling Setting [%.2f %unit%]"  <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do039:number"}
-Number:Power PV_Batt_Pwr_Sched   "Battery Power Scheduling Setting [%.2f %unit%]"  <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do040:number"}
-Number:Power PV_Max_AC_Pwr_Sched "Max. AC Power Limit Setting [%.2f %unit%]"       <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do041:number"}
-Number:Power PV_Min_AC_Pwr_Sched "Min. AC Power Limit Setting [%.2f %unit%]"       <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do042:number"}
-Number:Power PV_PV_Pwr_Sched     "PV Power Scheduling Setting [%.2f %unit%]"       <energy> (gPV) ["Setpoint", "Power"] {unit="kW", channel="modbus:data:TODO:rw_035_044:do044:number"}
-
-// #45 - #50
-Number               PV_Batt_Conf             "Battery Configuration [MAP(solinteg-battery-conf.map):%s]"         <batterylevel> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_045_050:do045:number"}
-Number               PV_Batt_Proto_Conf       "Battery Protocol configuration [JS(solinteg-battery-proto.js):%s]" <batterylevel> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_045_050:do046:number"}
-Switch               PV_On_Grid_SOC           "On-grid SOC Protection"                                            <batterylevel> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_045_050:do047:switch"}
-Number:Dimensionless PV_On_Grid_Batt_End_SOC  "On-grid Battery End SOC [%.1f %unit%]"                             <batterylevel> (gPV) ["Setpoint"] {unit="%", channel="modbus:data:TODO:rw_045_050:do048:number"}
-Switch               PV_Off_Grid_SOC          "Off-grid SOC Protection"                                           <batterylevel> (gPV) ["Setpoint"] {          channel="modbus:data:TODO:rw_045_050:do049:switch"}
-Number:Dimensionless PV_Off_Grid_Batt_End_SOC "Off-grid  Battery End SOC [%.1f %unit%]"                           <batterylevel> (gPV) ["Setpoint"] {unit="%", channel="modbus:data:TODO:rw_045_050:do050:number"}
-
-// #51
-Switch PV_Period_1_Enabled "Period Enable Flag - Period 1" <calendar> (gPV) {channel="modbus:data:TODO:rw_051_093:do051_0:switch"}
-Switch PV_Period_2_Enabled "Period Enable Flag - Period 2" <calendar> (gPV) {channel="modbus:data:TODO:rw_051_093:do051_1:switch"}
-Switch PV_Period_3_Enabled "Period Enable Flag - Period 3" <calendar> (gPV) {channel="modbus:data:TODO:rw_051_093:do051_2:switch"}
-Switch PV_Period_4_Enabled "Period Enable Flag - Period 4" <calendar> (gPV) {channel="modbus:data:TODO:rw_051_093:do051_3:switch"}
-Switch PV_Period_5_Enabled "Period Enable Flag - Period 5" <calendar> (gPV) {channel="modbus:data:TODO:rw_051_093:do051_4:switch"}
-Switch PV_Period_6_Enabled "Period Enable Flag - Period 6" <calendar> (gPV) {channel="modbus:data:TODO:rw_051_093:do051_5:switch"}
-
-// #52 - #93
+// Automatically generated content below
+Number                   PV_DO10104 "Safety Code [JS(solinteg-saftey-code.js):%s]"                             <f7:tag>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro10104:do10104:number"}                                                                  
+Number                   PV_DO10105 "Inverter Working Status [MAP(solinteg-inverter-working-status.map):%s]"   <settings>     (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro10104:do10105:number"}                                                                  
+Number:Power             PV_DO10994 "Pmeter on phase A [%.3f %unit%]"                                          <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro10994:do10994:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO10996 "Pmeter on phase B [%.3f %unit%]"                                          <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro10994:do10996:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO10998 "Pmeter on phase C [%.3f %unit%]"                                          <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro10994:do10998:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO11000 "Pmeter of three phases [%.3f %unit%]"                                     <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro10994:do11000:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Energy            PV_DO11002 "Total Grid-Injection Energy on Meter [%.2f %unit%]"                       <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro10994:do11002:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Energy            PV_DO11004 "Total Purchasing Energy from Grid on Meter [%.2f %unit%]"                 <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro10994:do11004:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11006 "AB line voltage [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro10994:do11006:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11007 "BC line voltage [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro10994:do11007:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11008 "CA line voltage [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro10994:do11008:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11009 "Phase A Voltage [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro10994:do11009:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO11010 "Phase A Current [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro10994:do11010:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11011 "Phase B Voltage [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro10994:do11011:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO11012 "Phase B Current [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro10994:do11012:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11013 "Phase C Voltage [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro10994:do11013:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO11014 "Phase C Current [%.1f %unit%]"                                            <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro10994:do11014:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Frequency         PV_DO11015 "Grid Frequency [%.2f %unit%]"                                             <energy>       (gPV) ["Measurement", "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:ro10994:do11015:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO11016 "Power AC [%.3f %unit%]"                                                   <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro10994:do11016:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Energy            PV_DO11018 "Energy today [%.1f %unit%]"                                               <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro10994:do11018:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO11020 "Energy total [%.1f %unit%]"                                               <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro10994:do11020:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Time              PV_DO11022 "Total Generation Hours [%.0f %unit%]"                                     <time>         (gPV) ["Measurement", "Time"]          {unit="H",   channel="modbus:data:inverter:ro10994:do11022:number"}                                                                  
+Number:Power             PV_DO11028 "Total PV Input Power [%.3f %unit%]"                                       <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro11028:do11028:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Temperature       PV_DO11032 "Temp. 1 [%.1f %unit%]"                                                    <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro11032:do11032:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Temperature       PV_DO11033 "Temp. 2 [%.1f %unit%]"                                                    <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro11032:do11033:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Temperature       PV_DO11034 "Temp. 3 [%.1f %unit%]"                                                    <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro11032:do11034:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Temperature       PV_DO11035 "Temp. 4 [%.1f %unit%]"                                                    <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro11032:do11035:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11038 "PV1 Voltage [%.1f %unit%]"                                                <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro11038:do11038:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO11039 "PV1 Current [%.1f %unit%]"                                                <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro11038:do11039:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO11040 "PV2 Voltage [%.1f %unit%]"                                                <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro11038:do11040:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO11041 "PV2 Current [%.1f %unit%]"                                                <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro11038:do11041:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Power             PV_DO11062 "PV1 Input Power [%.3f %unit%]"                                            <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro11062:do11062:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO11064 "PV2 Input Power [%.3f %unit%]"                                            <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro11062:do11064:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO30200 "Backup A Voltage [%.1f %unit%]"                                           <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro30200:do30200:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO30201 "Backup A Current [%.1f %unit%]"                                           <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro30200:do30201:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Frequency         PV_DO30202 "Backup A Frequency [%.2f %unit%]"                                         <energy>       (gPV) ["Measurement", "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:ro30200:do30202:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO30204 "Backup A Power [%.3f %unit%]"                                             <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30204:do30204:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO30210 "Backup B Voltage [%.1f %unit%]"                                           <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro30210:do30210:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO30211 "Backup B Current [%.1f %unit%]"                                           <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro30210:do30211:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Frequency         PV_DO30212 "Backup B Frequency [%.2f %unit%]"                                         <energy>       (gPV) ["Measurement", "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:ro30210:do30212:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO30214 "Backup B Power [%.3f %unit%]"                                             <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30214:do30214:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO30220 "Backup C Voltage [%.1f %unit%]"                                           <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro30220:do30220:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO30221 "Backup C Current [%.1f %unit%]"                                           <energy>       (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro30220:do30221:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Frequency         PV_DO30222 "Backup C Frequency [%.2f %unit%]"                                         <energy>       (gPV) ["Measurement", "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:ro30220:do30222:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO30224 "Backup C Power [%.3f %unit%]"                                             <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30224:do30224:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO30230 "Total Active Power [%.3f %unit%]"                                         <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30230:do30230:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO30236 "Phase A Active Power [%.3f %unit%]"                                       <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30236:do30236:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO30242 "Phase B Active Power [%.3f %unit%]"                                       <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30242:do30242:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Power             PV_DO30248 "Phase C Active Power [%.3f %unit%]"                                       <energy>       (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30248:do30248:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO30254 "Battery Voltage [%.1f %unit%]"                                            <batterylevel> (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro30254:do30254:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO30255 "Battery Current [%.1f %unit%]"                                            <batterylevel> (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro30254:do30255:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Switch                   PV_DO30256 "Battery Mode [MAP(solinteg-battery-mode.map):%s]"                         <batterylevel> (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:ro30254:do30256:switch"}                                                                  
+Number:Power             PV_DO30258 "Battery Power [%.3f %unit%]"                                              <batterylevel> (gPV) ["Measurement", "Power"]         {unit="kW",  channel="modbus:data:inverter:ro30258:do30258:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number:Energy            PV_DO31000 "Daily Energy Injected to Grid [%.1f %unit%]"                              <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31000:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31001 "Daily Purchased Energy [%.1f %unit%]"                                     <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31001:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31002 "Daily Energy Output on Backup [%.1f %unit%]"                              <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31002:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31003 "Daily Battery Charging Energy [%.1f %unit%]"                              <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31003:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31004 "Daily Battery Discharging [%.1f %unit%]"                                  <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31004:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31005 "Daily PV Generation [%.1f %unit%]"                                        <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31005:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31006 "Daily Load Consumption [%.1f %unit%]"                                     <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31000:do31006:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31008 "Daily Energy Purchased from Grid at Inverter [%.1f %unit%]"               <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31008:do31008:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31102 "Total Energy Injected into Grid [%.1f %unit%]"                            <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31102:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31104 "Total Purchased Energy from Grid [%.1f %unit%]"                           <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31104:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31106 "Total Output Energy on Backup Port [%.1f %unit%]"                         <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31106:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31108 "Total Battery Charging Energy [%.1f %unit%]"                              <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31108:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31110 "Total Battery Discharging Energy [%.1f %unit%]"                           <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31110:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31112 "Total PV Generation [%.1f %unit%]"                                        <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31112:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31114 "Total Load Consumption [%.1f %unit%]"                                     <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31102:do31114:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Energy            PV_DO31118 "Total Energy Purchased from Grid at Inverter Side [%.1f %unit%]"          <energy>       (gPV) ["Measurement", "Energy"]        {unit="kWh", channel="modbus:data:inverter:ro31118:do31118:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO32000 "Battery Type Codes [%.0f %unit%]"                                         <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro32000:do32000:number"}                                                                  
+Number                   PV_DO32001 "Battery strings [%.0f %unit%]"                                            <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro32000:do32001:number"}                                                                  
+Number                   PV_DO32002 "Battery protocol [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro32000:do32002:number"}                                                                  
+Number                   PV_DO32003 "Software Version [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro32000:do32003:number"}                                                                  
+Number                   PV_DO32004 "Hardware Version [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro32000:do32004:number"}                                                                  
+Number:ElectricCurrent   PV_DO32005 "BMS Charge Imax [%.1f %unit%]"                                            <batterylevel> (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro32000:do32005:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO32006 "BMS Discharge Imax [%.1f %unit%]"                                         <batterylevel> (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro32000:do32006:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Dimensionless     PV_DO33000 "SOC [%.2f %unit%]"                                                        <batterylevel> (gPV) ["Measurement", "Dimensionless"] {unit="%",   channel="modbus:data:inverter:ro33000:do33000:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Dimensionless     PV_DO33001 "SOH [%.2f %unit%]"                                                        <batterylevel> (gPV) ["Measurement", "Dimensionless"] {unit="%",   channel="modbus:data:inverter:ro33000:do33001:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number                   PV_DO33002 "BMS Status [%.0f %unit%]"                                                 <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33000:do33002:number"}                                                                  
+Number:Temperature       PV_DO33003 "BMS Pack Temperature [%.1f %unit%]"                                       <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro33000:do33003:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO33008 "Max Cell Temperature ID [%.0f %unit%]"                                    <temperature>  (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do33008:number"}                                                                  
+Number:Temperature       PV_DO33009 "Max Cell Temperature [%.1f %unit%]"                                       <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro33008:do33009:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO33010 "Min Cell Temperature ID [%.0f %unit%]"                                    <temperature>  (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do33010:number"}                                                                  
+Number:Temperature       PV_DO33011 "Min Cell Temperature [%.1f %unit%]"                                       <temperature>  (gPV) ["Measurement", "Temperature"]   {unit="°C",  channel="modbus:data:inverter:ro33008:do33011:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO33012 "Max Cell Voltage ID [%.0f %unit%]"                                        <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do33012:number"}                                                                  
+Number:ElectricPotential PV_DO33013 "Max Cell Voltage [%.3f %unit%]"                                           <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro33008:do33013:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number                   PV_DO33014 "Min Cell Voltage ID [%.0f %unit%]"                                        <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do33014:number"}                                                                  
+Number:ElectricPotential PV_DO33015 "Min Cell Voltage [%.3f %unit%]"                                           <energy>       (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro33008:do33015:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number                   PV_DO33016 "BMS ERROR CODE [%.0f %unit%]"                                             <error>        (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do33016:number"}                                                                  
+Number                   PV_DO33018 "BMS WARN CODE [%.0f %unit%]"                                              <error>        (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do33018:number"}                                                                  
+Number:ElectricPotential PV_DO33020 "Charge Cutoff Voltage [%.1f %unit%]"                                      <batterylevel> (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro33008:do33020:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO33021 "Charge Current Limit [%.1f %unit%]"                                       <batterylevel> (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro33008:do33021:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO33022 "Discharge Cutoff Voltage [%.1f %unit%]"                                   <batterylevel> (gPV) ["Measurement", "Voltage"]       {unit="V",   channel="modbus:data:inverter:ro33008:do33022:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricCurrent   PV_DO33023 "Discharge Current Limit [%.1f %unit%]"                                    <batterylevel> (gPV) ["Measurement", "Current"]       {unit="A",   channel="modbus:data:inverter:ro33008:do33023:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO25000 "Safety Code [%.0f %unit%]"                                                <settings>     (gPV) ["Status"]                       {            channel="modbus:data:inverter:ro33008:do25000:number"}                                                                  
+Number                   PV_DO25015 "Overload Method Setting [MAP(solinteg-overload-method.map):%s]"           <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw25015:do25015:number"}                                                                  
+Switch                   PV_DO25100 "Grid Injection Power Limit Switch"                                        <switch>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw25100:do25100:switch"}                                                                  
+Number                   PV_DO25103 "Grid Injection Power Limit % Setting [%.3f %unit%]"                       <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw25103:do25103:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Switch                   PV_DO25104 "Smart Meter COM Status"                                                   <status>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw25103:do25104:switch"}                                                                  
+// Number:Power             PV_DO25105 "Pmeter on Phase A [%.0f %unit%]"                                          <energy>       (gPV) ["Setpoint",    "Power"]         {unit="W",   channel="modbus:data:inverter:rw25103:do25105:number"}                                                                  
+// Number:Power             PV_DO25107 "Pmeter on Phase B [%.0f %unit%]"                                          <energy>       (gPV) ["Setpoint",    "Power"]         {unit="W",   channel="modbus:data:inverter:wo25107:do25107:number"}                                                                  
+// Number:Power             PV_DO25109 "Pmeter on Phase C [%.0f %unit%]"                                          <energy>       (gPV) ["Setpoint",    "Power"]         {unit="W",   channel="modbus:data:inverter:wo25109:do25109:number"}                                                                  
+Number                   PV_DO25118 "Reactive power limit percentage [%.3f %unit%]"                            <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw25118:do25118:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number                   PV_DO25120 "PF Setting [%.3f %unit%]"                                                 <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw25120:do25120:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number                   PV_DO25121 "Reactive power Control Mode [MAP(solinteg-pwr-ctl.map):%s]"               <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw25120:do25121:number"}                                                                  
+Number:ElectricPotential PV_DO28000 "Fault recovery voltage lower limit [%.1f %unit%]"                         <error>        (gPV) ["Setpoint",    "Voltage"]       {unit="V",   channel="modbus:data:inverter:rw28000:do28000:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO28001 "Fault recovery voltage upper limit [%.1f %unit%]"                         <error>        (gPV) ["Setpoint",    "Voltage"]       {unit="V",   channel="modbus:data:inverter:rw28000:do28001:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Frequency         PV_DO28002 "Fault recovery frequency lower limit [%.2f %unit%]"                       <error>        (gPV) ["Setpoint",    "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:rw28000:do28002:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Frequency         PV_DO28003 "Fault recovery frequency upper limit [%.2f %unit%]"                       <error>        (gPV) ["Setpoint",    "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:rw28000:do28003:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:ElectricPotential PV_DO28004 "Level-1 undervoltage protection threshold [%.1f %unit%]"                  <error>        (gPV) ["Setpoint",    "Voltage"]       {unit="V",   channel="modbus:data:inverter:rw28000:do28004:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Dimensionless     PV_DO28005 "Level-1 undervoltage protection duration [%.0f %unit%]"                   <error>        (gPV) ["Setpoint",    "Dimensionless"] {unit="Prd", channel="modbus:data:inverter:rw28000:do28005:number"}                                                                  
+Number:ElectricPotential PV_DO28006 "Level-1 overvoltage protection threshold [%.1f %unit%]"                   <error>        (gPV) ["Setpoint",    "Voltage"]       {unit="V",   channel="modbus:data:inverter:rw28000:do28006:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Dimensionless     PV_DO28007 "Level-1 overvoltage protection duration [%.0f %unit%]"                    <error>        (gPV) ["Setpoint",    "Dimensionless"] {unit="Prd", channel="modbus:data:inverter:rw28000:do28007:number"}                                                                  
+Number:Frequency         PV_DO28012 "Level-1 underfrequency protection threshold [%.2f %unit%]"                <error>        (gPV) ["Setpoint",    "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:rw28012:do28012:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Dimensionless     PV_DO28013 "Level-1 underfrequency protection duration [%.0f %unit%]"                 <error>        (gPV) ["Setpoint",    "Dimensionless"] {unit="Prd", channel="modbus:data:inverter:rw28012:do28013:number"}                                                                  
+Number:Frequency         PV_DO28014 "Level-1 overfrequency protection threshold [%.2f %unit%]"                 <error>        (gPV) ["Setpoint",    "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:rw28012:do28014:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Dimensionless     PV_DO28015 "Level-1 overfrequency protection duration [%.0f %unit%]"                  <error>        (gPV) ["Setpoint",    "Dimensionless"] {unit="Prd", channel="modbus:data:inverter:rw28012:do28015:number"}                                                                  
+Switch                   PV_DO28101 "10m overvoltage switch"                                                   <error>        (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw28101:do28101:switch"}                                                                  
+Number:ElectricPotential PV_DO28102 "10m overvoltage threshold [%.1f %unit%]"                                  <error>        (gPV) ["Setpoint",    "Voltage"]       {unit="V",   channel="modbus:data:inverter:rw28101:do28102:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO50000 "Hybrid Inverter Working Mode Setting [MAP(solinteg-working-mode.map):%s]" <settings>     (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw50000:do50000:number"}                                                                  
+Switch                   PV_DO50001 "Enable UPS Function Switch"                                               <batterylevel> (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw50000:do50001:switch"}                                                                  
+Number:ElectricPotential PV_DO50004 "Off-grid Voltage Setting [%.1f %unit%]"                                   <energy>       (gPV) ["Setpoint",    "Voltage"]       {unit="V",   channel="modbus:data:inverter:rw50004:do50004:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number:Frequency         PV_DO50005 "Off-grid Frequency Setting [%.2f %unit%]"                                 <energy>       (gPV) ["Setpoint",    "Frequency"]     {unit="Hz",  channel="modbus:data:inverter:rw50004:do50005:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Switch                   PV_DO50006 "On-Grid Unbalanced Output Switch"                                         <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw50004:do50006:switch"}                                                                  
+Switch                   PV_DO50007 "Peak Load Shifting Switch"                                                <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw50004:do50007:switch"}                                                                  
+Number:Power             PV_DO50009 "Max. Grid Power Value Setting [%.1f %unit%]"                              <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kVA", channel="modbus:data:inverter:rw50009:do50009:number"[profile="modbus:gainOffset", gain="0.01",   pre-gain-offset="0"]} 
+Number                   PV_DO50010 "Parallel Master-Slave Sign [MAP(solinteg-ms.map):%s]"                     <settings>     (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw50009:do50010:number"}                                                                  
+Number                   PV_DO50202 "AC Power Scheduling Mode Setting [MAP(solinteg-pwr-schdl.map):%s]"        <settings>     (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw50202:do50202:number"}                                                                  
+Number:Power             PV_DO50203 "Total AC Power Scheduling Setting [%.2f %unit%]"                          <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50203:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO50204 "Phase A Power Scheduling Setting [%.2f %unit%]"                           <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50204:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO50205 "Phase B Power Scheduling Setting [%.2f %unit%]"                           <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50205:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO50206 "Phase C Power Scheduling Setting [%.2f %unit%]"                           <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50206:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO50207 "Battery Power Scheduling Setting [%.2f %unit%]"                           <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50207:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO50208 "Max. AC Power Limit Setting [%.2f %unit%]"                                <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50208:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number:Power             PV_DO50209 "Min. AC Power Limit Setting [%.2f %unit%]"                                <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50209:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Switch                   PV_DO50210 "Priority of Power Output Setting [MAP(solinteg-pwr-schdl-prio.map):%s]"   <energy>       (gPV) ["Status"]                       {unit="NA",  channel="modbus:data:inverter:rw50202:do50210:switch"}                                                                  
+Number:Power             PV_DO50211 "PV Power Scheduling Setting [%.2f %unit%]"                                <energy>       (gPV) ["Setpoint",    "Power"]         {unit="kW",  channel="modbus:data:inverter:rw50202:do50211:number"[profile="modbus:gainOffset", gain="0.001",  pre-gain-offset="0"]} 
+Number                   PV_DO52500 "Battery Configuration [MAP(solinteg-battery-conf.map):%s]"                <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw52500:do52500:number"}                                                                  
+Number                   PV_DO52501 "Battery Protocol configuration [JS(solinteg-battery-proto.js):%s]"        <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw52500:do52501:number"}                                                                  
+Switch                   PV_DO52502 "On-grid SOC Protection"                                                   <batterylevel> (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw52500:do52502:switch"}                                                                  
+Number                   PV_DO52503 "On-grid Battery End SOC [%.3f %unit%]"                                    <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw52500:do52503:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Switch                   PV_DO52504 "Off-grid SOC Protection"                                                  <batterylevel> (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw52500:do52504:switch"}                                                                  
+Number                   PV_DO52505 "Off-grid  Battery End SOC [%.3f %unit%]"                                  <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw52500:do52505:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+Number                   PV_DO53007 "Charge/Discharge Setting [%.0f %unit%]"                                   <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53007:do53007:number"}                                                                  
+Switch                   PV_DO53008 "Battery Charge By"                                                        <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw53007:do53008:switch"}                                                                  
+// Number                   PV_DO53009 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53007:do53009:number"}                                                                  
+Number:Dimensionless     PV_DO53010 "Power Limit [%.3f %unit%]"                                                <energy>       (gPV) ["Setpoint",    "Dimensionless"] {unit="%",   channel="modbus:data:inverter:rw53007:do53010:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Number                   PV_DO53011 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53007:do53011:number"}                                                                  
+Number                   PV_DO53014 "Charge/Discharge [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53014:do53014:number"}                                                                  
+Switch                   PV_DO53015 "Battery Charge By"                                                        <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw53014:do53015:switch"}                                                                  
+// Number                   PV_DO53016 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53014:do53016:number"}                                                                  
+Number                   PV_DO53017 "Power Limit [%.3f %unit%]"                                                <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53014:do53017:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Number                   PV_DO53018 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53014:do53018:number"}                                                                  
+Number                   PV_DO53021 "Charge/Discharge [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53021:do53021:number"}                                                                  
+Switch                   PV_DO53022 "Battery Charge By"                                                        <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw53021:do53022:switch"}                                                                  
+// Number                   PV_DO53023 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53021:do53023:number"}                                                                  
+Number                   PV_DO53024 "Power Limit [%.3f %unit%]"                                                <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53021:do53024:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Number                   PV_DO53025 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53021:do53025:number"}                                                                  
+Number                   PV_DO53028 "Charge/Discharge [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53028:do53028:number"}                                                                  
+Switch                   PV_DO53029 "Battery Charge By"                                                        <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw53028:do53029:switch"}                                                                  
+// Number                   PV_DO53030 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53028:do53030:number"}                                                                  
+Number                   PV_DO53031 "Power Limit [%.3f %unit%]"                                                <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53028:do53031:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Number                   PV_DO53032 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53028:do53032:number"}                                                                  
+Number                   PV_DO53035 "Charge/Discharge [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53035:do53035:number"}                                                                  
+Switch                   PV_DO53036 "Battery Charge By"                                                        <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw53035:do53036:switch"}                                                                  
+// Number                   PV_DO53037 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53035:do53037:number"}                                                                  
+Number                   PV_DO53038 "Power Limit [%.3f %unit%]"                                                <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53035:do53038:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Number                   PV_DO53039 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53035:do53039:number"}                                                                  
+Number                   PV_DO53042 "Charge/Discharge [%.0f %unit%]"                                           <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53042:do53042:number"}                                                                  
+Switch                   PV_DO53043 "Battery Charge By"                                                        <energy>       (gPV) ["Status"]                       {unit="N/A", channel="modbus:data:inverter:rw53042:do53043:switch"}                                                                  
+// Number                   PV_DO53044 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53042:do53044:number"}                                                                  
+Number                   PV_DO53045 "Power Limit [%.3f %unit%]"                                                <energy>       (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53042:do53045:number"[profile="modbus:gainOffset", gain="0.0001", pre-gain-offset="0"]} 
+// Number                   PV_DO53046 "reserved [%.0f %unit%]"                                                   <none>         (gPV) ["Status"]                       {            channel="modbus:data:inverter:rw53042:do53046:number"}                                                                  
+// Number                   PV_DO53500 "BMSVersion [%.0f %unit%]"                                                 <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:wo53500:do53500:number"}                                                                  
+// Number                   PV_DO53508 "BMS Status [%.0f %unit%]"                                                 <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:wo53508:do53508:number"}                                                                  
+// Number                   PV_DO53509 "BMS ErrorCode [%.0f %unit%]"                                              <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:wo53508:do53509:number"}                                                                  
+// Number                   PV_DO53511 "BMS Protection Code [%.0f %unit%]"                                        <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:wo53511:do53511:number"}                                                                  
+// Number                   PV_DO53513 "BMS WarnCode [%.0f %unit%]"                                               <batterylevel> (gPV) ["Status"]                       {            channel="modbus:data:inverter:wo53513:do53513:number"}                                                                  

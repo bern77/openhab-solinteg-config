@@ -1,0 +1,134 @@
+Group gPV "Photovoltaik inkl. Speicher" <solarplant>
+Group gPV_Error "PV Fehler" <error> (gPV)
+
+// Device Serial Number
+Group gPV_Device_SN
+String PV_Device_SN_01 "Device SN - Character 1"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10000_l:string"}
+String PV_Device_SN_02 "Device SN - Character 2"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10000_h:string"}
+String PV_Device_SN_03 "Device SN - Character 3"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10001_l:string"}
+String PV_Device_SN_04 "Device SN - Character 4"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10001_h:string"}
+String PV_Device_SN_05 "Device SN - Character 5"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10002_l:string"}
+String PV_Device_SN_06 "Device SN - Character 6"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10002_h:string"}
+String PV_Device_SN_07 "Device SN - Character 7"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10003_l:string"}
+String PV_Device_SN_08 "Device SN - Character 8"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10003_h:string"}
+String PV_Device_SN_09 "Device SN - Character 9"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10004_l:string"}
+String PV_Device_SN_10 "Device SN - Character 10" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10004_h:string"}
+String PV_Device_SN_11 "Device SN - Character 11" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10005_l:string"}
+String PV_Device_SN_12 "Device SN - Character 12" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10005_h:string"}
+String PV_Device_SN_13 "Device SN - Character 13" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10006_l:string"}
+String PV_Device_SN_14 "Device SN - Character 14" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10006_h:string"}
+String PV_Device_SN_15 "Device SN - Character 15" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10007_l:string"}
+String PV_Device_SN_16 "Device SN - Character 16" (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10007_h:string"}
+String PV_Device_SN "Device Serial Number" <keyring> (gPV) ["Status"]
+
+// Device Model Info
+Group gPV_Device_Model_Info
+Number PV_Inverter_Type "Inverter Type" (gPV_Device_Model_Info) {channel="modbus:data:inverter:ro10000:do10008_l:number"}
+Number PV_Model_Info    "Model Info"    (gPV_Device_Model_Info) {channel="modbus:data:inverter:ro10000:do10008_h:number"}
+String PV_Device_Model_Info "Device Model Info" <keyring> (gPV) ["Status"]
+
+// Firmware Version
+Group gPV_Firmware_Version
+Number PV_FW_Ver_1 "Firmware Version 1" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10011_l:number"}
+Number PV_FW_Ver_2 "Firmware Version 2" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10011_h:number"}
+Number PV_FW_Ver_3 "Firmware Version 3" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10012_l:number"}
+Number PV_FW_Ver_4 "Firmware Version 4" (gPV_Firmware_Version) {channel="modbus:data:inverter:ro10011:do10012_h:number"}
+String PV_Firmware_Version "Firmware Version" <settings> (gPV) ["Status"]
+
+// Date and Time
+Group gPV_DateTime
+Number PV_DateTime_Y "Date+Time - Year"   (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10100_h:number"}
+Number PV_DateTime_M "Date+Time - Month"  (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10100_l:number"}
+Number PV_DateTime_D "Date+Time - Day"    (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10101_h:number"}
+Number PV_DateTime_h "Date+Time - Hour"   (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10101_l:number"}
+Number PV_DateTime_m "Date+Time - Minute" (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10102_h:number"}
+Number PV_DateTime_s "Date+Time - Second" (gPV_DateTime) {channel="modbus:data:inverter:ro10100:do10102_l:number"}
+DateTime PV_DateTime "Date+Time" <calendar> (gPV) ["Status"]
+
+// Fault Flag 1
+Switch PV_Fault_1_0 "Mains Lost"                 <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_0:switch"}
+Switch PV_Fault_1_1 "Grid Voltage Fault"         <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_1:switch"}
+Switch PV_Fault_1_2 "Grid Frequency Fault"       <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_2:switch"}
+Switch PV_Fault_1_3 "DCI Fault"                  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_3:switch"}
+Switch PV_Fault_1_4 "ISO Over Limitation"        <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_4:switch"}
+Switch PV_Fault_1_5 "GFCI Fault"                 <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_5:switch"}
+Switch PV_Fault_1_6 "PV Over Voltage"            <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_6:switch"}
+Switch PV_Fault_1_7 "Bus Voltage Fault"          <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_7:switch"}
+Switch PV_Fault_1_8 "Inverter Over Temperature"  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10112:do10112_8:switch"}
+
+// Fault Flag 2
+Switch PV_Fault_2_1 "SPI Fault"           <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_1:switch"}
+Switch PV_Fault_2_2 "E2 Fault"            <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_2:switch"}
+Switch PV_Fault_2_3 "GFCI Device Fault"   <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_3:switch"}
+Switch PV_Fault_2_4 "AC Transducer Fault" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_4:switch"}
+Switch PV_Fault_2_5 "Relay Check Fail"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_5:switch"}
+Switch PV_Fault_2_6 "Internal Fan Fault"  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_6:switch"}
+Switch PV_Fault_2_7 "External Fan Fault"  <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10114:do10114_7:switch"}
+
+// Fault Flag 3
+Switch PV_Fault_3_0  "Bus Hardware Fault"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_0:switch"}
+Switch PV_Fault_3_1  "PV Power Low"          <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_1:switch"}
+Switch PV_Fault_3_2  "Batt. Voltage Fault"   <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_2:switch"}
+Switch PV_Fault_3_3  "BAK Voltage Fault"     <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_3:switch"}
+Switch PV_Fault_3_4  "Bus Voltage Lower"     <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_4:switch"}
+Switch PV_Fault_3_5  "Sys Hardware Fault"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_5:switch"}
+Switch PV_Fault_3_6  "BAK Over Power"        <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_6:switch"}
+Switch PV_Fault_3_7  "Inverter Over Voltage" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_7:switch"}
+Switch PV_Fault_3_8  "Inverter Over Freq"    <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_8:switch"}
+Switch PV_Fault_3_9  "Inverter Over Current" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_9:switch"}
+Switch PV_Fault_3_10 "Phase Order Err"       <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro10120:do10120_10:switch"}
+
+// ARM Fault Flag 1
+Switch PV_Fault_ARM_0 "SCI Fault"        <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro18000:do18000_0:switch"}
+Switch PV_Fault_ARM_1 "FLASH Fault"      <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro18000:do18000_1:switch"}
+Switch PV_Fault_ARM_2 "Meter Comm Fault" <error> (gPV_Error) ["Alarm"] {channel="modbus:data:inverter:ro18000:do18000_2:switch"}
+
+// Date + Time: ignored, not likely that these values should be actively written to the inverter + they seem to be readable from other registers
+
+// Period Enable Flag
+Switch PV_Period_1_Enabled "Period Enable Flag - Period 1" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_0:switch"}
+Switch PV_Period_2_Enabled "Period Enable Flag - Period 2" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_1:switch"}
+Switch PV_Period_3_Enabled "Period Enable Flag - Period 3" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_2:switch"}
+Switch PV_Period_4_Enabled "Period Enable Flag - Period 4" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_3:switch"}
+Switch PV_Period_5_Enabled "Period Enable Flag - Period 5" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_4:switch"}
+Switch PV_Period_6_Enabled "Period Enable Flag - Period 6" <calendar> (gPV) ["Setpoint"] {channel="modbus:data:inverter:rw53006:do53006_5:switch"}
+
+// Start/Stop Times - Periods 1-6
+Number PV_Period_1_Start_H "Period 1 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53012_h:number"}
+Number PV_Period_2_Start_H "Period 2 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53019_h:number"}
+Number PV_Period_3_Start_H "Period 3 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53026_h:number"}
+Number PV_Period_4_Start_H "Period 4 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53033_h:number"}
+Number PV_Period_5_Start_H "Period 5 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53040_h:number"}
+Number PV_Period_6_Start_H "Period 6 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53047_h:number"}
+Number PV_Period_1_Start_M "Period 1 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53012_l:number"}
+Number PV_Period_2_Start_M "Period 2 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53019_l:number"}
+Number PV_Period_3_Start_M "Period 3 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53026_l:number"}
+Number PV_Period_4_Start_M "Period 4 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53033_l:number"}
+Number PV_Period_5_Start_M "Period 5 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53040_l:number"}
+Number PV_Period_6_Start_M "Period 6 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53047_l:number"}
+Number PV_Period_1_Stop_H "Period 1 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53013_h:number"}
+Number PV_Period_2_Stop_H "Period 2 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53020_h:number"}
+Number PV_Period_3_Stop_H "Period 3 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53027_h:number"}
+Number PV_Period_4_Stop_H "Period 4 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53034_h:number"}
+Number PV_Period_5_Stop_H "Period 5 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53041_h:number"}
+Number PV_Period_6_Stop_H "Period 6 - Start Time - h" {channel="modbus:data:inverter:rw53006:do53048_h:number"}
+Number PV_Period_1_Stop_M "Period 1 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53013_l:number"}
+Number PV_Period_2_Stop_M "Period 2 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53020_l:number"}
+Number PV_Period_3_Stop_M "Period 3 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53027_l:number"}
+Number PV_Period_4_Stop_M "Period 4 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53034_l:number"}
+Number PV_Period_5_Stop_M "Period 5 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53041_l:number"}
+Number PV_Period_6_Stop_M "Period 6 - Start Time - m" {channel="modbus:data:inverter:rw53006:do53048_l:number"}
+DateTime PV_Period_1_Start "Period 1 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_1_Stop  "Period 1 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_2_Start "Period 2 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_2_Stop  "Period 2 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_3_Start "Period 3 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_3_Stop  "Period 3 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_4_Start "Period 4 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_4_Stop  "Period 4 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_5_Start "Period 5 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_5_Stop  "Period 5 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+DateTime PV_Period_6_Start "Period 6 - Start Time [%1$tH:%1$tM]" <time> (gPV) ["Setpoint"]
+DateTime PV_Period_6_Stop  "Period 6 - Stop Time [%1$tH:%1$tM]"  <time> (gPV) ["Setpoint"] 
+
+// Automatically generated content below

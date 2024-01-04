@@ -7,7 +7,7 @@ function updateStringItem(itemName, index, char) {
     item.postUpdate(stateArr.join(''));
 }
 
-// #1 | Device Serial Number
+// Device Serial Number
 for (let i = 1; i <= 16; i++) {
     rules.JSRule({
         name: `Solinteg Device SN: monitor character ${i}`,
@@ -16,7 +16,7 @@ for (let i = 1; i <= 16; i++) {
     });
 }
 
-// #2 | Device Model Info
+// Device Model Info
 rules.JSRule({
     name: 'Solinteg Device Model Info',
     triggers: [
@@ -39,7 +39,7 @@ rules.JSRule({
     }
 });
 
-// #3 | Firmware Version
+// Firmware Version
 for (let i = 1; i <= 4; i++) {
     rules.JSRule({
         name: `Solinteg Firmware Version: monitor byte ${i}`,
@@ -48,7 +48,7 @@ for (let i = 1; i <= 4; i++) {
     });
 }
 
-// #4 - #6 | Date and Time
+// Date and Time
 rules.JSRule({
     name: 'Solinteg Date+Time',
     triggers: [
@@ -63,12 +63,27 @@ rules.JSRule({
         function getVal(itemName) { return parseInt(data.itemName == itemName ? data.newState : items.getItem(itemName).state); }
         let date = time.ZonedDateTime.of(getVal('PV_DateTime_Y'), getVal('PV_DateTime_M'), getVal('PV_DateTime_D'),
             getVal('PV_DateTime_h'), getVal('PV_DateTime_m'), getVal('PV_DateTime_s'), 0, time.ZoneId.of('Europe/Vienna'));
-        items.getItem('PV_DateTime').postUpdate(date);
+        items.getItem('PV_DateTime').postUpdate(date.toLocalDateTime().toString());
     }
 });
 
-
-
-
-
-
+// Period Start/Stop Times
+const startStop = ['Start', 'Stop'];
+function getItemName(p, s, t) { return `PV_Period_${p}_${startStop[s]}_${t}` }
+for (let p = 1; p <= 6; p++) {
+    for (let s = 0; s <= 1; s++) {
+        rules.JSRule({
+            name: `Solinteg Battery: monitor period ${p} ${startStop[s]}`,
+            triggers: [
+                trigger.ItemStateUpdateTrigger(getItemName(p, s, 'H')),
+                trigger.ItemStateUpdateTrigger(getItemName(p, s, 'M'))
+            ],
+            execute: data => {
+                let h = parseInt(data.itemName == getItemName(p, s, 'H') ? data.newState : items.getItem(getItemName(p, s, 'H')).state);
+                let m = parseInt(data.itemName == getItemName(p, s, 'M') ? data.newState : items.getItem(getItemName(p, s, 'M')).state);
+                let t = time.ZonedDateTime.of(0, 0, 0, h, m, 0, 0, time.ZoneId.of('Europe/Vienna'));
+                items.getItem(`PV_Period_${p}_${startStop[s]}`).postUpdate(t.toLocalDateTime().toString());
+            }
+        });
+    }
+}
