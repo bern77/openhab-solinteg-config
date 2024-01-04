@@ -1,0 +1,550 @@
+/* 
+    Implementation of Solinteg Inverter Modbus Protocol based on Register Table version 00.03 (2023-06-26)
+    
+
+*/
+
+Bridge modbus:tcp:localhostTCP "Solinteg Inverter" @ "TR" [ host="192.168.30.10", port=502, id=2 ] {
+
+    // --------------
+    // RO Data Object
+    // --------------
+
+    Bridge poller ro_001_002 "Poller for RO data objects 1-2" [ start=10000, length=9, refresh=0, type="holding" ] {
+        // #1 | Device Serial Number (10000 - 10007): Read bytes to string
+        Thing data do001_chr_01 "Device SN - Character 1"  [ readValueType="uint8.0", readStart=10000 ]
+        Thing data do001_chr_02 "Device SN - Character 2"  [ readValueType="uint8.1", readStart=10000 ]
+        Thing data do001_chr_03 "Device SN - Character 3"  [ readValueType="uint8.0", readStart=10001 ]
+        Thing data do001_chr_04 "Device SN - Character 4"  [ readValueType="uint8.1", readStart=10001 ]
+        Thing data do001_chr_05 "Device SN - Character 5"  [ readValueType="uint8.0", readStart=10002 ]
+        Thing data do001_chr_06 "Device SN - Character 6"  [ readValueType="uint8.1", readStart=10002 ]
+        Thing data do001_chr_07 "Device SN - Character 7"  [ readValueType="uint8.0", readStart=10003 ]
+        Thing data do001_chr_08 "Device SN - Character 8"  [ readValueType="uint8.1", readStart=10003 ]
+        Thing data do001_chr_09 "Device SN - Character 9"  [ readValueType="uint8.0", readStart=10004 ]
+        Thing data do001_chr_10 "Device SN - Character 10" [ readValueType="uint8.1", readStart=10004 ]
+        Thing data do001_chr_11 "Device SN - Character 11" [ readValueType="uint8.0", readStart=10005 ]
+        Thing data do001_chr_12 "Device SN - Character 12" [ readValueType="uint8.1", readStart=10005 ]
+        Thing data do001_chr_13 "Device SN - Character 13" [ readValueType="uint8.0", readStart=10006 ]
+        Thing data do001_chr_14 "Device SN - Character 14" [ readValueType="uint8.1", readStart=10006 ]
+        Thing data do001_chr_15 "Device SN - Character 15" [ readValueType="uint8.0", readStart=10007 ]
+        Thing data do001_chr_16 "Device SN - Character 16" [ readValueType="uint8.1", readStart=10007 ]
+        // #2 | Inverter Model (10008): determined by combination of low and high byte according to table
+        Thing data do002_l "Model Info"    [ readValueType="uint8.0", readStart=10008 ]
+        Thing data do002_h "Inverter Type" [ readValueType="uint8.1", readStart=10008 ]
+    }
+
+    // #3 | Firmware version (to be read as bytes)
+    Bridge poller ro_003 "Poller for data object 3" [ start=10011, length=2, refresh=0, type="holding" ] {
+        Thing data do003_b1 "Firmware Version 1" [ readValueType="uint8.0", readStart=10011 ]
+        Thing data do003_b2 "Firmware Version 2" [ readValueType="uint8.1", readStart=10011 ]
+        Thing data do003_b3 "Firmware Version 3" [ readValueType="uint8.0", readStart=10012 ]
+        Thing data do003_b4 "Firmware Version 4" [ readValueType="uint8.1", readStart=10012 ]
+    }
+
+    // #4 - #6 | Date and Time (to be read continuously)
+    Bridge poller ro_004_006 "Poller for RO data objects 4-6" [ start=10100, length=3, refresh=1000, type="holding" ] {
+        Thing data do004_h "Year"   [ readValueType="uint8.1", readStart=10100 ]
+        Thing data do004_l "Month"  [ readValueType="uint8.0", readStart=10100 ]
+        Thing data do005_h "Day"    [ readValueType="uint8.1", readStart=10101 ]
+        Thing data do005_l "Hour"   [ readValueType="uint8.0", readStart=10101 ]
+        Thing data do006_h "Minute" [ readValueType="uint8.1", readStart=10102 ]
+        Thing data do006_l "Second" [ readValueType="uint8.0", readStart=10102 ]
+    }
+
+    Bridge poller ro_007_008 "Poller for RO data objects 7-8" [ start=10104, length=2, refresh=10000, type="holding" ] {
+        // #7 | Safety Code
+        Thing data do007 "Safety Code" [ readValueType="uint16", readStart=10104 ]
+        // #8 | Inverter Working Status
+        Thing data do008 "Inverter Working Status" [ readValueType="uint16", readStart=10105 ]
+    }
+
+    // #9 | Fault Flag 1
+    Bridge poller ro_009 "Poller for data object 9" [ start=10112, length=2, refresh=5000, type="holding" ] {
+        Thing data do009_0 "Fault Flag 1 - Mains Lost"                [ readValueType="bit.0", readStart=10112 ]
+        Thing data do009_1 "Fault Flag 1 - Grid Voltage Fault"        [ readValueType="bit.1", readStart=10112 ]
+        Thing data do009_2 "Fault Flag 1 - Grid Frequency Fault"      [ readValueType="bit.2", readStart=10112 ]
+        Thing data do009_3 "Fault Flag 1 - DCI Fault"                 [ readValueType="bit.3", readStart=10112 ]
+        Thing data do009_4 "Fault Flag 1 - ISO Over Limitation"       [ readValueType="bit.4", readStart=10112 ]
+        Thing data do009_5 "Fault Flag 1 - GFCI Fault"                [ readValueType="bit.5", readStart=10112 ]
+        Thing data do009_6 "Fault Flag 1 - PV Over Voltage"           [ readValueType="bit.6", readStart=10112 ]
+        Thing data do009_7 "Fault Flag 1 - Bus Voltage Fault"         [ readValueType="bit.7", readStart=10112 ]
+        Thing data do009_8 "Fault Flag 1 - Inverter Over Temperature" [ readValueType="bit.8", readStart=10112 ]
+    }
+
+    // #10 | Fault Flag 2
+    Bridge poller ro_010 "Poller for data object 10" [ start=10114, length=2, refresh=5000, type="holding" ] {
+        Thing data do010_1 "Fault Flag 2 - SPI Fault"           [ readValueType="bit.1", readStart=10114 ]
+        Thing data do010_2 "Fault Flag 2 - E2 Fault"            [ readValueType="bit.2", readStart=10114 ]
+        Thing data do010_3 "Fault Flag 2 - GFCI Device Fault"   [ readValueType="bit.3", readStart=10114 ]
+        Thing data do010_4 "Fault Flag 2 - AC Transducer Fault" [ readValueType="bit.4", readStart=10114 ]
+        Thing data do010_5 "Fault Flag 2 - Relay Check Fail"    [ readValueType="bit.5", readStart=10114 ]
+        Thing data do010_6 "Fault Flag 2 - Internal Fan Fault"  [ readValueType="bit.6", readStart=10114 ]
+        Thing data do010_7 "Fault Flag 2 - External Fan Fault"  [ readValueType="bit.7", readStart=10114 ]
+    }
+
+    // #11 | Fault Flag 3
+    Bridge poller ro_011 "Poller for data object 11" [ start=10120, length=2, refresh=5000, type="holding" ] {
+        Thing data do011_0  "Fault Flag 3 - Bus Hardware Fault"    [ readValueType="bit.0",  readStart=10120 ]
+        Thing data do011_1  "Fault Flag 3 - PV Power Low"          [ readValueType="bit.1",  readStart=10120 ]
+        Thing data do011_2  "Fault Flag 3 - Batt. Voltage Fault"   [ readValueType="bit.2",  readStart=10120 ]
+        Thing data do011_3  "Fault Flag 3 - BAK Voltage Fault"     [ readValueType="bit.3",  readStart=10120 ]
+        Thing data do011_4  "Fault Flag 3 - Bus Voltage Lower"     [ readValueType="bit.4",  readStart=10120 ]
+        Thing data do011_5  "Fault Flag 3 - Sys Hardware Fault"    [ readValueType="bit.5",  readStart=10120 ]
+        Thing data do011_6  "Fault Flag 3 - BAK Over Power"        [ readValueType="bit.6",  readStart=10120 ]
+        Thing data do011_7  "Fault Flag 3 - Inverter Over Voltage" [ readValueType="bit.7",  readStart=10120 ]
+        Thing data do011_8  "Fault Flag 3 - Inverter Over Freq"    [ readValueType="bit.8",  readStart=10120 ]
+        Thing data do011_9  "Fault Flag 3 - Inverter Over Current" [ readValueType="bit.9",  readStart=10120 ]
+        Thing data do011_10 "Fault Flag 3 - Phase Order Err"       [ readValueType="bit.10", readStart=10120 ]
+    }
+
+    // #12 - 31
+    Bridge poller ro_012_031 "Poller for RO data objects 12 - 31" [ start=10994, length=30, refresh=5000, type="holding" ] {
+        Thing data do012 "Pmeter on phase A"                          [ readValue="int32",  readStart=10994 ] // unit="kW"
+        Thing data do013 "Pmeter on phase B"                          [ readValue="int32",  readStart=10996 ] // unit="kW"
+        Thing data do014 "Pmeter on phase C"                          [ readValue="int32",  readStart=10998 ] // unit="kW"
+        Thing data do015 "Pmeter of three phases"                     [ readValue="int32",  readStart=11000 ] // unit="kW"
+        Thing data do016 "Total Grid-Injection Energy on Meter"       [ readValue="uint32", readStart=11002 ] // unit="kWh"
+        Thing data do017 "Total Purchasing Energy from Grid on Meter" [ readValue="uint32", readStart=11004 ] // unit="kWh"
+        Thing data do018 "AB line voltage"                            [ readValue="uint16", readStart=11006 ] // unit="V"
+        Thing data do019 "BC line voltage"                            [ readValue="uint16", readStart=11007 ] // unit="V"
+        Thing data do020 "CA line voltage"                            [ readValue="uint16", readStart=11008 ] // unit="V"
+        Thing data do021 "Phase A Voltage"                            [ readValue="uint16", readStart=11009 ] // unit="V"
+        Thing data do022 "Phase A Current"                            [ readValue="uint16", readStart=11010 ] // unit="A"
+        Thing data do023 "Phase B Voltage"                            [ readValue="uint16", readStart=11011 ] // unit="V"
+        Thing data do024 "Phase B Current"                            [ readValue="uint16", readStart=11012 ] // unit="A"
+        Thing data do025 "Phase C Voltage"                            [ readValue="uint16", readStart=11013 ] // unit="V"
+        Thing data do026 "Phase C Current"                            [ readValue="uint16", readStart=11014 ] // unit="A"
+        Thing data do027 "Grid Frequency"                             [ readValue="uint16", readStart=11015 ] // unit="Hz"
+        Thing data do028 "Power AC"                                   [ readValue="int32",  readStart=11016 ] // unit="kW"
+        Thing data do029 "Energy today"                               [ readValue="uint32", readStart=11018 ] // unit="kWh"
+        Thing data do030 "Energy total"                               [ readValue="uint32", readStart=11020 ] // unit="kWh"
+        Thing data do031 "Total Generation Hours"                     [ readValue="uint32", readStart=11022 ] // unit="H"
+    }
+    
+    // #32 | Total PV Input Power
+    Bridge poller ro_032 "Poller for data object 32" [ start=11028, length=2, refresh=5000, type="holding" ] {
+        Thing data do032 "Total PV Input Power" [ readValue="uint32", readStart=11028 ] // unit="kW"
+    }
+    
+    // #33 - #36 | Temperature
+    Bridge poller ro_033_036 "Poller for RO data objects 33-36" [ start=11032, length=4, refresh=5000, type="holding" ] {
+        Thing data do033 "Temp. 1" [ readValue="int16", readStart=11032 ] // unit="°C"
+        Thing data do034 "Temp. 2" [ readValue="int16", readStart=11033 ] // unit="°C"
+        Thing data do035 "Temp. 3" [ readValue="int16", readStart=11034 ] // unit="°C"
+        Thing data do036 "Temp. 4" [ readValue="int16", readStart=11035 ] // unit="°C"
+    }
+
+    // #37 - #40 | PV1 and PV2 Voltage + Current
+    Bridge poller ro_037_040 "Poller for RO data objects 37-40" [ start=11038, length=4, refresh=5000, type="holding" ] {
+        Thing data do037 "PV1 Voltage" [ readValue="uint16", readStart=11038 ] // unit="V"
+        Thing data do038 "PV1 Current" [ readValue="uint16", readStart=11039 ] // unit="A"
+        Thing data do039 "PV2 Voltage" [ readValue="uint16", readStart=11040 ] // unit="V"
+        Thing data do040 "PV2 Current" [ readValue="uint16", readStart=11041 ] // unit="A"
+    }
+
+    // #41 - #42 | PV1 and PV2 Input Power
+    Bridge poller ro_041_042 "Poller for RO data objects 41-42" [ start=11062, length=4, refresh=5000, type="holding" ] {
+        Thing data do041 "PV1 Input Power" [ readValue="uint32", readStart=11062 ] // unit="kW"
+        Thing data do042 "PV2 Input Power" [ readValue="uint32", readStart=11064 ] // unit="kW"
+    }
+
+    // #43 | ARM Fault Flag 1
+    Bridge poller ro_043 "Poller for data object 43" [ start=18000, length=2, refresh=5000, type="holding" ] {
+        Thing data do043_0 "ARM Fault Flag 1 - SCI Fault"        [ readValueType="bit.0", readStart=18000 ]
+        Thing data do043_1 "ARM Fault Flag 1 - FLASH Fault"      [ readValueType="bit.1", readStart=18000 ]
+        Thing data do043_2 "ARM Fault Flag 1 - Meter Comm Fault" [ readValueType="bit.2", readStart=18000 ]
+    }
+
+    // #44 - #46 | Backup A
+    Bridge poller ro_044_046 "Poller for RO data objects 44-46" [ start=30200, length=3, refresh=5000, type="holding" ] {
+        Thing data do044 "Backup A Voltage"       [ readValue="uint16", readStart=30200 ] // unit="V"
+        Thing data do045 "Backup A Current"       [ readValue="uint16", readStart=30201 ] // unit="A"
+        Thing data do046 "Backup A Frequency"     [ readValue="uint16", readStart=30202 ] // unit="Hz"
+        
+    }
+
+    // #47 | Backup A - Active Power
+    Bridge poller ro_047 "Poller for data object 47" [ start=30204, length=2, refresh=5000, type="holding" ] {
+        Thing data do047 "Backup A Active Power" [ readValue="int32",  readStart=30204 ] // unit="kW"
+    }
+
+    // #48 - #50 | Backup B
+    Bridge poller ro_048_050 "Poller for RO data objects 48-50" [ start=30210, length=3, refresh=5000, type="holding" ] {
+        Thing data do048 "Backup B Voltage"       [ readValue="uint16", readStart=30210 ] // unit="V"
+        Thing data do049 "Backup B Current"       [ readValue="uint16", readStart=30211 ] // unit="A"
+        Thing data do050 "Backup B Frequency"     [ readValue="uint16", readStart=30212 ] // unit="Hz"
+    }
+
+    // #51 | Backup B - Active Power
+    Bridge poller ro_051 "Poller for data object 51" [ start=30214, length=2, refresh=5000, type="holding" ] {
+        Thing data do051 "Backup B Active Power " [ readValue="int32",  readStart=30214 ] // unit="kW"
+    }
+
+    // #52 - #54 | Backup C
+    Bridge poller ro_052_054 "Poller for RO data objects 52-54" [ start=30220, length=3, refresh=5000, type="holding" ] {
+        Thing data do052 "Backup C Voltage"       [ readValue="uint16", readStart=30220 ] // unit="V"
+        Thing data do053 "Backup C Current"       [ readValue="uint16", readStart=30221 ] // unit="A"
+        Thing data do054 "Backup C Frequency"     [ readValue="uint16", readStart=30222 ] // unit="Hz"
+    }
+
+    // #55 | Backup C - Active Power
+    Bridge poller ro_055 "Poller for data object 55" [ start=30224, length=2, refresh=5000, type="holding" ] {
+        Thing data do055 "Backup C Active Power " [ readValue="int32",  readStart=30224 ] // unit="kW"
+    }
+
+    // #56 | Total Active Power
+    Bridge poller ro_056 "Poller for data object 56" [ start=30230, length=2, refresh=5000, type="holding" ] {
+        Thing data do056 "Total Active Power" [ readValue="int32",  readStart=30230 ] // unit="kW"
+    }
+
+    // #57 | Phase A - Active Power
+    Bridge poller ro_057 "Poller for data object 57" [ start=30236, length=2, refresh=5000, type="holding" ] {
+        Thing data do057 "Phase A Active Power" [ readValue="int32", readStart=30236 ] // unit="kW"
+    }
+
+    // #58 | Phase B - Active Power
+    Bridge poller ro_058 "Poller for data object 58" [ start=30242, length=2, refresh=5000, type="holding" ] {
+        Thing data do058 "Phase B Active Power" [ readValue="int32", readStart=30242 ] // unit="kW"
+    }
+
+    // #59 | Phase C - Active Power
+    Bridge poller ro_059 "Poller for data object 59" [ start=30248, length=2, refresh=5000, type="holding" ] {
+        Thing data do059 "Phase C Active Power" [ readValue="int32", readStart=30248 ] // unit="kW"
+    }
+
+    // #60 - #62 | Battery
+    Bridge poller ro_060_062 "Poller for RO data objects 60-62" [ start=30254, length=3, refresh=5000, type="holding" ] {
+        Thing data do060 "Battery Voltage" [ readValue="uint16", readStart=30254 ] // unit="V"
+        Thing data do061 "Battery Current" [ readValue="int16",  readStart=30255 ] // unit="A"
+        Thing data do062 "Battery Mode"    [ readValue="uint16", readStart=30256 ] // 0=discharge, 1=charge
+    }
+
+    // #63 | Battery Power
+    Bridge poller ro_063 "Poller for data object 63" [ start=30258, length=2, refresh=5000, type="holding" ] {
+        Thing data do063 "Battery Power" [ readValue="int32", readStart=30258 ] // unit="kW"
+    }
+
+    // #64 - #70 | Daily Energy Statistics
+    Bridge poller ro_064_070 "Poller for RO data objects 64-70" [ start=31000, length=7, refresh=30000, type="holding" ] {
+        Thing data do064 "Daily Energy Injected to Grid" [ readValue="uint16", readStart=31000 ] // unit="kWh"
+        Thing data do065 "Daily Purchased Energy"        [ readValue="uint16", readStart=31001 ] // unit="kWh"
+        Thing data do066 "Daily Energy Output on Backup" [ readValue="uint16", readStart=31002 ] // unit="kWh"
+        Thing data do067 "Daily Battery Charging Energy" [ readValue="uint16", readStart=31003 ] // unit="kWh"
+        Thing data do068 "Daily Battery Discharging"     [ readValue="uint16", readStart=31004 ] // unit="kWh"
+        Thing data do069 "Daily PV Generation"           [ readValue="uint16", readStart=31005 ] // unit="kWh"
+        Thing data do070 "Daily Load Consumption"        [ readValue="uint16", readStart=31006 ] // unit="kWh"
+    }
+
+    // #71 | Daily Energy Purchased from Grid at Inverter
+    Bridge poller ro_071 "Poller for data object 71" [ start=31008, length=1, refresh=30000, type="holding" ] {
+        Thing data do071 "Daily Energy Purchased from Grid at Inverter" [ readValue="uint16", readStart=31008 ] // unit="kWh"
+    }
+
+    // #72 - #78 | Total Energy Statistics
+    Bridge poller ro_072_078 "Poller for RO data objects 72-78" [ start=31102, length=14, refresh=30000, type="holding" ] {
+        Thing data do072 "Total Energy Injected into Grid"    [ readValue="uint32", readStart=31102 ] // unit="kWh"
+        Thing data do073 "Total Purchased Energy from Grid"   [ readValue="uint32", readStart=31104 ] // unit="kWh"
+        Thing data do074 "Total Output Energy on Backup Port" [ readValue="uint32", readStart=31106 ] // unit="kWh"
+        Thing data do075 "Total Battery Charging Energy "     [ readValue="uint32", readStart=31108 ] // unit="kWh"
+        Thing data do076 "Total Battery Discharging Energy"   [ readValue="uint32", readStart=31110 ] // unit="kWh"
+        Thing data do077 "Total PV Generation"                [ readValue="uint32", readStart=31112 ] // unit="kWh"
+        Thing data do078 "Total Load Consumption"             [ readValue="uint32", readStart=31114 ] // unit="kWh"
+    }
+
+    // #79 | Total Energy Purchased from Grid at Inverter Side
+    Bridge poller ro_079 "Poller for data object 79" [ start=31118, length=2, refresh=30000, type="holding" ] {
+        Thing data do079 "Total Energy Purchased from Grid at Inverter Side" [ readValue="uint32", readStart=31118 ] // unit="kWh"
+    }
+
+    // #80 - #86 | Battery Infos
+    Bridge poller ro_080_086 "Poller for RO data objects 80-86" [ start=32000, length=7, refresh=30000, type="holding" ] {
+        Thing data do080 "Battery Type Codes" [ readValue="uint16", readStart=32000 ]
+        Thing data do081 "Battery strings"    [ readValue="uint16", readStart=32001 ]
+        Thing data do082 "Battery protocol"   [ readValue="uint16", readStart=32002 ]
+        Thing data do083 "Software Version"   [ readValue="uint16", readStart=32003 ]
+        Thing data do084 "Hardware Version"   [ readValue="uint16", readStart=32004 ]
+        Thing data do085 "BMS Charge Imax"    [ readValue="uint16", readStart=32005 ]
+        Thing data do086 "BMS Discharge Imax" [ readValue="uint16", readStart=32006 ]
+    }
+
+    // #87 - #90 | Battery Infos
+    Bridge poller ro_087_090 "Poller for RO data objects 87-90" [ start=33000, length=4, refresh=30000, type="holding" ] {
+        Thing data do087 "SOC"                  [ readValue="uint16", readStart=33000 ] // unit="%"
+        Thing data do088 "SOH"                  [ readValue="uint16", readStart=33001 ] // unit="%"
+        Thing data do089 "BMS Status"           [ readValue="uint16", readStart=33002 ]
+        Thing data do090 "BMS Pack Temperature" [ readValue="uint16", readStart=33003 ] // unit="°C"
+    }
+
+    // #91 - #104 | Battery Infos
+    Bridge poller ro_091_104 "Poller for RO data objects 91-104" [ start=33008, length=12, refresh=30000, type="holding" ] {
+        Thing data do091 "Max Cell Temperature ID"  [ readValue="uint16", readStart=33008 ]
+        Thing data do092 "Max Cell Temperature"     [ readValue="uint16", readStart=33009 ] // unit="°C"
+        Thing data do093 "Min Cell Temperature ID"  [ readValue="uint16", readStart=33010 ]
+        Thing data do094 "Min Cell Temperature"     [ readValue="uint16", readStart=33011 ] // unit="°C"
+        Thing data do095 "Max Cell Voltage ID"      [ readValue="uint16", readStart=33012 ]
+        Thing data do096 "Max Cell Voltage"         [ readValue="uint16", readStart=33013 ] // unit="V"
+        Thing data do097 "Min Cell Voltage ID"      [ readValue="uint16", readStart=33014 ]
+        Thing data do098 "Min Cell Voltage"         [ readValue="uint16", readStart=33015 ] // unit="V"
+        Thing data do099 "BMS ERROR CODE"           [ readValue="uint32", readStart=33016 ]
+        Thing data do100 "BMS WARN CODE"            [ readValue="uint32", readStart=33018 ]
+        Thing data do101 "Charge Cutoff Voltage"    [ readValue="uint16", readStart=33020 ] // unit="V" (?)
+        Thing data do102 "Charge Current Limit"     [ readValue="uint16", readStart=33021 ] // unit="A" (?)
+        Thing data do103 "Discharge Cutoff Voltage" [ readValue="uint16", readStart=33022 ] // unit="V" (?)
+        Thing data do104 "Discharge Current Limit"  [ readValue="uint16", readStart=33023 ] // unit="A" (?)
+    }
+
+
+    // --------------
+    // RW Data Object
+    // --------------
+
+    // // #1 - #3 | Date and Time
+    // Bridge poller rw_001_003 "Poller for RW data objects 1-3" [ start=20000, length=3, refresh=1000, type="holding" ] {
+    //     Thing data do001_h "Year"   [ readValueType="uint8.1", readStart=20000, writeValueType="uint8.1", writeStart=20000, writeType="holding" ]
+    //     Thing data do001_l "Month"  [ readValueType="uint8.0", readStart=20000, writeValueType="uint8.0", writeStart=20000, writeType="holding" ]
+    //     Thing data do002_h "Day"    [ readValueType="uint8.1", readStart=20001, writeValueType="uint8.1", writeStart=20001, writeType="holding" ]
+    //     Thing data do002_l "Hour"   [ readValueType="uint8.0", readStart=20001, writeValueType="uint8.0", writeStart=20001, writeType="holding" ]
+    //     Thing data do003_h "Minute" [ readValueType="uint8.1", readStart=20002, writeValueType="uint8.1", writeStart=20002, writeType="holding" ]
+    //     Thing data do004_l "Second" [ readValueType="uint8.0", readStart=20002, writeValueType="uint8.0", writeStart=20002, writeType="holding" ]
+    // }
+
+    // // #4 | Safety Code
+    // Bridge poller rw_004 "Poller for RW data object 4" [ start=25000, length=1, refresh=10000, type="holding" ] {
+    //     Thing data do004 "Safety Code" [ readValue="uint16", readStart=25000, writeValueType="uint16", writeStart=25000, writeType="holding" ]
+    // }
+
+    // #5 | Overload Method Setting
+    Bridge poller rw_005 "Poller for RW data object 5" [ start=25015, length=1, refresh=10000, type="holding" ] {
+        Thing data do005 "Overload Method Setting" [ readValue="uint16", readStart=25015, writeValueType="uint16", writeStart=25015, writeType="holding" ] // 0: Rated, 1: 110% OverLoading, 2: Limit
+    }
+
+    // #6 | Grid Injection Power Limit Switch
+    Bridge poller rw_006 "Poller for RW data object 6" [ start=25100, length=1, refresh=10000, type="holding" ] {
+        Thing data do006 "Grid Injection Power Limit Switch" [ readValue="uint16", readStart=25100, writeValueType="uint16", writeStart=25100, writeType="holding" ] // 0:OFF, 1:ON
+    }
+
+    // #7 - #11 | Smart Meter COM, Pmeter
+    Bridge poller rw_007_011 "Poller for RW data objects 7-11" [ start=25103, length=8, refresh=10000, type="holding" ] {
+        Thing data do007 "Grid Injection Power Limit % Setting" [ readValue="uint16", readStart=25103, writeValueType="uint16", writeStart=25103, writeType="holding" ] // [0.0%-100.0%]
+        // The following data objects are WO!
+        // Thing data do008 "Smart Meter COM Status"               [ writeValueType="uint16", writeStart=25104, writeType="holding" ] // 0: Meter abnormal, 1: Meter normal
+        // Thing data do009 "Pmeter on Phase A"                    [ writeValueType="int32",  writeStart=25105, writeType="holding" ] // unit="W"
+        // Thing data do010 "Pmeter on Phase B"                    [ writeValueType="int32",  writeStart=25107, writeType="holding" ] // unit="W"
+        // Thing data do011 "Pmeter on Phase C"                    [ writeValueType="int32",  writeStart=25109, writeType="holding" ] // unit="W"
+    }
+
+    // #12 | Reactive power limit percentage
+    Bridge poller rw_012 "Poller for RW data object 12" [ start=25118, length=1, refresh=10000, type="holding" ] {
+        Thing data do012 "Reactive power limit percentage" [ readValue="int16", readStart=25118, writeValueType="int16", writeStart=25118, writeType="holding" ] // [-600, +600] accuracy to 0.1%
+    }
+
+    // #13 - #14 | PF Setting, Reactive power Control Mode
+    Bridge poller rw_013_014 "Poller for RW data objects 13-14" [ start=25120, length=2, refresh=30000, type="holding" ] {
+        Thing data do013 "PF Setting"                  [ readValue="int16",  readStart=25120, writeValueType="int16",  writeStart=25120, writeType="holding" ] // (-1000, 800]U[800, 1000]
+        Thing data do014 "Reactive power Control Mode" [ readValue="uint16", readStart=25121, writeValueType="uint16", writeStart=25121, writeType="holding" ] // 0: OFF, 1: PF, 2: Qt, 3: Q(P), 4: Q(U)
+    }
+
+    // #15 - #22 | Faul recovery / under/over voltage protection
+    Bridge poller rw_015_022 "Poller for RW data objects 15-22" [ start=28000, length=8, refresh=30000, type="holding" ] {
+        Thing data do015 "Fault recovery voltage lower limit"        [ readValue="uint16", readStart=28000, writeValueType="uint16", writeStart=28000, writeType="holding" ] // unit="V"
+        Thing data do016 "Fault recovery voltage upper limit"        [ readValue="uint16", readStart=28001, writeValueType="uint16", writeStart=28001, writeType="holding" ] // unit="V"
+        Thing data do017 "Fault recovery frequency lower limit"      [ readValue="uint16", readStart=28002, writeValueType="uint16", writeStart=28002, writeType="holding" ] // unit="Hz"
+        Thing data do018 "Fault recovery frequency upper limit"      [ readValue="uint16", readStart=28003, writeValueType="uint16", writeStart=28003, writeType="holding" ] // unit="Hz"
+        Thing data do019 "Level-1 undervoltage protection threshold" [ readValue="uint16", readStart=28004, writeValueType="uint16", writeStart=28004, writeType="holding" ] // unit="V"
+        Thing data do020 "Level-1 undervoltage protection duration"  [ readValue="uint16", readStart=28005, writeValueType="uint16", writeStart=28005, writeType="holding" ] // unit="Prd"
+        Thing data do021 "Level-1 overvoltage protection threshold"  [ readValue="uint16", readStart=28006, writeValueType="uint16", writeStart=28006, writeType="holding" ] // unit="V"
+        Thing data do022 "Level-1 overvoltage protection duration"   [ readValue="uint16", readStart=28007, writeValueType="uint16", writeStart=28007, writeType="holding" ] // unit="Prd"
+    }
+
+    // #23 - #26 | under/over frequency protection
+    Bridge poller rw_023_026 "Poller for RW data objects 23-26" [ start=28012, length=4, refresh=30000, type="holding" ] {
+        Thing data do023 "Level-1 underfrequency protection threshold" [ readValue="uint16", readStart=28012, writeValueType="uint16", writeStart=28012, writeType="holding" ] // unit="Hz"
+        Thing data do024 "Level-1 underfrequency protection duration"  [ readValue="uint16", readStart=28013, writeValueType="uint16", writeStart=28013, writeType="holding" ] // unit="Prd"
+        Thing data do025 "Level-1 overfrequency protection threshold"  [ readValue="uint16", readStart=28014, writeValueType="uint16", writeStart=28014, writeType="holding" ] // unit="Hz"
+        Thing data do026 "Level-1 overfrequency protection duration"   [ readValue="uint16", readStart=28015, writeValueType="uint16", writeStart=28015, writeType="holding" ] // unit="Prd"
+    }
+
+    // #27 - #28 | Hybrid Inverter Working Mode Setting, Enable UPS Function Switch
+    Bridge poller rw_027_028 "Poller for RW data objects 27-28" [ start=50000, length=2, refresh=5000, type="holding" ] {
+        Thing data do027 "Hybrid Inverter Working Mode Setting" [ readValue="uint16", readStart=50000, writeValueType="uint16", writeStart=50000, writeType="holding" ] // see Excel
+        Thing data do028 "Enable UPS Function Switch"           [ readValue="uint16", readStart=50001, writeValueType="uint16", writeStart=50001, writeType="holding" ] // 0: OFF, 1: ON
+    }
+
+    // #29 - #32 | Off-grid Voltage + Frequency, Unbalanced Output, Peak Load Shifting
+    Bridge poller rw_029_032 "Poller for RW data objects 29-32" [ start=50004, length=4, refresh=30000, type="holding" ] {
+        Thing data do029 "Off-grid Voltage Setting"         [ readValue="uint16", readStart=50004, writeValueType="uint16", writeStart=50004, writeType="holding" ] // unit="V"
+        Thing data do030 "Off-grid Frequency Setting"       [ readValue="uint16", readStart=50005, writeValueType="uint16", writeStart=50005, writeType="holding" ] // unit="Hz"
+        Thing data do031 "On-Grid Unbalanced Output Switch" [ readValue="uint16", readStart=50006, writeValueType="uint16", writeStart=50006, writeType="holding" ] // 0: OFF, 1: ON
+        Thing data do032 "Peak Load Shifting Switch"        [ readValue="uint16", readStart=50007, writeValueType="uint16", writeStart=50007, writeType="holding" ] // 0: OFF, 1: ON
+    }
+
+    // #33 - #34 | Max. Grid Power Value Setting, Parallel Master-Slave Sign 
+    Bridge poller rw_033_034 "Poller for RW data objects 33-34" [ start=50009, length=2, refresh=30000, type="holding" ] {
+        Thing data do033 "Max. Grid Power Value Setting" [ readValue="uint16", readStart=50009, writeValueType="uint16", writeStart=50009, writeType="holding" ] // unit="kVA"
+        Thing data do034 "Parallel Master-Slave Sign"    [ readValue="uint16", readStart=50010, writeValueType="uint16", writeStart=50010, writeType="holding" ] // 0: Independent Operating, 1: Parallel (Slave), 2: Parallel (Master)
+    }
+
+    // #35 - #44 | Power Settings
+    Bridge poller rw_035_044 "Poller for RW data objects 35-44" [ start=50202, length=10, refresh=30000, type="holding" ] {
+        Thing data do035 "AC Power Scheduling Mode Setting"  [ readValue="uint16", readStart=50202, writeValueType="uint16", writeStart=50202, writeType="holding" ] // 0: Off, 1: Total Power Setting (Register: 50203), 2: Power Setting on each Phase (Registers: 50204-50206)
+        Thing data do036 "Total AC Power Scheduling Setting" [ readValue="int16",  readStart=50203, writeValueType="int16",  writeStart=50203, writeType="holding" ] // unit="kW"
+        Thing data do037 "Phase A Power Scheduling Setting"  [ readValue="int16",  readStart=50204, writeValueType="int16",  writeStart=50204, writeType="holding" ] // unit="kW"
+        Thing data do038 "Phase B Power Scheduling Setting"  [ readValue="int16",  readStart=50205, writeValueType="int16",  writeStart=50205, writeType="holding" ] // unit="kW"
+        Thing data do039 "Phase C Power Scheduling Setting"  [ readValue="int16",  readStart=50206, writeValueType="int16",  writeStart=50206, writeType="holding" ] // unit="kW"
+        Thing data do040 "Battery Power Scheduling Setting"  [ readValue="int16",  readStart=50207, writeValueType="int16",  writeStart=50207, writeType="holding" ] // unit="kW"
+        Thing data do041 "Max. AC Power Limit Setting"       [ readValue="int16",  readStart=50208, writeValueType="int16",  writeStart=50208, writeType="holding" ] // unit="kW"
+        Thing data do042 "Min. AC Power Limit Setting"       [ readValue="int16",  readStart=50209, writeValueType="int16",  writeStart=50209, writeType="holding" ] // unit="kW"
+        Thing data do043 "Priority of Power Output Setting"  [ readValue="uint16", readStart=50210, writeValueType="uint16", writeStart=50210, writeType="holding" ] // 0: PV Output Priority, 1: Battery Output Priority
+        Thing data do044 "PV Power Scheduling Setting"       [ readValue="uint16", readStart=50211, writeValueType="uint16", writeStart=50211, writeType="holding" ] // unit="kW"
+    }
+
+    // #45 - #50 | Battery Config
+    Bridge poller rw_045_050 "Poller for RW data objects 45-50" [ start=52500, length=6, refresh=30000, type="holding" ] {
+        Thing data do045 "Battery Configuration"          [ readValue="uint16", readStart=52500, writeValueType="uint16", writeStart=52500, writeType="holding" ] // solinteg-battery-conf.map
+        Thing data do046 "Battery Protocol configuration" [ readValue="uint16", readStart=52501, writeValueType="uint16", writeStart=52501, writeType="holding" ] // solinteg-battery-proto.map
+        Thing data do047 "On-grid SOC Protection"         [ readValue="uint16", readStart=52502, writeValueType="uint16", writeStart=52502, writeType="holding" ] // 0: OFF, 1: ON
+        Thing data do048 "On-grid Battery End SOC"        [ readValue="uint16", readStart=52503, writeValueType="uint16", writeStart=52503, writeType="holding" ] // [0.0%-100.0%]
+        Thing data do049 "Off-grid SOC Protection"        [ readValue="uint16", readStart=52504, writeValueType="uint16", writeStart=52504, writeType="holding" ] // 0: OFF, 1: ON
+        Thing data do050 "Off-grid  Battery End SOC"      [ readValue="uint16", readStart=52505, writeValueType="uint16", writeStart=52505, writeType="holding" ] // [0.0%-100.0%]
+    }
+
+    // #51 - #93 | Battery Period Settings
+    Bridge poller rw_051_093 "Poller for RW data objects 51-93" [ start=53006, length=43, refresh=30000, type="holding" ] {
+        Thing data do051_0 "Period Enable Flag - Period 1" [ readValue="bit.0", readStart=53006, writeValueType="bit.0", writeStart=53006, writeType="holding" ] // 0: disable, 1: enable
+        Thing data do051_1 "Period Enable Flag - Period 2" [ readValue="bit.1", readStart=53006, writeValueType="bit.1", writeStart=53006, writeType="holding" ] // 0: disable, 1: enable
+        Thing data do051_2 "Period Enable Flag - Period 3" [ readValue="bit.2", readStart=53006, writeValueType="bit.2", writeStart=53006, writeType="holding" ] // 0: disable, 1: enable
+        Thing data do051_3 "Period Enable Flag - Period 4" [ readValue="bit.3", readStart=53006, writeValueType="bit.3", writeStart=53006, writeType="holding" ] // 0: disable, 1: enable
+        Thing data do051_4 "Period Enable Flag - Period 5" [ readValue="bit.4", readStart=53006, writeValueType="bit.4", writeStart=53006, writeType="holding" ] // 0: disable, 1: enable
+        Thing data do051_5 "Period Enable Flag - Period 6" [ readValue="bit.5", readStart=53006, writeValueType="bit.5", writeStart=53006, writeType="holding" ] // 0: disable, 1: enable
+        // Period 1
+        Thing data do052 "Period 1 - Charge/Discharge"  [ readValue="uint16", readStart=53007, writeValueType="uint16", writeStart=53007, writeType="holding" ] // 0:NONE, 1:charge, 2:discharge
+        Thing data do053 "Period 1 - Battery Charge By" [ readValue="uint16", readStart=53008, writeValueType="uint16", writeStart=53008, writeType="holding" ] // 0:PV, 1:PV+GRID
+        // Thing data do054 "Period 1 - reserved"          [ readValue="uint16", readStart=53009, writeValueType="uint16", writeStart=53009, writeType="holding" ] // Reserved: 0xFF
+        Thing data do055 "Period 1 - Power Limit"       [ readValue="uint16", readStart=53010, writeValueType="uint16", writeStart=53010, writeType="holding" ] // [0.0-100.0%]
+        // Thing data do056 "Period 1 - reserved"          [ readValue="uint16", readStart=53011, writeValueType="uint16", writeStart=53011, writeType="holding" ] // Reserved: 0xFF
+        Thing data do057 "Period 1 - Start Time"        [ readValue="uint16", readStart=53012, writeValueType="uint16", writeStart=53012, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        Thing data do058 "Period 1 - Stop Time"         [ readValue="uint16", readStart=53013, writeValueType="uint16", writeStart=53013, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        // Period 2
+        Thing data do059 "Period 2 - Charge/Discharge"  [ readValue="uint16", readStart=53014, writeValueType="uint16", writeStart=53014, writeType="holding" ] // 0:NONE, 1:charge, 2:discharge
+        Thing data do060 "Period 2 - Battery Charge By" [ readValue="uint16", readStart=53015, writeValueType="uint16", writeStart=53015, writeType="holding" ] // 0:PV, 1:PV+GRID
+        // Thing data do061 "Period 2 - reserved"          [ readValue="uint16", readStart=53016, writeValueType="uint16", writeStart=53016, writeType="holding" ] // Reserved: 0xFF
+        Thing data do062 "Period 2 - Power Limit"       [ readValue="uint16", readStart=53017, writeValueType="uint16", writeStart=53017, writeType="holding" ] // [0.0-100.0%]
+        // Thing data do063 "Period 2 - reserved"          [ readValue="uint16", readStart=53018, writeValueType="uint16", writeStart=53018, writeType="holding" ] // Reserved: 0xFF
+        Thing data do064 "Period 2 - Start Time"        [ readValue="uint16", readStart=53019, writeValueType="uint16", writeStart=53019, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        Thing data do065 "Period 2 - Stop Time"         [ readValue="uint16", readStart=53020, writeValueType="uint16", writeStart=53020, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        // Period 3
+        Thing data do066 "Period 3 - Charge/Discharge"  [ readValue="uint16", readStart=53021, writeValueType="uint16", writeStart=53021, writeType="holding" ] // 0:NONE, 1:charge, 2:discharge
+        Thing data do067 "Period 3 - Battery Charge By" [ readValue="uint16", readStart=53022, writeValueType="uint16", writeStart=53022, writeType="holding" ] // 0:PV, 1:PV+GRID
+        // Thing data do068 "Period 3 - reserved"          [ readValue="uint16", readStart=53023, writeValueType="uint16", writeStart=53023, writeType="holding" ] // Reserved: 0xFF
+        Thing data do069 "Period 3 - Power Limit"       [ readValue="uint16", readStart=53024, writeValueType="uint16", writeStart=53024, writeType="holding" ] // [0.0-100.0%]
+        // Thing data do070 "Period 3 - reserved"          [ readValue="uint16", readStart=53025, writeValueType="uint16", writeStart=53025, writeType="holding" ] // Reserved: 0xFF
+        Thing data do071 "Period 3 - Start Time"        [ readValue="uint16", readStart=53026, writeValueType="uint16", writeStart=53026, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        Thing data do072 "Period 3 - Stop Time"         [ readValue="uint16", readStart=53027, writeValueType="uint16", writeStart=53027, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        // Period 4
+        Thing data do073 "Period 4 - Charge/Discharge"  [ readValue="uint16", readStart=53028, writeValueType="uint16", writeStart=53028, writeType="holding" ] // 0:NONE, 1:charge, 2:discharge
+        Thing data do074 "Period 4 - Battery Charge By" [ readValue="uint16", readStart=53029, writeValueType="uint16", writeStart=53029, writeType="holding" ] // 0:PV, 1:PV+GRID
+        // Thing data do075 "Period 4 - reserved"          [ readValue="uint16", readStart=53030, writeValueType="uint16", writeStart=53030, writeType="holding" ] // Reserved: 0xFF
+        Thing data do076 "Period 4 - Power Limit"       [ readValue="uint16", readStart=53031, writeValueType="uint16", writeStart=53031, writeType="holding" ] // [0.0-100.0%]
+        // Thing data do077 "Period 4 - reserved"          [ readValue="uint16", readStart=53032, writeValueType="uint16", writeStart=53032, writeType="holding" ] // Reserved: 0xFF
+        Thing data do078 "Period 4 - Start Time"        [ readValue="uint16", readStart=53033, writeValueType="uint16", writeStart=53033, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        Thing data do079 "Period 4 - Stop Time"         [ readValue="uint16", readStart=53034, writeValueType="uint16", writeStart=53034, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        // Period 5
+        Thing data do080 "Period 5 - Charge/Discharge"  [ readValue="uint16", readStart=53035, writeValueType="uint16", writeStart=53035, writeType="holding" ] // 0:NONE, 1:charge, 2:discharge
+        Thing data do081 "Period 5 - Battery Charge By" [ readValue="uint16", readStart=53036, writeValueType="uint16", writeStart=53036, writeType="holding" ] // 0:PV, 1:PV+GRID
+        // Thing data do082 "Period 5 - reserved"          [ readValue="uint16", readStart=53037, writeValueType="uint16", writeStart=53037, writeType="holding" ] // Reserved: 0xFF
+        Thing data do083 "Period 5 - Power Limit"       [ readValue="uint16", readStart=53038, writeValueType="uint16", writeStart=53038, writeType="holding" ] // [0.0-100.0%]
+        // Thing data do084 "Period 5 - reserved"          [ readValue="uint16", readStart=53039, writeValueType="uint16", writeStart=53039, writeType="holding" ] // Reserved: 0xFF
+        Thing data do085 "Period 5 - Start Time"        [ readValue="uint16", readStart=53040, writeValueType="uint16", writeStart=53040, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        Thing data do086 "Period 5 - Stop Time"         [ readValue="uint16", readStart=53041, writeValueType="uint16", writeStart=53041, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        // Period 6
+        Thing data do087 "Period 6 - Charge/Discharge"  [ readValue="uint16", readStart=53042, writeValueType="uint16", writeStart=53042, writeType="holding" ] // 0:NONE, 1:charge, 2:discharge
+        Thing data do088 "Period 6 - Battery Charge By" [ readValue="uint16", readStart=53043, writeValueType="uint16", writeStart=53043, writeType="holding" ] // 0:PV, 1:PV+GRID
+        // Thing data do089 "Period 6 - reserved"          [ readValue="uint16", readStart=53044, writeValueType="uint16", writeStart=53044, writeType="holding" ] // Reserved: 0xFF
+        Thing data do090 "Period 6 - Power Limit"       [ readValue="uint16", readStart=53045, writeValueType="uint16", writeStart=53045, writeType="holding" ] // [0.0-100.0%]
+        // Thing data do091 "Period 6 - reserved"          [ readValue="uint16", readStart=53046, writeValueType="uint16", writeStart=53046, writeType="holding" ] // Reserved: 0xFF
+        Thing data do092 "Period 6 - Start Time"        [ readValue="uint16", readStart=53047, writeValueType="uint16", writeStart=53047, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+        Thing data do093 "Period 6 - Stop Time"         [ readValue="uint16", readStart=53048, writeValueType="uint16", writeStart=53048, writeType="holding" ] // High 8bits(Hour): [0,23], Low 8bits(Mins): [0,59]
+    }
+
+    // #94 | BMSVersion
+    // Bridge poller rw_094 "Poller for RW data object 94" [ start=53500, length=1, refresh=30000, type="holding" ] {
+    //     // The following data objects are WO!
+    //     Thing data do094 "BMSVersion" [ writeValueType="int16", writeStart=53500, writeType="holding" ] // Only for BMS access to EMS
+    // }
+
+    // // #95 - #107 | BMS
+    // Bridge poller rw_095_107 "Poller for RW data objects 95-107" [ start=53508, length=16, refresh=30000, type="holding" ] {
+    //     // The following data objects are WO!
+    //     // BMS Status
+    //     Thing data do095_0  "BMS Status - Sleep"                  [ writeValueType="bit.0",  writeStart=53508, writeType="holding" ]
+    //     Thing data do095_1  "BMS Status - Charge"                 [ writeValueType="bit.1",  writeStart=53508, writeType="holding" ]
+    //     Thing data do095_2  "BMS Status - Discharge"              [ writeValueType="bit.2",  writeStart=53508, writeType="holding" ]
+    //     Thing data do095_3  "BMS Status - Standby"                [ writeValueType="bit.3",  writeStart=53508, writeType="holding" ]
+    //     Thing data do095_4  "BMS Status - Fault"                  [ writeValueType="bit.4",  writeStart=53508, writeType="holding" ]
+    //     Thing data do095_8  "BMS Status - On-grid Discharge Cmd"  [ writeValueType="bit.8",  writeStart=53508, writeType="holding" ] // 1: Enable, 0: Disable
+    //     Thing data do095_9  "BMS Status - Off-grid Discharge Cmd" [ writeValueType="bit.9",  writeStart=53508, writeType="holding" ] // 1: Enable, 0: Disable
+    //     Thing data do095_10 "BMS Status - Charge Cmd"             [ writeValueType="bit.10", writeStart=53508, writeType="holding" ] // 1: Enable, 0: Disable
+    //     Thing data do095_11 "BMS Status - Force Charge Cmd"       [ writeValueType="bit.11", writeStart=53508, writeType="holding" ] // 1: Force Charge Command（Charge Command Bit10 must write 1), 0: Invalid (Null)
+    //     // BMS Error Code
+    //     Thing data do096_0 "BMS ErrorCode - Internal COM Fault"       [ writeValueType="bit.0", writeStart=53509, writeType="holding" ]
+    //     Thing data do096_1 "BMS ErrorCode - Voltage Sensor Fault"     [ writeValueType="bit.1", writeStart=53509, writeType="holding" ]
+    //     Thing data do096_2 "BMS ErrorCode - Temperature Sensor Fault" [ writeValueType="bit.2", writeStart=53509, writeType="holding" ]
+    //     Thing data do096_3 "BMS ErrorCode - Relay Fault"              [ writeValueType="bit.3", writeStart=53509, writeType="holding" ]
+    //     Thing data do096_4 "BMS ErrorCode - Cells Damage Fault"       [ writeValueType="bit.4", writeStart=53509, writeType="holding" ]
+    //     // BMS Protection Code
+    //     Thing data do097_0  "BMS Protection Code - Cells Low Voltage Protection"                     [ writeValueType="bit.0",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_1  "BMS Protection Code - Cells High Voltage Protection"                    [ writeValueType="bit.1",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_2  "BMS Protection Code - Battery Module Discharge Low Voltage Protection"  [ writeValueType="bit.2",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_3  "BMS Protection Code - Battery Module Charge Over Voltage Protection"    [ writeValueType="bit.3",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_4  "BMS Protection Code - Charge Low Temperature Protection"                [ writeValueType="bit.4",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_5  "BMS Protection Code - Charge High Temperature Protection"               [ writeValueType="bit.5",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_6  "BMS Protection Code - Discharge Low Temperature Protection"             [ writeValueType="bit.6",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_7  "BMS Protection Code - Discharge High Temperature Protection"            [ writeValueType="bit.7",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_8  "BMS Protection Code - Battery Module Charge Over-current Protection"    [ writeValueType="bit.8",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_9  "BMS Protection Code - Battery Module Discharge Over-current Protection" [ writeValueType="bit.9",  writeStart=53511, writeType="holding" ]
+    //     Thing data do097_10 "BMS Protection Code - Battery Module Low Voltage Protection"            [ writeValueType="bit.10", writeStart=53511, writeType="holding" ]
+    //     Thing data do097_11 "BMS Protection Code - Battery Module Over Voltage Protection"           [ writeValueType="bit.11", writeStart=53511, writeType="holding" ]
+    //     Thing data do097_12 "BMS Protection Code - Power Terminal Over Temperature Protection"       [ writeValueType="bit.12", writeStart=53511, writeType="holding" ]
+    //     Thing data do097_13 "BMS Protection Code - Ambient Low Temperature Protection"               [ writeValueType="bit.13", writeStart=53511, writeType="holding" ]
+    //     Thing data do097_14 "BMS Protection Code - Ambient High Temperature Protection"              [ writeValueType="bit.14", writeStart=53511, writeType="holding" ]
+    //     Thing data do097_15 "BMS Protection Code - Leakage Current Protection"                       [ writeValueType="bit.15", writeStart=53511, writeType="holding" ]
+    //     // BMS Warn Code
+    //     Thing data do098_0  "BMS WarnCode - Cells Low Voltage Warning"                     [ writeValueType="bit.0",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_1  "BMS WarnCode - Cells High Voltage Warning"                    [ writeValueType="bit.1",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_2  "BMS WarnCode - Battery Module Discharge Low Voltage Warning"  [ writeValueType="bit.2",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_3  "BMS WarnCode - Battery Module Charge Over Voltage Warning"    [ writeValueType="bit.3",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_4  "BMS WarnCode - Charge Low Temperature Warning"                [ writeValueType="bit.4",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_5  "BMS WarnCode - Charge High Temperature Warning"               [ writeValueType="bit.5",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_6  "BMS WarnCode - Discharge Low Temperature Warning"             [ writeValueType="bit.6",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_7  "BMS WarnCode - Discharge High Temperature Warning"            [ writeValueType="bit.7",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_8  "BMS WarnCode - Battery Module Charge Over Current Warning"    [ writeValueType="bit.8",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_9  "BMS WarnCode - Battery Module Discharge Over Current Warning" [ writeValueType="bit.9",  writeStart=53513, writeType="holding" ]
+    //     Thing data do098_10 "BMS WarnCode - Battery Module Low Voltage Warning"            [ writeValueType="bit.10", writeStart=53513, writeType="holding" ]
+    //     Thing data do098_11 "BMS WarnCode - Battery Module High Voltage Warning"           [ writeValueType="bit.11", writeStart=53513, writeType="holding" ]
+    //     Thing data do098_12 "BMS WarnCode - Power Terminal Over Temperature Warning"       [ writeValueType="bit.12", writeStart=53513, writeType="holding" ]
+    //     Thing data do098_13 "BMS WarnCode - Ambient Low Temperature Warning"               [ writeValueType="bit.13", writeStart=53513, writeType="holding" ]
+    //     Thing data do098_14 "BMS WarnCode - Ambient High Temperature Warning"              [ writeValueType="bit.14", writeStart=53513, writeType="holding" ]
+    //     // Other values
+    //     Thing data do099 "BMS ChargeVoltLimit"   [ writeValueType="uint16", writeStart=53515, writeType="holding" ] // unit="V"
+    //     Thing data do100 "BMS ChargeCurrMax"     [ writeValueType="uint16", writeStart=53516, writeType="holding" ] // unit="A"
+    //     Thing data do101 "BMS DishargeVoltLimit" [ writeValueType="uint16", writeStart=53517, writeType="holding" ] // unit="V"
+    //     Thing data do102 "BMS DishargeCurrMax"   [ writeValueType="uint16", writeStart=53518, writeType="holding" ] // unit="A"
+    //     Thing data do103 "BMS BatSOC"            [ writeValueType="uint16", writeStart=53519, writeType="holding" ] // unit="%"
+    //     Thing data do104 "BMS BatSOH"            [ writeValueType="uint16", writeStart=53520, writeType="holding" ] // unit="%"
+    //     Thing data do105 "BMS BatVoltage"        [ writeValueType="uint16", writeStart=53521, writeType="holding" ] // unit="V"
+    //     Thing data do106 "BMS BatCurrent"        [ writeValueType="int16",  writeStart=53522, writeType="holding" ] // unit="A"
+    //     Thing data do107 "BMS BatTemp"           [ writeValueType="int16",  writeStart=53523, writeType="holding" ] // unit="°C"
+    // }
+
+
+    // --------------
+    // WO Data Object
+    // --------------
+
+    // #1 - #2 | Off-grid function Switch, Clear Off-grid Over-loading Protection Flag
+    Bridge poller wo_001_002 "Poller for WO data objects 1-2" [ start=50200, length=2, type="holding" ] {
+        Thing data do001 "Off-grid function Switch"                    [ writeValueType="uint16", writeStart=50200, writeType="holding" ] // 0: OFF；1: ON 
+        Thing data do002 "Clear Off-grid Over-loading Protection Flag" [ writeValueType="uint16", writeStart=50201, writeType="holding" ] // Write 1 to clear
+    }
+
+}
