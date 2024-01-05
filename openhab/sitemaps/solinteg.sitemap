@@ -2,6 +2,10 @@ sitemap solinteg label="Solinteg" {
 
     Frame label="Infos" {
         Text item=PV_DO10104
+        Text item=PV_Device_SN
+        Text item=PV_Device_Model_Info
+        Text item=PV_Firmware_Version
+        Text item=PV_DateTime
     }
 
     Frame label="Control" {
@@ -171,36 +175,6 @@ sitemap solinteg label="Solinteg" {
         Text item=PV_DO52503
         Text item=PV_DO52504
         Text item=PV_DO52505
-        Text item=PV_DO53007
-        Text item=PV_DO53008
-        Text item=PV_DO53009
-        Text item=PV_DO53010
-        Text item=PV_DO53011
-        Text item=PV_DO53014
-        Text item=PV_DO53015
-        Text item=PV_DO53016
-        Text item=PV_DO53017
-        Text item=PV_DO53018
-        Text item=PV_DO53021
-        Text item=PV_DO53022
-        Text item=PV_DO53023
-        Text item=PV_DO53024
-        Text item=PV_DO53025
-        Text item=PV_DO53028
-        Text item=PV_DO53029
-        Text item=PV_DO53030
-        Text item=PV_DO53031
-        Text item=PV_DO53032
-        Text item=PV_DO53035
-        Text item=PV_DO53036
-        Text item=PV_DO53037
-        Text item=PV_DO53038
-        Text item=PV_DO53039
-        Text item=PV_DO53042
-        Text item=PV_DO53043
-        Text item=PV_DO53044
-        Text item=PV_DO53045
-        Text item=PV_DO53046
         Text item=PV_DO53500
         Text item=PV_DO53508
         Text item=PV_DO53509
@@ -214,6 +188,117 @@ sitemap solinteg label="Solinteg" {
         Text item=PV_DO53520
         Text item=PV_DO53521
         Text item=PV_DO53522
+    }
+
+    Frame label="Period 1" {
+        Text item=PV_DO53007
+        Text item=PV_DO53008
+        Text item=PV_DO53009
+        Text item=PV_DO53010
+        Text item=PV_DO53011
+        Text item=PV_Period_1_Enabled
+        Text item=PV_Period_1_Start_H
+        Text item=PV_Period_1_Start_M
+        Text item=PV_Period_1_Stop_H
+        Text item=PV_Period_1_Stop_M
+    }
+
+    Frame label="Period 2" {
+        Text item=PV_DO53014
+        Text item=PV_DO53015
+        Text item=PV_DO53016
+        Text item=PV_DO53017
+        Text item=PV_DO53018
+        Text item=PV_Period_2_Enabled
+        Text item=PV_Period_2_Start_H
+        Text item=PV_Period_2_Start_M
+        Text item=PV_Period_2_Stop_H
+        Text item=PV_Period_2_Stop_M
+    }
+
+    Frame label="Period 3" {
+        Text item=PV_DO53021
+        Text item=PV_DO53022
+        Text item=PV_DO53023
+        Text item=PV_DO53024
+        Text item=PV_DO53025
+        Text item=PV_Period_3_Enabled
+        Text item=PV_Period_3_Start_H
+        Text item=PV_Period_3_Start_M
+        Text item=PV_Period_3_Stop_H
+        Text item=PV_Period_3_Stop_M
+    }
+
+    Frame label="Period 4" {
+        Text item=PV_DO53028
+        Text item=PV_DO53029
+        Text item=PV_DO53030
+        Text item=PV_DO53031
+        Text item=PV_DO53032
+        Text item=PV_Period_4_Enabled
+        Text item=PV_Period_4_Start_H
+        Text item=PV_Period_4_Start_M
+        Text item=PV_Period_4_Stop_H
+        Text item=PV_Period_4_Stop_M
+    }
+
+    Frame label="Period 5" {
+        Text item=PV_DO53035
+        Text item=PV_DO53036
+        Text item=PV_DO53037
+        Text item=PV_DO53038
+        Text item=PV_DO53039
+        Text item=PV_Period_5_Enabled
+        Text item=PV_Period_5_Start_H
+        Text item=PV_Period_5_Start_M
+        Text item=PV_Period_5_Stop_H
+        Text item=PV_Period_5_Stop_M
+    }
+
+    Frame label="Period 6" {
+        Text item=PV_DO53042
+        Text item=PV_DO53043
+        Text item=PV_DO53044
+        Text item=PV_DO53045
+        Text item=PV_DO53046
+        Text item=PV_Period_6_Enabled
+        Text item=PV_Period_6_Start_H
+        Text item=PV_Period_6_Start_M
+        Text item=PV_Period_6_Stop_H
+        Text item=PV_Period_6_Stop_M
+    }
+
+    Frame label="Status" {
+        Text item=PV_Fault_1_0
+        Text item=PV_Fault_1_1
+        Text item=PV_Fault_1_2
+        Text item=PV_Fault_1_3
+        Text item=PV_Fault_1_4
+        Text item=PV_Fault_1_5
+        Text item=PV_Fault_1_6
+        Text item=PV_Fault_1_7
+        Text item=PV_Fault_1_8
+        Text item=PV_Fault_2_1
+        Text item=PV_Fault_2_2
+        Text item=PV_Fault_2_3
+        Text item=PV_Fault_2_4
+        Text item=PV_Fault_2_5
+        Text item=PV_Fault_2_6
+        Text item=PV_Fault_2_7
+        Text item=PV_Fault_3_0
+        Text item=PV_Fault_3_1
+        Text item=PV_Fault_3_2
+        Text item=PV_Fault_3_3
+        Text item=PV_Fault_3_4
+        Text item=PV_Fault_3_5
+        Text item=PV_Fault_3_6
+        Text item=PV_Fault_3_7
+        Text item=PV_Fault_3_8
+        Text item=PV_Fault_3_9
+        Text item=PV_Fault_3_10
+        Text item=PV_Fault_ARM_0
+        Text item=PV_Fault_ARM_1
+        Text item=PV_Fault_ARM_2
     }
 
 }

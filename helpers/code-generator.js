@@ -1,6 +1,7 @@
 'use strict';
 
 const {CR, TAB, CodeLine, CodeBlock} = require('./code');
+const {MANUAL_DATA} = require('../manual/sitemap');
 
 const MODBUS_TYPE = 'tcp';
 const BRIDGE_NAME = 'inverter';
@@ -43,14 +44,19 @@ class RegisterTable {
         for (let i = 0; i < this.#dataObjects.length; i++) {
             let d = this.#dataObjects[i];
             if (!(d.sitemap in sitemap)) sitemap[d.sitemap] = [];
-            sitemap[d.sitemap].push(d);
+            sitemap[d.sitemap].push(d.getItemName());
         }
-        // create the code;
+        // add manually defined items
+        for (let i = 0; i < MANUAL_DATA.length; i++) {
+            if (!(MANUAL_DATA[i].sitemap in sitemap)) sitemap[MANUAL_DATA[i].sitemap] = [];
+            sitemap[MANUAL_DATA[i].sitemap].push(MANUAL_DATA[i].item);
+        }
+        // create the code
         let code = 'sitemap solinteg label="Solinteg" {' + CR + CR;
         for (let group in sitemap) {
             code += TAB + `Frame label="${group}" {` + CR;
             for (let i = 0; i < sitemap[group].length; i++) {
-                code += TAB + TAB + 'Text item=' + sitemap[group][i].getItemName() + CR;
+                code += TAB + TAB + 'Text item=' + sitemap[group][i] + CR;
             }
             code += TAB + '}' + CR + CR;
         }
