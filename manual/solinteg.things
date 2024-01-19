@@ -1,6 +1,6 @@
 // Contains the manual things definitions
 
-Bridge modbus:tcp:dummy []  {
+Bridge modbus:tcp:inverter "Solinteg Inverter" @ "TR"  [ host="192.168.30.145", port=502, id=255 ]  {
 
 ///////
 
@@ -9,139 +9,127 @@ Bridge modbus:tcp:dummy []  {
     Bridge poller ro10000 [ start=10000, length=9, refresh=0, type="holding" ] {
 
         // Device Serial Number (10000 - 10007): Read bytes to string
-        Thing data do10000_l "Device SN - Character 1"  [ readValueType="uint8.0", readStart=10000 ]
-        Thing data do10000_h "Device SN - Character 2"  [ readValueType="uint8.1", readStart=10000 ]
-        Thing data do10001_l "Device SN - Character 3"  [ readValueType="uint8.0", readStart=10001 ]
-        Thing data do10001_h "Device SN - Character 4"  [ readValueType="uint8.1", readStart=10001 ]
-        Thing data do10002_l "Device SN - Character 5"  [ readValueType="uint8.0", readStart=10002 ]
-        Thing data do10002_h "Device SN - Character 6"  [ readValueType="uint8.1", readStart=10002 ]
-        Thing data do10003_l "Device SN - Character 7"  [ readValueType="uint8.0", readStart=10003 ]
-        Thing data do10003_h "Device SN - Character 8"  [ readValueType="uint8.1", readStart=10003 ]
-        Thing data do10004_l "Device SN - Character 9"  [ readValueType="uint8.0", readStart=10004 ]
-        Thing data do10004_h "Device SN - Character 10" [ readValueType="uint8.1", readStart=10004 ]
-        Thing data do10005_l "Device SN - Character 11" [ readValueType="uint8.0", readStart=10005 ]
-        Thing data do10005_h "Device SN - Character 12" [ readValueType="uint8.1", readStart=10005 ]
-        Thing data do10006_l "Device SN - Character 13" [ readValueType="uint8.0", readStart=10006 ]
-        Thing data do10006_h "Device SN - Character 14" [ readValueType="uint8.1", readStart=10006 ]
-        Thing data do10007_l "Device SN - Character 15" [ readValueType="uint8.0", readStart=10007 ]
-        Thing data do10007_h "Device SN - Character 16" [ readValueType="uint8.1", readStart=10007 ]
+        Thing data do10000_h "Device SN - Character 1"  [ readValueType="uint8", readStart="10000.1" ]
+        Thing data do10000_l "Device SN - Character 2"  [ readValueType="uint8", readStart="10000.0" ]
+        Thing data do10001_h "Device SN - Character 3"  [ readValueType="uint8", readStart="10001.1" ]
+        Thing data do10001_l "Device SN - Character 4"  [ readValueType="uint8", readStart="10001.0" ]
+        Thing data do10002_h "Device SN - Character 5"  [ readValueType="uint8", readStart="10002.1" ]
+        Thing data do10002_l "Device SN - Character 6"  [ readValueType="uint8", readStart="10002.0" ]
+        Thing data do10003_h "Device SN - Character 7"  [ readValueType="uint8", readStart="10003.1" ]
+        Thing data do10003_l "Device SN - Character 8"  [ readValueType="uint8", readStart="10003.0" ]
+        Thing data do10004_h "Device SN - Character 9"  [ readValueType="uint8", readStart="10004.1" ]
+        Thing data do10004_l "Device SN - Character 10" [ readValueType="uint8", readStart="10004.0" ]
+        Thing data do10005_h "Device SN - Character 11" [ readValueType="uint8", readStart="10005.1" ]
+        Thing data do10005_l "Device SN - Character 12" [ readValueType="uint8", readStart="10005.0" ]
+        Thing data do10006_h "Device SN - Character 13" [ readValueType="uint8", readStart="10006.1" ]
+        Thing data do10006_l "Device SN - Character 14" [ readValueType="uint8", readStart="10006.0" ]
+        Thing data do10007_h "Device SN - Character 15" [ readValueType="uint8", readStart="10007.1" ]
+        Thing data do10007_l "Device SN - Character 16" [ readValueType="uint8", readStart="10007.0" ]
 
         // Inverter Model (10008): determined by combination of low and high byte according to table
-        Thing data do10008_l "Model Info"    [ readValueType="uint8.0", readStart=10008 ]
-        Thing data do10008_h "Inverter Type" [ readValueType="uint8.1", readStart=10008 ]
+        Thing data do10008_l "Model Info"    [ readValueType="uint8", readStart="10008.0" ]
+        Thing data do10008_h "Inverter Type" [ readValueType="uint8", readStart="10008.1" ]
     }
 
     // Firmware Version
     Bridge poller ro10011 [ start=10011, length=2, refresh=0, type="holding" ] {
-        Thing data do10011_l "Firmware Version - Byte 1" [ readValueType="uint8.0", readStart=10011 ]
-        Thing data do10011_h "Firmware Version - Byte 2" [ readValueType="uint8.1", readStart=10011 ]
-        Thing data do10012_l "Firmware Version - Byte 3" [ readValueType="uint8.0", readStart=10012 ]
-        Thing data do10012_h "Firmware Version - Byte 4" [ readValueType="uint8.1", readStart=10012 ]
+        Thing data do10011_h "Firmware Version - Byte 1" [ readValueType="uint8", readStart="10011.1" ]
+        Thing data do10011_l "Firmware Version - Byte 2" [ readValueType="uint8", readStart="10011.0" ]
+        Thing data do10012_h "Firmware Version - Byte 3" [ readValueType="uint8", readStart="10012.1" ]
+        Thing data do10012_l "Firmware Version - Byte 4" [ readValueType="uint8", readStart="10012.0" ]
     }
 
     // Date and Time (to be read continuously)
     Bridge poller ro10100 [ start=10100, length=3, refresh=1000, type="holding" ] {
-        Thing data do10100_h "Year"   [ readValueType="uint8.1", readStart=10100 ]
-        Thing data do10100_l "Month"  [ readValueType="uint8.0", readStart=10100 ]
-        Thing data do10101_h "Day"    [ readValueType="uint8.1", readStart=10101 ]
-        Thing data do10101_l "Hour"   [ readValueType="uint8.0", readStart=10101 ]
-        Thing data do10102_h "Minute" [ readValueType="uint8.1", readStart=10102 ]
-        Thing data do10102_l "Second" [ readValueType="uint8.0", readStart=10102 ]
+        Thing data do10100_h "Year"   [ readValueType="uint8", readStart="10100.1" ]
+        Thing data do10100_l "Month"  [ readValueType="uint8", readStart="10100.0" ]
+        Thing data do10101_h "Day"    [ readValueType="uint8", readStart="10101.1" ]
+        Thing data do10101_l "Hour"   [ readValueType="uint8", readStart="10101.0" ]
+        Thing data do10102_h "Minute" [ readValueType="uint8", readStart="10102.1" ]
+        Thing data do10102_l "Second" [ readValueType="uint8", readStart="10102.0" ]
     }
 
     // Fault Flag 1
     Bridge poller ro10112 [ start=10112, length=2, refresh=5000, type="holding" ] {
-        Thing data do10112_0 "Fault Flag 1 - Mains Lost"                [ readValueType="bit.0", readStart=10112 ]
-        Thing data do10112_1 "Fault Flag 1 - Grid Voltage Fault"        [ readValueType="bit.1", readStart=10112 ]
-        Thing data do10112_2 "Fault Flag 1 - Grid Frequency Fault"      [ readValueType="bit.2", readStart=10112 ]
-        Thing data do10112_3 "Fault Flag 1 - DCI Fault"                 [ readValueType="bit.3", readStart=10112 ]
-        Thing data do10112_4 "Fault Flag 1 - ISO Over Limitation"       [ readValueType="bit.4", readStart=10112 ]
-        Thing data do10112_5 "Fault Flag 1 - GFCI Fault"                [ readValueType="bit.5", readStart=10112 ]
-        Thing data do10112_6 "Fault Flag 1 - PV Over Voltage"           [ readValueType="bit.6", readStart=10112 ]
-        Thing data do10112_7 "Fault Flag 1 - Bus Voltage Fault"         [ readValueType="bit.7", readStart=10112 ]
-        Thing data do10112_8 "Fault Flag 1 - Inverter Over Temperature" [ readValueType="bit.8", readStart=10112 ]
+        Thing data do10112_0 "Fault Flag 1 - Mains Lost"                [ readValueType="bit", readStart="10112.0" ]
+        Thing data do10112_1 "Fault Flag 1 - Grid Voltage Fault"        [ readValueType="bit", readStart="10112.1" ]
+        Thing data do10112_2 "Fault Flag 1 - Grid Frequency Fault"      [ readValueType="bit", readStart="10112.2" ]
+        Thing data do10112_3 "Fault Flag 1 - DCI Fault"                 [ readValueType="bit", readStart="10112.3" ]
+        Thing data do10112_4 "Fault Flag 1 - ISO Over Limitation"       [ readValueType="bit", readStart="10112.4" ]
+        Thing data do10112_5 "Fault Flag 1 - GFCI Fault"                [ readValueType="bit", readStart="10112.5" ]
+        Thing data do10112_6 "Fault Flag 1 - PV Over Voltage"           [ readValueType="bit", readStart="10112.6" ]
+        Thing data do10112_7 "Fault Flag 1 - Bus Voltage Fault"         [ readValueType="bit", readStart="10112.7" ]
+        Thing data do10112_8 "Fault Flag 1 - Inverter Over Temperature" [ readValueType="bit", readStart="10112.8" ]
     }
 
     // Fault Flag 2
     Bridge poller ro10114 [ start=10114, length=2, refresh=5000, type="holding" ] {
-        Thing data do10114_1 "Fault Flag 2 - SPI Fault"           [ readValueType="bit.1", readStart=10114 ]
-        Thing data do10114_2 "Fault Flag 2 - E2 Fault"            [ readValueType="bit.2", readStart=10114 ]
-        Thing data do10114_3 "Fault Flag 2 - GFCI Device Fault"   [ readValueType="bit.3", readStart=10114 ]
-        Thing data do10114_4 "Fault Flag 2 - AC Transducer Fault" [ readValueType="bit.4", readStart=10114 ]
-        Thing data do10114_5 "Fault Flag 2 - Relay Check Fail"    [ readValueType="bit.5", readStart=10114 ]
-        Thing data do10114_6 "Fault Flag 2 - Internal Fan Fault"  [ readValueType="bit.6", readStart=10114 ]
-        Thing data do10114_7 "Fault Flag 2 - External Fan Fault"  [ readValueType="bit.7", readStart=10114 ]
+        Thing data do10114_1 "Fault Flag 2 - SPI Fault"           [ readValueType="bit", readStart="10114.1" ]
+        Thing data do10114_2 "Fault Flag 2 - E2 Fault"            [ readValueType="bit", readStart="10114.2" ]
+        Thing data do10114_3 "Fault Flag 2 - GFCI Device Fault"   [ readValueType="bit", readStart="10114.3" ]
+        Thing data do10114_4 "Fault Flag 2 - AC Transducer Fault" [ readValueType="bit", readStart="10114.4" ]
+        Thing data do10114_5 "Fault Flag 2 - Relay Check Fail"    [ readValueType="bit", readStart="10114.5" ]
+        Thing data do10114_6 "Fault Flag 2 - Internal Fan Fault"  [ readValueType="bit", readStart="10114.6" ]
+        Thing data do10114_7 "Fault Flag 2 - External Fan Fault"  [ readValueType="bit", readStart="10114.7" ]
     }
 
     // Fault Flag 3
     Bridge poller ro10120 [ start=10120, length=2, refresh=5000, type="holding" ] {
-        Thing data do10120_0  "Fault Flag 3 - Bus Hardware Fault"    [ readValueType="bit.0",  readStart=10120 ]
-        Thing data do10120_1  "Fault Flag 3 - PV Power Low"          [ readValueType="bit.1",  readStart=10120 ]
-        Thing data do10120_2  "Fault Flag 3 - Batt. Voltage Fault"   [ readValueType="bit.2",  readStart=10120 ]
-        Thing data do10120_3  "Fault Flag 3 - BAK Voltage Fault"     [ readValueType="bit.3",  readStart=10120 ]
-        Thing data do10120_4  "Fault Flag 3 - Bus Voltage Lower"     [ readValueType="bit.4",  readStart=10120 ]
-        Thing data do10120_5  "Fault Flag 3 - Sys Hardware Fault"    [ readValueType="bit.5",  readStart=10120 ]
-        Thing data do10120_6  "Fault Flag 3 - BAK Over Power"        [ readValueType="bit.6",  readStart=10120 ]
-        Thing data do10120_7  "Fault Flag 3 - Inverter Over Voltage" [ readValueType="bit.7",  readStart=10120 ]
-        Thing data do10120_8  "Fault Flag 3 - Inverter Over Freq"    [ readValueType="bit.8",  readStart=10120 ]
-        Thing data do10120_9  "Fault Flag 3 - Inverter Over Current" [ readValueType="bit.9",  readStart=10120 ]
-        Thing data do10120_10 "Fault Flag 3 - Phase Order Err"       [ readValueType="bit.10", readStart=10120 ]
+        Thing data do10120_0  "Fault Flag 3 - Bus Hardware Fault"    [ readValueType="bit",  readStart="10120.0" ]
+        Thing data do10120_1  "Fault Flag 3 - PV Power Low"          [ readValueType="bit",  readStart="10120.1" ]
+        Thing data do10120_2  "Fault Flag 3 - Batt. Voltage Fault"   [ readValueType="bit",  readStart="10120.2" ]
+        Thing data do10120_3  "Fault Flag 3 - BAK Voltage Fault"     [ readValueType="bit",  readStart="10120.3" ]
+        Thing data do10120_4  "Fault Flag 3 - Bus Voltage Lower"     [ readValueType="bit",  readStart="10120.4" ]
+        Thing data do10120_5  "Fault Flag 3 - Sys Hardware Fault"    [ readValueType="bit",  readStart="10120.5" ]
+        Thing data do10120_6  "Fault Flag 3 - BAK Over Power"        [ readValueType="bit",  readStart="10120.6" ]
+        Thing data do10120_7  "Fault Flag 3 - Inverter Over Voltage" [ readValueType="bit",  readStart="10120.7" ]
+        Thing data do10120_8  "Fault Flag 3 - Inverter Over Freq"    [ readValueType="bit",  readStart="10120.8" ]
+        Thing data do10120_9  "Fault Flag 3 - Inverter Over Current" [ readValueType="bit",  readStart="10120.9" ]
+        Thing data do10120_10 "Fault Flag 3 - Phase Order Err"       [ readValueType="bit", readStart="10120.10" ]
     }
 
     // ARM Fault Flag 1
     Bridge poller ro18000 [ start=18000, length=2, refresh=5000, type="holding" ] {
-        Thing data do18000_0 "ARM Fault Flag 1 - SCI Fault"        [ readValueType="bit.0", readStart=18000 ]
-        Thing data do18000_1 "ARM Fault Flag 1 - FLASH Fault"      [ readValueType="bit.1", readStart=18000 ]
-        Thing data do18000_2 "ARM Fault Flag 1 - Meter Comm Fault" [ readValueType="bit.2", readStart=18000 ]
+        Thing data do18000_0 "ARM Fault Flag 1 - SCI Fault"        [ readValueType="bit", readStart="18000.0" ]
+        Thing data do18000_1 "ARM Fault Flag 1 - FLASH Fault"      [ readValueType="bit", readStart="18000.1" ]
+        Thing data do18000_2 "ARM Fault Flag 1 - Meter Comm Fault" [ readValueType="bit", readStart="18000.2" ]
     }
 
     // Date and Time
     // Bridge poller rw20000 [ start=20000, length=3, refresh=1000, type="holding" ] {
-    //     Thing data do20000_h "Year"   [ readValueType="uint8.1", readStart=20000, writeValueType="uint8.1", writeStart=20000, writeType="holding" ]
-    //     Thing data do20000_l "Month"  [ readValueType="uint8.0", readStart=20000, writeValueType="uint8.0", writeStart=20000, writeType="holding" ]
-    //     Thing data do20001_h "Day"    [ readValueType="uint8.1", readStart=20001, writeValueType="uint8.1", writeStart=20001, writeType="holding" ]
-    //     Thing data do20001_l "Hour"   [ readValueType="uint8.0", readStart=20001, writeValueType="uint8.0", writeStart=20001, writeType="holding" ]
-    //     Thing data do20002_h "Minute" [ readValueType="uint8.1", readStart=20002, writeValueType="uint8.1", writeStart=20002, writeType="holding" ]
-    //     Thing data do20002_l "Second" [ readValueType="uint8.0", readStart=20002, writeValueType="uint8.0", writeStart=20002, writeType="holding" ]
+    //     Thing data do20000_h "Year"   [ readValueType="uint8", readStart="20000.1", writeValueType="uint8", writeStart="20000.1", writeType="holding" ]
+    //     Thing data do20000_l "Month"  [ readValueType="uint8", readStart="20000.0", writeValueType="uint8", writeStart="20000.0", writeType="holding" ]
+    //     Thing data do20001_h "Day"    [ readValueType="uint8", readStart="20001.1", writeValueType="uint8", writeStart="20001.1", writeType="holding" ]
+    //     Thing data do20001_l "Hour"   [ readValueType="uint8", readStart="20001.0", writeValueType="uint8", writeStart="20001.0", writeType="holding" ]
+    //     Thing data do20002_h "Minute" [ readValueType="uint8", readStart="20002.1", writeValueType="uint8", writeStart="20002.1", writeType="holding" ]
+    //     Thing data do20002_l "Second" [ readValueType="uint8", readStart="20002.0", writeValueType="uint8", writeStart="20002.0", writeType="holding" ]
     // }
 
      // Battery Period Settings
     Bridge poller rw53006 [ start=53006, length=43, refresh=30000, type="holding" ] {
-        Thing data do53006_0 "Period Enable Flag - Period 1" [ readValue="bit.0", readStart=53006, writeValueType="bit.0", writeStart=53006, writeType="holding" ]
-        Thing data do53006_1 "Period Enable Flag - Period 2" [ readValue="bit.1", readStart=53006, writeValueType="bit.1", writeStart=53006, writeType="holding" ]
-        Thing data do53006_2 "Period Enable Flag - Period 3" [ readValue="bit.2", readStart=53006, writeValueType="bit.2", writeStart=53006, writeType="holding" ]
-        Thing data do53006_3 "Period Enable Flag - Period 4" [ readValue="bit.3", readStart=53006, writeValueType="bit.3", writeStart=53006, writeType="holding" ]
-        Thing data do53006_4 "Period Enable Flag - Period 5" [ readValue="bit.4", readStart=53006, writeValueType="bit.4", writeStart=53006, writeType="holding" ]
-        Thing data do53006_5 "Period Enable Flag - Period 6" [ readValue="bit.5", readStart=53006, writeValueType="bit.5", writeStart=53006, writeType="holding" ]
+        Thing data do53006_0 "Period Enable Flag - Period 1" [ readValueType="bit", readStart="53006.0", writeValueType="bit", writeStart="53006.0", writeType="holding" ]
+        Thing data do53006_1 "Period Enable Flag - Period 2" [ readValueType="bit", readStart="53006.1", writeValueType="bit", writeStart="53006.1", writeType="holding" ]
+        Thing data do53006_2 "Period Enable Flag - Period 3" [ readValueType="bit", readStart="53006.2", writeValueType="bit", writeStart="53006.2", writeType="holding" ]
+        Thing data do53006_3 "Period Enable Flag - Period 4" [ readValueType="bit", readStart="53006.3", writeValueType="bit", writeStart="53006.3", writeType="holding" ]
+        Thing data do53006_4 "Period Enable Flag - Period 5" [ readValueType="bit", readStart="53006.4", writeValueType="bit", writeStart="53006.4", writeType="holding" ]
+        Thing data do53006_5 "Period Enable Flag - Period 6" [ readValueType="bit", readStart="53006.5", writeValueType="bit", writeStart="53006.5", writeType="holding" ]
         // Period 1
-        Thing data do53012_h "Period 1 - Start Time - h" [ readValue="uint8.1", readStart=53012, writeValueType="uint8.1", writeStart=53012, writeType="holding" ]
-        Thing data do53012_l "Period 1 - Start Time - m" [ readValue="uint8.0", readStart=53012, writeValueType="uint8.0", writeStart=53012, writeType="holding" ]
-        Thing data do53013_h "Period 1 - Stop Time - h"  [ readValue="uint8.1", readStart=53013, writeValueType="uint8.1", writeStart=53013, writeType="holding" ]
-        Thing data do53013_l "Period 1 - Stop Time - m"  [ readValue="uint8.0", readStart=53013, writeValueType="uint8.0", writeStart=53013, writeType="holding" ]
+        Thing data do53012 "Period 1 - Start Time" [ readValueType="uint16", readStart="53012", writeValueType="int16", writeStart="53012", writeType="holding" ]
+        Thing data do53013 "Period 1 - Stop Time"  [ readValueType="uint16", readStart="53013", writeValueType="int16", writeStart="53013", writeType="holding" ]
         // Period 2
-        Thing data do53019_h "Period 2 - Start Time - h" [ readValue="uint8.1", readStart=53019, writeValueType="uint8.1", writeStart=53019, writeType="holding" ]
-        Thing data do53019_l "Period 2 - Start Time - m" [ readValue="uint8.0", readStart=53019, writeValueType="uint8.0", writeStart=53019, writeType="holding" ]
-        Thing data do53020_h "Period 2 - Stop Time - h"  [ readValue="uint8.1", readStart=53020, writeValueType="uint8.1", writeStart=53020, writeType="holding" ]
-        Thing data do53020_l "Period 2 - Stop Time - m"  [ readValue="uint8.0", readStart=53020, writeValueType="uint8.0", writeStart=53020, writeType="holding" ]
+        Thing data do53019 "Period 2 - Start Time" [ readValueType="uint16", readStart="53019", writeValueType="int16", writeStart="53019", writeType="holding" ]
+        Thing data do53020 "Period 2 - Stop Time"  [ readValueType="uint16", readStart="53020", writeValueType="int16", writeStart="53020", writeType="holding" ]
         // Period 3
-        Thing data do53026_h "Period 3 - Start Time - h" [ readValue="uint8.1", readStart=53026, writeValueType="uint8.1", writeStart=53026, writeType="holding" ]
-        Thing data do53026_l "Period 3 - Start Time - m" [ readValue="uint8.0", readStart=53026, writeValueType="uint8.0", writeStart=53026, writeType="holding" ]
-        Thing data do53027_h "Period 3 - Stop Time - h"  [ readValue="uint8.1", readStart=53027, writeValueType="uint8.1", writeStart=53027, writeType="holding" ]
-        Thing data do53027_l "Period 3 - Stop Time - m"  [ readValue="uint8.0", readStart=53027, writeValueType="uint8.0", writeStart=53027, writeType="holding" ]
+        Thing data do53026 "Period 3 - Start Time" [ readValueType="uint16", readStart="53026", writeValueType="int16", writeStart="53026", writeType="holding" ]
+        Thing data do53027 "Period 3 - Stop Time"  [ readValueType="uint16", readStart="53027", writeValueType="int16", writeStart="53027", writeType="holding" ]
         // Period 4
-        Thing data do53033_h "Period 4 - Start Time - h" [ readValue="uint8.1", readStart=53033, writeValueType="uint8.1", writeStart=53033, writeType="holding" ]
-        Thing data do53033_l "Period 4 - Start Time - m" [ readValue="uint8.0", readStart=53033, writeValueType="uint8.0", writeStart=53033, writeType="holding" ]
-        Thing data do53034_h "Period 4 - Stop Time - h"  [ readValue="uint8.1", readStart=53034, writeValueType="uint8.1", writeStart=53034, writeType="holding" ]
-        Thing data do53034_l "Period 4 - Stop Time - m"  [ readValue="uint8.0", readStart=53034, writeValueType="uint8.0", writeStart=53034, writeType="holding" ]
+        Thing data do53033 "Period 4 - Start Time" [ readValueType="uint16", readStart="53033", writeValueType="int16", writeStart="53033", writeType="holding" ]
+        Thing data do53034 "Period 4 - Stop Time"  [ readValueType="uint16", readStart="53034", writeValueType="int16", writeStart="53034", writeType="holding" ]
         // Period 5
-        Thing data do53040_h "Period 5 - Start Time - h" [ readValue="uint8.1", readStart=53040, writeValueType="uint8.1", writeStart=53040, writeType="holding" ]
-        Thing data do53040_l "Period 5 - Start Time - m" [ readValue="uint8.0", readStart=53040, writeValueType="uint8.0", writeStart=53040, writeType="holding" ]
-        Thing data do53041_h "Period 5 - Stop Time - h"  [ readValue="uint8.1", readStart=53041, writeValueType="uint8.1", writeStart=53041, writeType="holding" ]
-        Thing data do53041_l "Period 5 - Stop Time - m"  [ readValue="uint8.0", readStart=53041, writeValueType="uint8.0", writeStart=53041, writeType="holding" ]
+        Thing data do53040 "Period 5 - Start Time" [ readValueType="uint16", readStart="53040", writeValueType="int16", writeStart="53040", writeType="holding" ]
+        Thing data do53041 "Period 5 - Stop Time"  [ readValueType="uint16", readStart="53041", writeValueType="int16", writeStart="53041", writeType="holding" ]
         // Period 6
-        Thing data do53047_h "Period 6 - Start Time - h" [ readValue="uint8.1", readStart=53047, writeValueType="uint8.1", writeStart=53047, writeType="holding" ]
-        Thing data do53047_l "Period 6 - Start Time - m" [ readValue="uint8.0", readStart=53047, writeValueType="uint8.0", writeStart=53047, writeType="holding" ]
-        Thing data do53048_h "Period 6 - Stop Time - h"  [ readValue="uint8.1", readStart=53048, writeValueType="uint8.1", writeStart=53048, writeType="holding" ]
-        Thing data do53048_l "Period 6 - Stop Time - m"  [ readValue="uint8.0", readStart=53048, writeValueType="uint8.0", writeStart=53048, writeType="holding" ]
+        Thing data do53047 "Period 6 - Start Time" [ readValueType="uint16", readStart="53047", writeValueType="int16", writeStart="53047", writeType="holding" ]
+        Thing data do53048 "Period 6 - Stop Time"  [ readValueType="uint16", readStart="53048", writeValueType="int16", writeStart="53048", writeType="holding" ]
     }
 }

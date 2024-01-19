@@ -7,9 +7,11 @@ const MODBUS_TYPE = 'tcp';
 const BRIDGE_NAME = 'inverter';
 const BRIDGE_DESCRIPTION = 'Solinteg Inverter';
 const LOCATION = 'TR';
-const IP_ADDR = '192.168.30.10';
+const IP_ADDR = '192.168.30.145';
 const PORT = 502;
-const ID = 2;
+const ID = 255;
+
+const READ_ONLY_CONFIG = true;
 
 class RegisterTable {
 
@@ -26,7 +28,7 @@ class RegisterTable {
     addDataObject(dataObj) { this.#dataObjects.push(dataObj); }
 
     toThingsCode() {
-        let code = `Bridge modbus:${MODBUS_TYPE}:${BRIDGE_NAME} "${BRIDGE_DESCRIPTION}" @ "${LOCATION}" [ host="${IP_ADDR}", port=${PORT}, ID=${ID} ] {` + CR + CR;
+        let code = `Bridge modbus:${MODBUS_TYPE}:${BRIDGE_NAME} "${BRIDGE_DESCRIPTION}" @ "${LOCATION}" [ host="${IP_ADDR}", port=${PORT}, id=${ID} ] {` + CR + CR;
         for (let i = 0; i < this.#continuousRegisters.length; i++) code += this.#continuousRegisters[i].toThingsCode();
         //code += '}';
         return code;
@@ -44,19 +46,21 @@ class RegisterTable {
         for (let i = 0; i < this.#dataObjects.length; i++) {
             let d = this.#dataObjects[i];
             if (!(d.sitemap in sitemap)) sitemap[d.sitemap] = [];
-            sitemap[d.sitemap].push(d.getItemName());
+            sitemap[d.sitemap].push({item: d.getItemName(), exclude: d.exclude});
         }
         // add manually defined items
         for (let i = 0; i < MANUAL_DATA.length; i++) {
             if (!(MANUAL_DATA[i].sitemap in sitemap)) sitemap[MANUAL_DATA[i].sitemap] = [];
-            sitemap[MANUAL_DATA[i].sitemap].push(MANUAL_DATA[i].item);
+            sitemap[MANUAL_DATA[i].sitemap].push({item: MANUAL_DATA[i].item, exclude: false});
         }
         // create the code
         let code = 'sitemap solinteg label="Solinteg" {' + CR + CR;
         for (let group in sitemap) {
             code += TAB + `Frame label="${group}" {` + CR;
             for (let i = 0; i < sitemap[group].length; i++) {
-                code += TAB + TAB + 'Text item=' + sitemap[group][i] + CR;
+                code += TAB + TAB;
+                if (sitemap[group][i].exclude) code += '//';
+                code += 'Default item=' + sitemap[group][i].item + CR;
             }
             code += TAB + '}' + CR + CR;
         }
@@ -78,9 +82,9 @@ class RegisterTable {
     static getDataType(t) {
         switch (t) {
             case 'U16':
-                return 'uint16';
+                return 'int16';
             case 'U32':
-                return 'uint32';
+                return 'int32';
             case 'I16':
                 return 'int16';
             case 'I32':
@@ -231,7 +235,10 @@ class DataObject {
     get uom() { return this.#uom; }
     get accuracy() { return this.#accuracy; }
     get note() { return this.#note; }
+    get exclude() { return this.#exclude; }
     get sitemap() { return this.#sitemap; }
+
+    get hasUom() { return (this.#uom !== undefined) && (this.#uom != 'N/A') && (this.#uom != 'Prd'); }
 
     _getThingID() { return 'do' + this.#startAddress; }
 
@@ -241,22 +248,24 @@ class DataObject {
         cl.addCodePart(`[`);
         if ((this.type == RegisterTable.REG_TYPE_RO) || (this.type == RegisterTable.REG_TYPE_RW)) {
             cl.addCodePart(`readValueType="${this.#dataType}",`);
-            cl.addCodePart(`readStart=${this.#startAddress}` + (this.type != RegisterTable.REG_TYPE_RO ? ',' : ''));
+            cl.addCodePart(`readStart=${this.#startAddress}` + ((this.type != RegisterTable.REG_TYPE_RO) && (!READ_ONLY_CONFIG) ? ',' : ''));
         } else {
             cl.addEmptyParts(2);
         }
-        if ((this.type == RegisterTable.REG_TYPE_RW) || (this.type == RegisterTable.REG_TYPE_WO)) {
-            cl.addCodePart(`writeValueType="${this.#dataType}",`);
-            cl.addCodePart(`writeStart=${this.#startAddress},`);
-            cl.addCodePart('writeType="holding"');
-        } else {
-            cl.addEmptyParts(3);
+        if (!READ_ONLY_CONFIG) {
+            if ((this.type == RegisterTable.REG_TYPE_RW) || (this.type == RegisterTable.REG_TYPE_WO)) {
+                cl.addCodePart(`writeValueType="${this.#dataType.charAt(0) == 'u' ? this.#dataType.substring(1) : this.#dataType}",`); // no unsigned data types for write operations
+                cl.addCodePart(`writeStart=${this.#startAddress},`);
+                cl.addCodePart('writeType="holding"');
+            } else {
+                cl.addEmptyParts(3);
+            }
         }
         cl.addCodePart(']');
         let comment = '';
         if ((this.uom !== undefined) || (this.accuracy !== undefined) || (this.note !== undefined)) {
             comment = ' // ';
-            if (this.uom != 'N/A') comment += `unit: ${this.uom}, accuracy: ${this.accuracy}`;
+            if ((this.uom != 'N/A') && (this.uom != 'Prd')) comment += `unit: ${this.uom}, accuracy: ${this.accuracy}`;
             if ((this.note !== undefined) && (this.note !== null)) {
                 if (comment.length > 4) comment += ', ';
                 comment += String(this.note).replaceAll(/\n/gi, ', ');
@@ -267,16 +276,13 @@ class DataObject {
             }
         }
         cl.addCodePart(comment);
+        cl.exclude = this.exclude;
         return cl;
     }
 
     _getItemType() {
         if (this.#itemType === undefined) {
             switch (this.#uom) {
-                case 'Prd':
-                case '%':
-                    this.#itemType = new ItemType(ItemType.NUMBER, ItemType.UOM_DIMENSIONLESS);
-                    break;
                 case '°C':
                     this.#itemType = new ItemType(ItemType.NUMBER, ItemType.UOM_TEMPERATURE);
                     break;
@@ -300,11 +306,14 @@ class DataObject {
                 case 'V':
                     this.#itemType = new ItemType(ItemType.NUMBER, ItemType.UOM_ELECTRIC_POTENTIAL);
                     break;
-                case 'N/A':
+                case '%':
+                    this.#itemType = new ItemType(ItemType.NUMBER);
+                    break;
                 case 'N/A ':
                 case 'NA':
                 case ' ':
                 case '':
+                case 'Prd':
                 default:
                     this.#itemType = new ItemType(ItemType.NUMBER);
                     this.#uom = undefined;
@@ -331,7 +340,7 @@ class DataObject {
     _getItemDescription() {
         let d = '"' + this.#description;
         if ((this.#transformation !== undefined) && (this.#transformation !== null)) d += ' ' + this._getTransformation();
-        else if (this.#itemType.isNumeric) d += ` [%.${this._getNoOfDigts()}f %unit%]`;
+        else if (this.#itemType.isNumeric) d += ` [%.${this._getNoOfDigts()}f ${this.uom == '%%' ? '%' : '%unit%'}]`;
         d += '"';
         return d;
     }
@@ -376,15 +385,19 @@ class DataObject {
             cl.addEmptyParts(2);
         }
         // unit
-        cl.addCodePart(this.#uom != undefined ? `{unit="${this.#uom}",` : '{');
+        // cl.addCodePart(this.hasUom ? `{unit="${this.uom}",` : '{');
         // channel
-        let channel = `channel="modbus:data:${BRIDGE_NAME}:${pollerID}:${this._getThingID()}:${this.#itemType.channel}"`;
-        if (this.#accuracy > 1) {
+        let channel = `{channel="modbus:data:${BRIDGE_NAME}:${pollerID}:${this._getThingID()}:${this.#itemType.channel}"`;
+        if (this.hasUom) {
             channel += '[profile="modbus:gainOffset",';
             cl.addCodePart(channel);
-            let gain = 'gain="0.';
-            for (let i = 0; i < this._getNoOfDigts(); i++) gain += '0';
-            gain += '1",';
+            let gain = 'gain="0';
+            if (this._getNoOfDigts() >= 1) {
+                gain += '.';
+                for (let i = 0; i < this._getNoOfDigts() - 1; i++) gain += '0';
+                gain += '1';
+            }
+            gain += ' ' + this.uom + '",';
             cl.addCodePart(gain);
             cl.addCodePart('pre-gain-offset="0"]}');
         } else {

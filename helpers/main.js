@@ -23,6 +23,7 @@ const COLS = {
     end: 17,
 
     // reference the individual columns:
+    table: 1, // A
     no: 2, // B
     addr: 3, // C
     description: 5, // E
@@ -60,6 +61,7 @@ workbook.xlsx.readFile(EXCEL_FILENAME).then(() => {
     let registerTable = new RegisterTable(); // the object we want to create from the table's contents
 
     // helpers required for processing each line
+    let lastTable = null;
     let poller = null;
     let lastNo = null;
     let lastAddr = null;
@@ -94,7 +96,7 @@ workbook.xlsx.readFile(EXCEL_FILENAME).then(() => {
                 registerTable.addDataObject(dataObj);
                 if (poller === null) { // first line
                     poller = new ContinuousRegisters(dataObj.type);
-                } else if (dataObj.startAddress > lastAddr + 1) { // progress in address > 1 register => we need a now poller
+                } else if ((lastTable != row.getCell(COLS.table).value) || (dataObj.startAddress > lastAddr + 1)) { // separate table or progress in address > 1 register => we need a now poller
                     registerTable.addContinuousRegister(poller);
                     poller = new ContinuousRegisters(dataObj.type);
                 }
@@ -102,6 +104,7 @@ workbook.xlsx.readFile(EXCEL_FILENAME).then(() => {
                 lastAddr = dataObj.startAddress;
             }
             lastNo = row.getCell(COLS.no).value;
+            lastTable = row.getCell(COLS.table).value;
         }
     }
 

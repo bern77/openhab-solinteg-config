@@ -1,5 +1,5 @@
 (function(i) {
-    let brand = parseInt(items.getItem('PV_Batt_Conf').state);
+    let brand = parseInt(items.getItem('PV_DO52500').state);
     let conf = parseInt(i);
     switch (brand) {
         case 1: // Solinteg
