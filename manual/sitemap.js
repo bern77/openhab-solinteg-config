@@ -3,6 +3,7 @@
 // copied from Excel file (code generated via Formulas)
 
 const MANUAL_DATA = [];
+MANUAL_DATA.push({item: 'PV_Multi_Function_Relay', sitemap:'Status'});
 MANUAL_DATA.push({item: 'PV_Device_SN', sitemap: 'Infos'});
 MANUAL_DATA.push({item: 'PV_Device_Model_Info', sitemap: 'Infos'});
 MANUAL_DATA.push({item: 'PV_Firmware_Version', sitemap: 'Infos'});

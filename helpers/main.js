@@ -35,9 +35,10 @@ const COLS = {
     manualDef: 12, // L
     manualItemType: 13, // M
     tranform: 14, // N
-    exclude: 15, // O
-    icon: 16, // P
-    sitemap: 17 // Q
+    refresh: 15, // O
+    exclude: 16, // P
+    icon: 17, // Q
+    sitemap: 18 // R
 }
 
 const TRIM = false;
@@ -102,6 +103,13 @@ workbook.xlsx.readFile(EXCEL_FILENAME).then(() => {
                 }
                 poller.addDataObject(dataObj);
                 lastAddr = dataObj.startAddress;
+
+                let refresh = row.getCell(COLS.refresh).value;
+                if ((refresh !== null) && (refresh.result !== undefined)) refresh = refresh.result;
+                if ((refresh !== null) && (refresh != '')) {
+                    refresh = parseInt(refresh);
+                    if ((poller.refresh === undefined) || (refresh < poller.refresh)) poller.refresh = refresh;
+                }
             }
             lastNo = row.getCell(COLS.no).value;
             lastTable = row.getCell(COLS.table).value;

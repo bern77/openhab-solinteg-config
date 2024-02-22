@@ -1,6 +1,9 @@
 Group gPV "Photovoltaik inkl. Speicher" <solarplant>
 Group gPV_Error "PV Fehler" <error> (gPV)
 
+// Multi Function Relay
+Switch PV_Multi_Function_Relay "Multi Function Relay" (gPV) {channel="knx:device:ems:solinteq_multifunktionsrelais"}
+
 // Device Serial Number
 Group gPV_Device_SN
 Number PV_Device_SN_01 "Device SN - Character 1 [%d]"  (gPV_Device_SN) {channel="modbus:data:inverter:ro10000:do10000_h:number"}

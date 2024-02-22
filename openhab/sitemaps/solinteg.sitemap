@@ -269,6 +269,7 @@ sitemap solinteg label="Solinteg" {
     }
 
     Frame label="Status" {
+        Default item=PV_Multi_Function_Relay
         Default item=PV_Fault_1_0
         Default item=PV_Fault_1_1
         Default item=PV_Fault_1_2

@@ -11,7 +11,7 @@ const IP_ADDR = '192.168.30.145';
 const PORT = 502;
 const ID = 255;
 
-const READ_ONLY_CONFIG = true;
+const READ_ONLY_CONFIG = false;
 
 class RegisterTable {
 
@@ -103,16 +103,20 @@ class ContinuousRegisters {
     #length;
     #dataObjects;
     #codeBlock;
+    #refresh;
 
-    constructor(type, length = 0) {
+    constructor(type, length = 0, refresh = undefined) {
         this.#type = type;
         this.#length = length;
         this.#dataObjects = [];
         this.#codeBlock = new CodeBlock();
+        this.#refresh = refresh;
     }
 
     set length(length) { this.#length = length; }
     get length() { return this.#length; }
+    set refresh(refresh) { this.#refresh = refresh; }
+    get refresh() { return this.#refresh; }
     incLength() { this.#length++; }
 
     get dataObjects() { return this.#dataObjects; }
@@ -131,7 +135,9 @@ class ContinuousRegisters {
     get pollerID() { return this.#type + this.startAddress; }
 
     toThingsCode() {
-        let code = TAB + `Bridge poller ${this.pollerID} [ start=${this.startAddress}, length=${this.#length}, type="holding" ] {` + CR;
+        let code = TAB + `Bridge poller ${this.pollerID} [ start=${this.startAddress}, length=${this.#length}, type="holding"`;
+        if (this.#refresh !== undefined) code += `, refresh=${this.#refresh}`;
+        code += ` ] {` + CR;
         code += this.#codeBlock.toCode(TAB + TAB);
         code += TAB + '}' + CR + CR;
         return code;
@@ -356,6 +362,10 @@ class DataObject {
         return tags;
     }
 
+    _getTransformationScript(read) {
+        return `${read ? 'toItemScript' : 'toHandlerScript'}="scale.js?f=${this.#accuracy}&rw=${read ? 'r' : 'w'}"`;
+    }
+
     toItemCodeLine(pollerID) {
         let cl = new CodeLine();
         // type
@@ -389,17 +399,10 @@ class DataObject {
         // channel
         let channel = `{channel="modbus:data:${BRIDGE_NAME}:${pollerID}:${this._getThingID()}:${this.#itemType.channel}"`;
         if (this.hasUom) {
-            channel += '[profile="modbus:gainOffset",';
+            channel += '[profile="transform:JS",';
             cl.addCodePart(channel);
-            let gain = 'gain="0';
-            if (this._getNoOfDigts() >= 1) {
-                gain += '.';
-                for (let i = 0; i < this._getNoOfDigts() - 1; i++) gain += '0';
-                gain += '1';
-            }
-            gain += ' ' + this.uom + '",';
-            cl.addCodePart(gain);
-            cl.addCodePart('pre-gain-offset="0"]}');
+            cl.addCodePart(this._getTransformationScript(true) + ',');
+            cl.addCodePart(this._getTransformationScript(false) + ']}');
         } else {
             cl.addCodePart(channel + '}');
             cl.addEmptyParts(2);
