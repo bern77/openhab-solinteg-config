@@ -1,6 +1,9 @@
 Group gPV "Photovoltaik inkl. Speicher" <solarplant>
 Group gPV_Error "PV Fehler" <error> (gPV)
 
+// Total Current Power Consumption ( |PV_DO11000| + PV_DO11028 )
+Number:Energy PV_Total_Power "Current Total Power Consumption" {unit="kWh"}
+
 // Multi Function Relay
 Switch PV_Multi_Function_Relay "Multi Function Relay" (gPV) {channel="knx:device:ems:solinteq_multifunktionsrelais"}
 

@@ -106,3 +106,17 @@ for (let p = 1; p <= 6; p++) {
         });
     }
 }
+
+// Total Current Power Consumption
+rules.JSRule({
+    name: 'Solinteg Total Current Power Consumption',
+    triggers: [
+        triggers.ItemStateUpdateTrigger('PV_DO11000'), // Pmeter of 3 phases
+        triggers.ItemStateUpdateTrigger('PV_DO11028')  // Total PV Input Power
+    ],
+    execute: data => {
+        let grid = Math.abs(parseFloat(data.itemName == 'PV_DO11000' ? data.receivedState : items.getItem('PV_DO11000').state));
+        let pv =   parseFloat(data.itemName == 'PV_DO11028' ? data.receivedState : items.getItem('PV_DO11028').state);
+        items.getItem('PV_Total_Power').postUpdate(`${grid + pv} kWh`);
+    }
+});
