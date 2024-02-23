@@ -12,5 +12,3 @@ It's also necessary to install the Modbus binding (https://www.openhab.org/addon
 
 In order to run the script you need to install NodeJS as well as the relevant depdencies:
 <code>npm install exceljs</code>
-
-**WARNING: This project is still work in progress. At the moment only reading is supported.**

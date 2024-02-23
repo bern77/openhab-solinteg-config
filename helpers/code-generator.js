@@ -346,7 +346,7 @@ class DataObject {
     _getItemDescription() {
         let d = '"' + this.#description;
         if ((this.#transformation !== undefined) && (this.#transformation !== null)) d += ' ' + this._getTransformation();
-        else if (this.#itemType.isNumeric) d += ` [%.${this._getNoOfDigts()}f ${this.uom == '%%' ? '%' : '%unit%'}]`;
+        else if (this.#itemType.isNumeric) d += ` [%.${this._getNoOfDigts()}f ${this.uom == '%' ? '%%' : '%unit%'}]`;
         d += '"';
         return d;
     }
@@ -395,9 +395,9 @@ class DataObject {
             cl.addEmptyParts(2);
         }
         // unit
-        // cl.addCodePart(this.hasUom ? `{unit="${this.uom}",` : '{');
+        cl.addCodePart(this.hasUom ? `{unit="${this.uom}",` : '{');
         // channel
-        let channel = `{channel="modbus:data:${BRIDGE_NAME}:${pollerID}:${this._getThingID()}:${this.#itemType.channel}"`;
+        let channel = `channel="modbus:data:${BRIDGE_NAME}:${pollerID}:${this._getThingID()}:${this.#itemType.channel}"`;
         if (this.hasUom) {
             channel += '[profile="transform:JS",';
             cl.addCodePart(channel);
