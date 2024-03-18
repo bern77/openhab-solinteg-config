@@ -182,9 +182,9 @@ Bridge modbus:tcp:inverter "Solinteg Inverter" @ "TR" [ host="192.168.30.145", p
     }
 
     Bridge poller rw25103 [ start=25103, length=3, type="holding", refresh=60000 ] {
-        Thing data do25103 "Grid Injection Power Limit % Setting" [ readValueType="int16", readStart=25103, writeValueType="int16", writeStart=25103, writeType="holding" ]  // unit: %, accuracy: 1000, [0.0%-100.0%] 
-//         Thing data do25104 "Smart Meter COM Status"               [                                         writeValueType="int16", writeStart=25104, writeType="holding" ]  // 0: Meter abnormal, 1: Meter normal     
-//         Thing data do25105 "Pmeter on Phase A"                    [                                         writeValueType="int32", writeStart=25105, writeType="holding" ]  // unit: W, accuracy: 1                   
+        Thing data do25103 "Grid Injection Power Limit % Setting" [ readValueType="int16", readStart=25103, writeValueType="int16", writeStart=25103, writeType="holding" ]  // unit: %, accuracy: 100, [0.0%-100.0%] 
+//         Thing data do25104 "Smart Meter COM Status"               [                                         writeValueType="int16", writeStart=25104, writeType="holding" ]  // 0: Meter abnormal, 1: Meter normal    
+//         Thing data do25105 "Pmeter on Phase A"                    [                                         writeValueType="int32", writeStart=25105, writeType="holding" ]  // unit: W, accuracy: 1                  
     }
 
     Bridge poller wo25107 [ start=25107, length=1, type="holding" ] {
@@ -196,7 +196,7 @@ Bridge modbus:tcp:inverter "Solinteg Inverter" @ "TR" [ host="192.168.30.145", p
     }
 
     Bridge poller rw25118 [ start=25118, length=1, type="holding", refresh=60000 ] {
-        Thing data do25118 "Reactive power limit percentage" [ readValueType="int16", readStart=25118, writeValueType="int16", writeStart=25118, writeType="holding" ]  // unit: %, accuracy: 1000, [-600, +600], accuracy to 0.1% 
+        Thing data do25118 "Reactive power limit percentage" [ readValueType="int16", readStart=25118, writeValueType="int16", writeStart=25118, writeType="holding" ]  // unit: %, accuracy: 100, [-600, +600], accuracy to 0.1% 
     }
 
     Bridge poller rw25120 [ start=25120, length=2, type="holding", refresh=60000 ] {
@@ -258,12 +258,12 @@ Bridge modbus:tcp:inverter "Solinteg Inverter" @ "TR" [ host="192.168.30.145", p
     }
 
     Bridge poller rw52500 [ start=52500, length=6, type="holding", refresh=3600000 ] {
-        Thing data do52500 "Battery Configuration"          [ readValueType="int16", readStart=52500, writeValueType="int16", writeStart=52500, writeType="holding" ]  // Please refer to table 3.7              
-        Thing data do52501 "Battery Protocol configuration" [ readValueType="int16", readStart=52501, writeValueType="int16", writeStart=52501, writeType="holding" ]  //                                        
-        Thing data do52502 "On-grid SOC Protection"         [ readValueType="int16", readStart=52502, writeValueType="int16", writeStart=52502, writeType="holding" ]  // 0: OFF, 1: ON                          
-        Thing data do52503 "On-grid Battery End SOC"        [ readValueType="int16", readStart=52503, writeValueType="int16", writeStart=52503, writeType="holding" ]  // unit: %, accuracy: 1000, [0.0%-100.0%] 
-        Thing data do52504 "Off-grid SOC Protection"        [ readValueType="int16", readStart=52504, writeValueType="int16", writeStart=52504, writeType="holding" ]  // 0: OFF, 1: ON                          
-        Thing data do52505 "Off-grid  Battery End SOC"      [ readValueType="int16", readStart=52505, writeValueType="int16", writeStart=52505, writeType="holding" ]  // unit: %, accuracy: 1000, [0.0%-100.0%] 
+        Thing data do52500 "Battery Configuration"          [ readValueType="int16", readStart=52500, writeValueType="int16", writeStart=52500, writeType="holding" ]  // Please refer to table 3.7             
+        Thing data do52501 "Battery Protocol configuration" [ readValueType="int16", readStart=52501, writeValueType="int16", writeStart=52501, writeType="holding" ]  //                                       
+        Thing data do52502 "On-grid SOC Protection"         [ readValueType="int16", readStart=52502, writeValueType="int16", writeStart=52502, writeType="holding" ]  // 0: OFF, 1: ON                         
+        Thing data do52503 "On-grid Battery End SOC"        [ readValueType="int16", readStart=52503, writeValueType="int16", writeStart=52503, writeType="holding" ]  // unit: %, accuracy: 100, [0.0%-100.0%] 
+        Thing data do52504 "Off-grid SOC Protection"        [ readValueType="int16", readStart=52504, writeValueType="int16", writeStart=52504, writeType="holding" ]  // 0: OFF, 1: ON                         
+        Thing data do52505 "Off-grid  Battery End SOC"      [ readValueType="int16", readStart=52505, writeValueType="int16", writeStart=52505, writeType="holding" ]  // unit: %, accuracy: 100, [0.0%-100.0%] 
     }
 
     Bridge poller rw53007 [ start=53007, length=5, type="holding", refresh=3600000 ] {

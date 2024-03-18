@@ -337,17 +337,19 @@ class DataObject {
     _getTransformation() {
         if ((this.#transformation !== undefined) && (this.#transformation !== null)) {
             let type = this.#transformation.split('.')[1];
-            return `[${type.toUpperCase()}(${this.#transformation}):%s]`;
+            return `${type.toUpperCase()}(${this.#transformation}):%s`;
         } else return undefined;
     }
 
     _getNoOfDigts() { return String(this.#accuracy).length - 1; }
 
-    _getItemDescription() {
-        let d = '"' + this.#description;
-        if ((this.#transformation !== undefined) && (this.#transformation !== null)) d += ' ' + this._getTransformation();
-        else if (this.#itemType.isNumeric) d += ` [%.${this._getNoOfDigts()}f ${this.uom == '%' ? '%%' : '%unit%'}]`;
-        d += '"';
+    _getItemDescription() { return '"' + this.#description + '"'; }
+
+    _getStateDescription() {
+        let d = 'stateDescription=" "[pattern="';
+        if ((this.#transformation !== undefined) && (this.#transformation !== null)) d += this._getTransformation();
+        else if (this.#itemType.isNumeric) d += `%.${this._getNoOfDigts()}f ${this.uom == '%' ? '%%' : '%unit%'}`;
+        d += '"]';
         return d;
     }
 
@@ -402,11 +404,13 @@ class DataObject {
             channel += '[profile="transform:JS",';
             cl.addCodePart(channel);
             cl.addCodePart(this._getTransformationScript(true) + ',');
-            cl.addCodePart(this._getTransformationScript(false) + ']}');
+            cl.addCodePart(this._getTransformationScript(false) + '],');
         } else {
-            cl.addCodePart(channel + '}');
+            cl.addCodePart(channel + ',');
             cl.addEmptyParts(2);
         }
+        // state description
+        cl.addCodePart(this._getStateDescription() + '}');
         // exclude
         cl.exclude = this.#exclude;
 
