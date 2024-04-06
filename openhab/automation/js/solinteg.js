@@ -115,8 +115,9 @@ rules.JSRule({
         triggers.ItemStateUpdateTrigger('PV_DO11028')  // Total PV Input Power
     ],
     execute: data => {
-        let grid = Math.abs(parseFloat(data.itemName == 'PV_DO11000' ? data.receivedState : items.getItem('PV_DO11000').state));
+        let grid = parseFloat(data.itemName == 'PV_DO11000' ? data.receivedState : items.getItem('PV_DO11000').state);
         let pv =   parseFloat(data.itemName == 'PV_DO11028' ? data.receivedState : items.getItem('PV_DO11028').state);
-        items.getItem('PV_Total_Power').postUpdate(`${grid + pv} kWh`);
+        let batt = parseFloat(data.itemName == 'PV_DO30258' ? data.receivedState : items.getItem('PV_DO30258').state);
+        items.getItem('PV_Total_Power').postUpdate(`${pv - grid + batt} kW`);
     }
 });
