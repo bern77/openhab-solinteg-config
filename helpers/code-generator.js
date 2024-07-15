@@ -365,7 +365,7 @@ class DataObject {
     }
 
     _getTransformationScript(read) {
-        return `${read ? 'toItemScript' : 'toHandlerScript'}="scale.js?f=${this.accuracy}&rw=${read ? 'r' : 'w'}"`;
+        return `${read ? 'toItemScript' : 'commandFromItemScript'}="scale.js?f=${this.accuracy}&rw=${read ? 'r' : 'w'}"`;
     }
 
     toItemCodeLine(pollerID) {
